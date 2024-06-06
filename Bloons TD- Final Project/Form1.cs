@@ -33,7 +33,7 @@ namespace Bloons_TD__Final_Project
                 form.Controls.Remove(currenet);
             }
 
-            next.Location = new Point((form.Width - next.Width) / 2, (form.Height - next.Height) / 2);
+            next.Location = new Point(0, (form.Height - next.Height) / 2);
 
             form.Controls.Add(next);
         }

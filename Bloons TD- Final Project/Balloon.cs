@@ -11,18 +11,20 @@ namespace Bloons_TD__Final_Project
     {
 
 
-        int x, y, width, height, colour;
+       public int x, y, width, height, colour;
 
         public Image image;
 
-        public int xSpeed, ySpeed;
+        public double xSpeed, ySpeed;
 
         public Rectangle hitBox;
 
         public static bool bePopped;
 
+        public bool slow = false;
 
-        public Balloon(int _colour, int _x, int _y, int _width, int _height, int _xSpeed, int _ySpeed)
+
+        public Balloon(int _colour, int _x, int _y, int _width, int _height, double _xSpeed, double _ySpeed, bool _slow)
         {
             colour = _colour;
             x = _x;
@@ -31,6 +33,7 @@ namespace Bloons_TD__Final_Project
             height = _height;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
+            slow = _slow;
 
 
             hitBox = new Rectangle(x, y, width, height);
@@ -43,13 +46,24 @@ namespace Bloons_TD__Final_Project
             {
                 image = Properties.Resources.BlueBalloon;
             }
-
+            if(colour == 3)
+            {
+                image = Properties.Resources.GreenBalloon;
+            }
+            if(colour == 4)
+            {
+                image = Properties.Resources.YellowBalloon;
+            }
+            if(colour == 5)
+            {
+                image= Properties.Resources.PinkBalloon;   
+            }
         }
 
         public void move(Balloon b)
         {
-            b.x += xSpeed;
-            b.y += ySpeed;
+            b.x += (int)xSpeed;
+            b.y += (int)ySpeed;
 
             b.hitBox = new Rectangle(b.x, b.y, b.width, b.height);
         }
@@ -66,14 +80,23 @@ namespace Bloons_TD__Final_Project
                 bePopped = true;
             }
 
-
             if (b.colour == 1)
             {
                 b.image = Properties.Resources.RedBalloon;
             }
+
             if (b.colour == 2)
             {
                 b.image = Properties.Resources.BlueBalloon;
+            }
+
+            if (b.colour == 3)
+            {
+                b.image = Properties.Resources.GreenBalloon;
+            }
+            if (b.colour == 4)
+            {
+                b.image = Properties.Resources.YellowBalloon;
             }
 
 

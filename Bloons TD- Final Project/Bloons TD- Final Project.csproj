@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Balloon.cs" />
+    <Compile Include="Dart.cs" />
+    <Compile Include="Defender.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +124,57 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BTD6Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TACKYSHOOTER-removebg-preview-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2024-06-05_102143-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BTD6Green-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\raf_360x360_075_t_fafafa_ca443f4786-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BTD6Yellow-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BTD6Pink-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Supreme_leader_monkey-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WIZARDIO-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purple_balls-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ICEMONKEY-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ICEBALL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yellow Ice Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green Ice Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue Ice Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red Ice Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pink snow balloon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

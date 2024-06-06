@@ -124,16 +124,61 @@
   <data name="BlueBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BTD6Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Blue_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blue Ice Balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Dart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btd-6-dart-monkey-and-dart-pack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Dart Monkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MonkeyBTD-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GreenBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BTD6Green-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green Ice Balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ICEBALL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ICEBALL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IceMonkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ICEMONKEY-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Magic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\purple_balls-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MonkeyMeadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MonkeyMeadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PinkBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BTD6Pink-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pink_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pink snow balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RedBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BTD6Red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Red_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red Ice Balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SuperMonkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Supreme_leader_monkey-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot_2024-06-05_102143-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TackShooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TACKYSHOOTER-removebg-preview-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WizardMonkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WIZARDIO-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YellowBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BTD6Yellow-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yellow_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Yellow Ice Balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
