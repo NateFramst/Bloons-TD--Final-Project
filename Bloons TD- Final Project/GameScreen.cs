@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Bloons_TD__Final_Project
 {
@@ -97,6 +98,10 @@ namespace Bloons_TD__Final_Project
         int money = 1000;
 
         int superRange;
+
+        double roundNumber = 1;
+
+        bool inBetweenRounds = true;
 
         public GameScreen()
         {
@@ -216,6 +221,12 @@ namespace Bloons_TD__Final_Project
             {
                 e.Graphics.DrawImage(spawnImage, dms.X - 10, dms.Y - 10, 60, 60);
                 //e.Graphics.DrawRectangle(Pens.Red, dms);
+                e.Graphics.DrawEllipse(Pens.White, dms.X - rad + 15, dms.Y - rad + 15, 2 * rad, 2 * rad);
+            }
+
+            if (spawn == false)
+            {
+                e.Graphics.FillEllipse(Brushes.Red, dms.X - rad + 15, dms.Y - rad + 15, 2 * rad, 2 * rad);
             }
 
 
@@ -232,345 +243,380 @@ namespace Bloons_TD__Final_Project
             Size mouseSize = new Size(1, 1);
 
             mouse = new Rectangle(this.PointToClient(Cursor.Position), mouseSize);
-
-            if (bloonSpawnTimer % 10 == 0)
+            if (!inBetweenRounds)
             {
-                if (bloonSpawner < bpl)
+                if (bloonSpawnTimer % 10 == 0)
                 {
-                    int type = 5;
-                    Balloon bloon = new Balloon(type, 0, 210, 30, 30, balloonSpeed + type, 0, false);
-                    balloons.Add(bloon);
-                }
-                bloonSpawner++;
-
-            }
-            if (bloonSpawnTimer < 100000000 && bloonSpawnTimer >= 0)
-            {
-                bloonSpawnTimer++;
-            }
-            else
-            {
-                bloonSpawnTimer = -1;
-            }
-
-
-
-            foreach (Defender d in defenders)
-            {
-
-                d.shotTimer--;
-
-                if(d.type == 3)
-                {
-                    if (d.upgrade)
+                    if (bloonSpawner < bpl)
                     {
-                        superRange = 10000;
+                        int type;
+                        if (bloonSpawner < 10)
+                        {
+                            type = 1;
+                        }
+                        else if (bloonSpawner < 20)
+                        {
+                            type = 2;
+                        }
+                        else if (bloonSpawner < 30)
+                        {
+                            type = 3;
+                        }
+                        else if (bloonSpawner < 40)
+                        {
+                            type = 4;
+                        }
+                        else if (bloonSpawner < 50)
+                        {
+                            type = 5;
+                        }
+                        else
+                        {
+                            type = 1;
+                        }
+                        Balloon bloon = new Balloon(type, 0, 210, 30, 30, balloonSpeed + type, 0, false);
+                        balloons.Add(bloon);
                     }
+                    bloonSpawner++;
+
+                }
+                if (bloonSpawnTimer < 100000000 && bloonSpawnTimer >= 0)
+                {
+                    bloonSpawnTimer++;
                 }
                 else
                 {
-                    superRange = 0;
+                    bloonSpawnTimer = -1;
+                }
+                foreach (Defender d in defenders)
+                {
+
+                    d.shotTimer--;
+
+                    if (d.type == 3)
+                    {
+                        if (d.upgrade)
+                        {
+                            superRange = 10000;
+                        }
+                    }
+                    else
+                    {
+                        superRange = 0;
+                    }
+
+                    foreach (Balloon b in balloons)
+                    {
+                        x1 = b.hitBox.X + (b.hitBox.Width / 2);
+                        x2 = d.hitBox.X + (d.hitBox.Width / 2);
+
+                        y1 = b.hitBox.Y + (b.hitBox.Height / 2);
+                        y2 = d.hitBox.Y + (d.hitBox.Height / 2);
+
+                        inRange = Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2)));
+
+                        tempLabel.Text = inRange.ToString();
+
+                        if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < rad + superRange)
+                        {
+                            if (d.type == 5 && b.slow == false)
+                            {
+                                def = d;
+                                bloon = b;
+                                if (d.shotTimer < 0)
+                                {
+                                    shoot = true;
+                                }
+                                break;
+                            }
+                            else if (d.type == 5 && b.slow == true)
+                            {
+                                //womp womp
+                            }
+                            else
+                            {
+                                def = d;
+                                bloon = b;
+                                if (d.shotTimer < 0)
+                                {
+                                    shoot = true;
+                                }
+                                break;
+                            }
+
+                        }
+
+                    }
+                    if (shoot)
+                    {
+                        if (d.type == 1 || d.type == 3)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
+                            darts.Add(dart);
+                        }
+                        if (d.type == 2)
+                        {
+                            double xStep = Math.Cos(45 * Math.PI / 180.0);
+                            double yStep = Math.Sin(45 * Math.PI / 180.0);
+
+                            Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 3, Properties.Resources.Tack);
+                            Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 3, Properties.Resources.Tack);
+                            Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 3, Properties.Resources.Tack);
+                            Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 3, Properties.Resources.Tack);
+                            Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
+                            Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
+                            Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
+                            Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
+
+                            darts.Add(dart1);
+                            darts.Add(dart2);
+                            darts.Add(dart3);
+                            darts.Add(dart4);
+                            darts.Add(dart5);
+                            darts.Add(dart6);
+                            darts.Add(dart7);
+                            darts.Add(dart8);
+                        }
+                        if (d.type == 4)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
+                            darts.Add(dart);
+                        }
+                        if (d.type == 5)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.5, (y1 - y2) * 0.5, 5, Properties.Resources.ICEBALL);
+                            darts.Add(dart);
+                        }
+
+                        shoot = false;
+                        d.shotTimer = d.defualtTimer;
+                    }
+                }
+
+                foreach (Dart d in darts)
+                {
+                    d.move();
+                }
+                for (int i = 0; i < darts.Count; i++)
+                {
+                    if (onScreen.Contains(darts[i].hitBox.X, darts[i].hitBox.Y))
+                    {
+                        //nada
+                    }
+                    else if (darts[i].image == Properties.Resources.Tack)
+                    {
+                        //  darts.RemoveAt(i);
+                    }
+                    else
+                    {
+                        darts.RemoveAt(i);
+                    }
+                }
+
+                for (int i = 0; i < balloons.Count; i++)
+                {
+                    for (int j = 0; j < darts.Count; j++)
+                    {
+                        if (i < balloons.Count)
+                        {
+                            if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox))
+                            {
+
+                                money++;
+                                if (darts[j].type == 4)
+                                {
+                                    Balloon.bePopped = true;
+                                }
+                                else if (darts[j].type == 5)
+                                {
+                                    balloons[i].slow = true;
+                                    if (balloons[i].colour == 1)
+                                    {
+                                        balloons[i].image = Properties.Resources.Red_Ice_Balloon;
+                                    }
+                                    if (balloons[i].colour == 2)
+                                    {
+                                        balloons[i].image = Properties.Resources.Blue_Ice_Balloon;
+                                    }
+                                    if (balloons[i].colour == 3)
+                                    {
+                                        balloons[i].image = Properties.Resources.Green_Ice_Balloon;
+                                    }
+                                    if (balloons[i].colour == 4)
+                                    {
+                                        balloons[i].image = Properties.Resources.Yellow_Ice_Balloon;
+                                    }
+                                    if (balloons[i].colour == 5)
+                                    {
+                                        balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
+                                    }
+                                }
+                                else
+                                {
+                                    balloons[i].slow = false;
+                                    balloons[i].popped(balloons[i]);
+                                }
+                                darts.RemoveAt(j);
+                                if (Balloon.bePopped)
+                                {
+                                    balloons.RemoveAt(i);
+                                    Balloon.bePopped = false;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 foreach (Balloon b in balloons)
                 {
-                    x1 = b.hitBox.X + (b.hitBox.Width / 2);
-                    x2 = d.hitBox.X + (d.hitBox.Width / 2);
-
-                    y1 = b.hitBox.Y + (b.hitBox.Height / 2);
-                    y2 = d.hitBox.Y + (d.hitBox.Height / 2);
-
-                    inRange = Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2)));
-
-                    tempLabel.Text = inRange.ToString();
-
-                    if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < rad + superRange)
+                    b.move(b);
+                }
+                #region Balloons be movin
+                foreach (Balloon b in balloons)
+                {
+                    if (b.hitBox.IntersectsWith(cornerRect1))
                     {
-                        if (d.type == 5 && b.slow == false)
+                        b.xSpeed = 0;
+                        b.ySpeed = -(balloonSpeed + b.colour);
+                        if (b.slow)
                         {
-                            def = d;
-                            bloon = b;
-                            if (d.shotTimer < 0)
-                            {
-                                shoot = true;
-                            }
-                            break;
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
                         }
-                        else if (d.type == 5 && b.slow == true)
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect2))
+                    {
+                        b.xSpeed = -(balloonSpeed + b.colour);
+                        b.ySpeed = 0;
+                        if (b.slow)
                         {
-                            //womp womp
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
                         }
-                        else
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect3))
+                    {
+                        b.xSpeed = 0;
+                        b.ySpeed = balloonSpeed + b.colour;
+                        if (b.slow)
                         {
-                            def = d;
-                            bloon = b;
-                            if (d.shotTimer < 0)
-                            {
-                                shoot = true;
-                            }
-                            break;
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
                         }
-                        
                     }
-
-                }
-                if (shoot)
-                {
-                    if (d.type == 1 || d.type == 3)
+                    if (b.hitBox.IntersectsWith(cornerRect4))
                     {
-                        Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
-                        darts.Add(dart);
-                    }
-                    if (d.type == 2)
-                    {
-                        double xStep = Math.Cos(45 * Math.PI / 180.0);
-                        double yStep = Math.Sin(45 * Math.PI / 180.0);
-
-                        Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 3, Properties.Resources.Tack);
-                        Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 3, Properties.Resources.Tack);
-                        Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 3, Properties.Resources.Tack);
-                        Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 3, Properties.Resources.Tack);
-                        Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
-                        Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
-                        Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
-                        Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
-
-                        darts.Add(dart1);
-                        darts.Add(dart2);
-                        darts.Add(dart3);
-                        darts.Add(dart4);
-                        darts.Add(dart5);
-                        darts.Add(dart6);
-                        darts.Add(dart7);
-                        darts.Add(dart8);
-                    }
-                    if (d.type == 4)
-                    {
-                        Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
-                        darts.Add(dart);
-                    }
-                    if (d.type == 5)
-                    {
-                        Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.5, (y1 - y2) * 0.5, 5, Properties.Resources.ICEBALL);
-                        darts.Add(dart);
-                    }
-
-                    shoot = false;
-                    d.shotTimer = d.defualtTimer;
-                }
-            }
-
-
-
-            foreach (Dart d in darts)
-            {
-                d.move();
-            }
-            for (int i = 0; i < darts.Count; i++)
-            {
-                if (onScreen.Contains(darts[i].hitBox.X, darts[i].hitBox.Y))
-                {
-                    //nada
-                }
-                else if (darts[i].image == Properties.Resources.Tack)
-                {
-                    //  darts.RemoveAt(i);
-                }
-                else
-                {
-                    darts.RemoveAt(i);
-                }
-            }
-
-
-            for (int i = 0; i < balloons.Count; i++)
-            {
-                for (int j = 0; j < darts.Count; j++)
-                {
-                    if (i < balloons.Count)
-                    {
-                        if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox))
+                        b.xSpeed = -(balloonSpeed + b.colour);
+                        b.ySpeed = 0;
+                        if (b.slow)
                         {
-
-                            money++;
-                            if (darts[j].type == 4)
-                            {
-                                Balloon.bePopped = true;
-                            }
-                            else if (darts[j].type == 5)
-                            {
-                                balloons[i].slow = true;
-                                if(balloons[i].colour == 1)
-                                {
-                                    balloons[i].image = Properties.Resources.Red_Ice_Balloon;
-                                }
-                                if (balloons[i].colour == 2)
-                                {
-                                    balloons[i].image = Properties.Resources.Blue_Ice_Balloon;
-                                }
-                                if (balloons[i].colour == 3)
-                                {
-                                    balloons[i].image = Properties.Resources.Green_Ice_Balloon;
-                                }
-                                if (balloons[i].colour == 4)
-                                {
-                                    balloons[i].image = Properties.Resources.Yellow_Ice_Balloon;
-                                }
-                                if (balloons[i].colour == 5)
-                                {
-                                    balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
-                                }
-                            }
-                            else
-                            {
-                                balloons[i].slow = false;
-                                balloons[i].popped(balloons[i]);
-                            }
-                            darts.RemoveAt(j);
-                            if (Balloon.bePopped)
-                            {
-                                balloons.RemoveAt(i);
-                                Balloon.bePopped = false;
-                            }
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect5))
+                    {
+                        b.xSpeed = 0;
+                        b.ySpeed = -(balloonSpeed + b.colour);
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect6))
+                    {
+                        b.xSpeed = balloonSpeed + b.colour; ;
+                        b.ySpeed = 0;
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect7))
+                    {
+                        b.xSpeed = 0;
+                        b.ySpeed = -(balloonSpeed + b.colour);
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect8))
+                    {
+                        b.xSpeed = balloonSpeed + b.colour;
+                        b.ySpeed = 0;
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect9))
+                    {
+                        b.xSpeed = 0;
+                        b.ySpeed = balloonSpeed + b.colour;
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect10))
+                    {
+                        b.xSpeed = -(balloonSpeed + b.colour);
+                        b.ySpeed = 0;
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
+                        }
+                    }
+                    if (b.hitBox.IntersectsWith(cornerRect11))
+                    {
+                        b.xSpeed = 0;
+                        b.ySpeed = balloonSpeed + b.colour;
+                        if (b.slow)
+                        {
+                            b.xSpeed *= 0.5;
+                            b.ySpeed *= 0.5;
                         }
                     }
                 }
-            }
+                for (int i = 0; i < balloons.Count; i++)
+                {
+                    if (balloons[i].hitBox.Y > this.Height)
+                    {
+                        lives -= balloons[i].colour;
+                        balloons.RemoveAt(i);
+
+                    }
+                }
 
 
 
-            foreach (Balloon b in balloons)
-            {
-                b.move(b);
-            }
+                #endregion
 
-            #region Balloons be movin
-            foreach (Balloon b in balloons)
-            {
-                if (b.hitBox.IntersectsWith(cornerRect1))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = -(balloonSpeed + b.colour);
-                    if(b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect2))
-                {
-                    b.xSpeed = -(balloonSpeed + b.colour);
-                    b.ySpeed = 0;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect3))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = balloonSpeed + b.colour;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect4))
-                {
-                    b.xSpeed = -(balloonSpeed + b.colour);
-                    b.ySpeed = 0;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect5))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = -(balloonSpeed + b.colour);
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect6))
-                {
-                    b.xSpeed = balloonSpeed + b.colour; ;
-                    b.ySpeed = 0;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect7))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = -(balloonSpeed + b.colour);
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect8))
-                {
-                    b.xSpeed = balloonSpeed + b.colour;
-                    b.ySpeed = 0;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect9))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = balloonSpeed + b.colour;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect10))
-                {
-                    b.xSpeed = -(balloonSpeed + b.colour);
-                    b.ySpeed = 0;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-                if (b.hitBox.IntersectsWith(cornerRect11))
-                {
-                    b.xSpeed = 0;
-                    b.ySpeed = balloonSpeed + b.colour;
-                    if (b.slow)
-                    {
-                        b.xSpeed *= 0.5;
-                        b.ySpeed *= 0.5;
-                    }
-                }
-            }
-            for (int i = 0; i < balloons.Count; i++)
-            {
-                if (balloons[i].hitBox.Y > this.Height)
-                {
-                    lives -= balloons[i].colour;
-                    balloons.RemoveAt(i);
 
+                if (lives <= 0)
+                {
+                    Application.Exit();
+                }
+                if (balloons.Count == 0)
+                {
+                    inBetweenRounds = true;
+                    bloonSpawnTimer = 10;
+                    bloonSpawner = 0;
+                    roundNumber++;
+                    darts.Clear();
+                    money += (100 * (int)roundNumber);
+
+                    bpl = (int)(Math.Pow(roundNumber, 2) + 15);
                 }
             }
 
-
-
-            #endregion
 
             if (spawnSelect)
             {
@@ -602,10 +648,6 @@ namespace Bloons_TD__Final_Project
         BREAK:
 
 
-            if (lives <= 0)
-            {
-                Application.Exit();
-            }
             Refresh();
         }
 
@@ -636,7 +678,7 @@ namespace Bloons_TD__Final_Project
             }
 
             Point balls = new Point(mouse.X, mouse.Y);
-            
+
             foreach (Defender d in defenders)
             {
                 if (d.hitBox.Contains(balls) && spawn == false)
@@ -664,7 +706,7 @@ namespace Bloons_TD__Final_Project
 
         }
 
-        
+
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -709,6 +751,11 @@ namespace Bloons_TD__Final_Project
                 spawnType = 5;
                 money -= 425;
             }
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            inBetweenRounds = false;
         }
     }
 }

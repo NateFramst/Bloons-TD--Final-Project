@@ -46,6 +46,7 @@
             this.MoneyLabel4 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.MoneyLabel5 = new System.Windows.Forms.Label();
+            this.playButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -214,12 +215,23 @@
             this.MoneyLabel5.TabIndex = 15;
             this.MoneyLabel5.Text = "425";
             // 
+            // playButton
+            // 
+            this.playButton.Location = new System.Drawing.Point(660, 486);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(47, 22);
+            this.playButton.TabIndex = 16;
+            this.playButton.Text = "Play";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImage = global::Bloons_TD__Final_Project.Properties.Resources.MonkeyMeadow;
+            this.Controls.Add(this.playButton);
             this.Controls.Add(this.MoneyLabel5);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.MoneyLabel4);
@@ -272,5 +284,6 @@
         private System.Windows.Forms.Label MoneyLabel4;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label MoneyLabel5;
+        private System.Windows.Forms.Button playButton;
     }
 }
