@@ -106,6 +106,15 @@ namespace Bloons_TD__Final_Project
 
         bool inBetweenRounds = true;
 
+        SolidBrush transRed = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
+        SolidBrush transGray = new SolidBrush(Color.FromArgb(100, 182, 172, 172));
+
+        //Label upgradeMenuBackgroundLabel = new Label();
+
+        Defender menuMonkey;
+
+        int price;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -166,9 +175,12 @@ namespace Bloons_TD__Final_Project
             #endregion
 
 
+
+
             rad = 150;
 
             bpl = 10;
+
 
             //Defender defender = new Defender(180, 140, 60, 60, 2, Properties.Resources.TackShooter);
 
@@ -222,16 +234,22 @@ namespace Bloons_TD__Final_Project
 
             if (spawnSelect)
             {
-                e.Graphics.DrawImage(spawnImage, dms.X - 10, dms.Y - 10, 60, 60);
+
                 //e.Graphics.DrawRectangle(Pens.Red, dms);
-                e.Graphics.DrawEllipse(Pens.White, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
-            }
+                e.Graphics.DrawEllipse(Pens.Black, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
 
-            if (drawRed == false)
-            {
-                e.Graphics.FillEllipse(Brushes.Red, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
-            }
+                if (drawRed == false)
+                {
 
+                    e.Graphics.FillEllipse(transRed, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
+                }
+                if (drawRed)
+                {
+                    e.Graphics.FillEllipse(transGray, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
+                }
+
+                e.Graphics.DrawImage(spawnImage, dms.X - 10, dms.Y - 10, 60, 60);
+            }
 
 
 
@@ -275,7 +293,7 @@ namespace Bloons_TD__Final_Project
                         }
                         else
                         {
-                            type = 1;
+                            type = 5;
                         }
                         Balloon bloon = new Balloon(type, 0, 210, 30, 30, balloonSpeed + type, 0, false);
                         balloons.Add(bloon);
@@ -602,16 +620,17 @@ namespace Bloons_TD__Final_Project
                 {
                     Application.Exit();
                 }
-                if (balloons.Count == 0)
+                if (balloons.Count == 0  && bloonSpawner >= bpl)
                 {
                     inBetweenRounds = true;
                     bloonSpawnTimer = 10;
                     bloonSpawner = 0;
                     roundNumber++;
                     darts.Clear();
-                    money += (100 * (int)roundNumber);
+                    // money += (100 * (int)roundNumber);
+                    money += 200;
 
-                    bpl = (int)(Math.Pow(roundNumber, 2) + 15);
+                    bpl = (int)(Math.Pow(roundNumber, 2) + 10);
                 }
             }
 
@@ -724,28 +743,176 @@ namespace Bloons_TD__Final_Project
 
         private void GameScreen_MouseClick(object sender, MouseEventArgs e)
         {
-            if (spawn)
+            if(e.Button == MouseButtons.Left)
             {
-                Defender defenderNew = new Defender(mouse.X - 30, mouse.Y - 30, 60, 60, spawnType, spawnImage, false);
-                defenders.Add(defenderNew);
-                //spawn = false;
-                spawnSelect = false;
-            }
+                Point clicked = new Point(mouse.X, mouse.Y);
 
-            Point balls = new Point(mouse.X, mouse.Y);
-
-            foreach (Defender d in defenders)
-            {
-                if (d.hitBox.Contains(balls) && spawn == false)
+                foreach (Defender d in defenders)
                 {
-                    //upgradeMenu
+                    if (d.hitBox.Contains(clicked) && spawnSelect == false)
+                    {
+                        openMenu(d.type, d.hitBox);
+
+                        menuMonkey = d;
+
+                        break;
+                    }
+                    else
+                    {
+                        closeMenu();
+                    }
+                }
+
+                if (spawn)
+                {
+                    Defender defenderNew = new Defender(mouse.X - 30, mouse.Y - 30, 60, 60, spawnType, spawnImage, false);
+                    defenders.Add(defenderNew);
+                    money -= price;
+                    spawn = false;
+                    spawnSelect = false;
                 }
             }
+            if(e.Button == MouseButtons.Right)
+            {
+                spawnSelect = false;
+            }
+           
 
-
-
+          
 
         }
+
+
+        public void openMenu(int type, Rectangle rec)
+        {
+            if (rec.X < this.Width /2)
+            {
+                upgradeMenuBackgroundLabel.Location = new Point(595, 45);
+                upgradeButton.Location = new Point(631,284);
+                upgradeMenuNameLabel.Location = new Point(639, 171);
+                upgradeMenuPictureBox.Location = new Point(615, 67);
+                sellButton.Location = new Point(631, 397);
+                sellButtonLabel.Location = new Point(648, 381);
+                upgradeButtonLabel.Location = new Point(648,255);
+
+
+                upgradeMenuBackgroundLabel.Visible = true;
+
+                upgradeMenuPictureBox.Visible = true;
+
+                if (type == 1)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.Dart_Monkey;
+                }
+                if (type == 2)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.TackShooter;
+                }
+                if (type == 3)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.SuperMonkey;
+                }
+                if (type == 4)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.WizardMonkey;
+                }
+                if (type == 5)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.IceMonkey;
+                }
+
+                upgradeButton.Visible = true;
+                sellButton.Visible = true;
+
+                sellButtonLabel.Visible = true;
+                upgradeButtonLabel.Visible = true;
+
+                upgradeMenuNameLabel.Visible = true;
+
+
+                upgradeMenuPictureBox.BringToFront();
+                upgradeButton.BringToFront();
+                sellButton.BringToFront();
+                sellButtonLabel.BringToFront();
+                upgradeButtonLabel.BringToFront();
+                upgradeMenuNameLabel.BringToFront();
+            }
+            else
+            {
+                upgradeMenuBackgroundLabel.Location = new Point(0, 45);
+                upgradeButton.Location = new Point(36, 284);
+                upgradeMenuNameLabel.Location = new Point(44, 171);
+                upgradeMenuPictureBox.Location = new Point(20, 67);
+                sellButton.Location = new Point(36, 397);
+                sellButtonLabel.Location = new Point(53, 381);
+                upgradeButtonLabel.Location = new Point(53, 255);
+
+
+                upgradeMenuBackgroundLabel.Visible = true;
+
+                upgradeMenuPictureBox.Visible = true;
+
+                if (type == 1)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.Dart_Monkey;
+                }
+                if (type == 2)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.TackShooter;
+                }
+                if (type == 3)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.SuperMonkey;
+                }
+                if (type == 4)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.WizardMonkey;
+                }
+                if (type == 5)
+                {
+                    upgradeMenuPictureBox.Image = Properties.Resources.IceMonkey;
+                }
+
+                upgradeButton.Visible = true;
+                sellButton.Visible = true;
+
+                sellButtonLabel.Visible = true;
+                upgradeButtonLabel.Visible = true;
+
+                upgradeMenuNameLabel.Visible = true;
+
+
+                upgradeMenuPictureBox.BringToFront();
+                upgradeButton.BringToFront();
+                sellButton.BringToFront();
+                sellButtonLabel.BringToFront();
+                upgradeButtonLabel.BringToFront();
+                upgradeMenuNameLabel.BringToFront();
+            }
+
+        }
+
+        public void closeMenu()
+        {
+        
+            upgradeMenuBackgroundLabel.Visible = false;
+
+            upgradeMenuPictureBox.Visible = false;
+
+            upgradeButton.Visible = false;
+            sellButton.Visible = false;
+
+            sellButtonLabel.Visible = false;
+            upgradeButtonLabel.Visible = false;
+
+            upgradeMenuNameLabel.Visible = false;
+
+            upgradeMenuBackgroundLabel.Visible = false;
+        }
+
+
+
+
 
 
 
@@ -756,7 +923,7 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = true;
                 spawnImage = Properties.Resources.Dart_Monkey;
                 spawnType = 1;
-                money -= 170;
+                price = 170;
                 rad = 150;
             }
 
@@ -771,7 +938,7 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = true;
                 spawnImage = Properties.Resources.TackShooter;
                 spawnType = 2;
-                money -= 220;
+                price = 220;
                 rad = 80;
             }
 
@@ -784,7 +951,7 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = true;
                 spawnImage = Properties.Resources.SuperMonkey;
                 spawnType = 3;
-                money -= 1000;
+                price = 1000;
                 rad = 200;
             }
         }
@@ -796,7 +963,7 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = true;
                 spawnImage = Properties.Resources.WizardMonkey;
                 spawnType = 4;
-                money -= 500;
+                price = 500;
                 rad = 130;
             }
         }
@@ -808,7 +975,7 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = true;
                 spawnImage = Properties.Resources.IceMonkey;
                 spawnType = 5;
-                money -= 425;
+                price = 425;
                 rad = 160;
             }
         }
@@ -816,6 +983,36 @@ namespace Bloons_TD__Final_Project
         private void playButton_Click(object sender, EventArgs e)
         {
             inBetweenRounds = false;
+        }
+
+        
+
+        private void sellButton_Click(object sender, EventArgs e)
+        {
+            defenders.Remove(menuMonkey);
+            closeMenu();
+            if (menuMonkey.type == 1)
+            {
+                money += 136;
+            }
+            if (menuMonkey.type == 2)
+            {
+                money += 176;
+            }
+            if (menuMonkey.type == 3)
+            {
+                money += 800;
+            }
+            if (menuMonkey.type == 4)
+            {
+                money += 400;
+            }
+            if (menuMonkey.type == 5)
+            {
+                money += 340;
+            }
+            
+
         }
     }
 }
