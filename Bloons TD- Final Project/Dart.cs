@@ -17,6 +17,8 @@ namespace Bloons_TD__Final_Project
         public Image image;
         public int type;
 
+        public int timer;
+
         public Rectangle hitBox;
 
         public Dart(double _x, double _y, int _width, int _height, double _xSpeed, double _ySpeed, int _type, Image _image)
@@ -31,6 +33,9 @@ namespace Bloons_TD__Final_Project
             type = _type;
 
             hitBox = new Rectangle((int)(x), (int)(y), width, height);
+
+            timer = 0;
+
         }
 
         public void move()

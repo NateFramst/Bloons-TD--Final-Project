@@ -18,7 +18,7 @@ namespace Bloons_TD__Final_Project
 
         public int type;
 
-        public int shotTimer, defualtTimer;
+        public int shotTimer, defualtTimer, rad;
 
         public bool upgrade;
 
@@ -39,26 +39,32 @@ namespace Bloons_TD__Final_Project
             {
                 shotTimer = 40;
                 defualtTimer = 40;
+                rad = 150;
+                
             }
             if (type == 2)
             {
                 shotTimer = 60;
                 defualtTimer = 60;
+                rad = 80;
             }
             if (type == 3)
             {
                 shotTimer = 5;
                 defualtTimer = 5;
+                rad = 200;
             }
             if(type == 4)
             {
                 shotTimer = 50;
                 defualtTimer = 50;
+                rad = 130;
             }
             if (type == 5)
             {
                 shotTimer = 22;
                 defualtTimer = 22;
+                rad = 180;
             }
         }
 

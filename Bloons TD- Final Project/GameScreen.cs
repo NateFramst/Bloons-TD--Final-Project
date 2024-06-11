@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace Bloons_TD__Final_Project
         int bloonSpawner;
 
         int bloonSpawnTimer;
+
+        bool drawRed = true;
 
         int lives = 100;
 
@@ -221,12 +224,12 @@ namespace Bloons_TD__Final_Project
             {
                 e.Graphics.DrawImage(spawnImage, dms.X - 10, dms.Y - 10, 60, 60);
                 //e.Graphics.DrawRectangle(Pens.Red, dms);
-                e.Graphics.DrawEllipse(Pens.White, dms.X - rad + 15, dms.Y - rad + 15, 2 * rad, 2 * rad);
+                e.Graphics.DrawEllipse(Pens.White, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
             }
 
-            if (spawn == false)
+            if (drawRed == false)
             {
-                e.Graphics.FillEllipse(Brushes.Red, dms.X - rad + 15, dms.Y - rad + 15, 2 * rad, 2 * rad);
+                e.Graphics.FillEllipse(Brushes.Red, mouse.X - rad, mouse.Y - rad, 2 * rad, 2 * rad);
             }
 
 
@@ -293,18 +296,6 @@ namespace Bloons_TD__Final_Project
 
                     d.shotTimer--;
 
-                    if (d.type == 3)
-                    {
-                        if (d.upgrade)
-                        {
-                            superRange = 10000;
-                        }
-                    }
-                    else
-                    {
-                        superRange = 0;
-                    }
-
                     foreach (Balloon b in balloons)
                     {
                         x1 = b.hitBox.X + (b.hitBox.Width / 2);
@@ -317,7 +308,7 @@ namespace Bloons_TD__Final_Project
 
                         tempLabel.Text = inRange.ToString();
 
-                        if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < rad + superRange)
+                        if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < d.rad)
                         {
                             if (d.type == 5 && b.slow == false)
                             {
@@ -349,7 +340,7 @@ namespace Bloons_TD__Final_Project
                     }
                     if (shoot)
                     {
-                        if (d.type == 1 || d.type == 3)
+                        if (d.type == 1)
                         {
                             Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
                             darts.Add(dart);
@@ -359,14 +350,14 @@ namespace Bloons_TD__Final_Project
                             double xStep = Math.Cos(45 * Math.PI / 180.0);
                             double yStep = Math.Sin(45 * Math.PI / 180.0);
 
-                            Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 3, Properties.Resources.Tack);
-                            Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 3, Properties.Resources.Tack);
-                            Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 3, Properties.Resources.Tack);
-                            Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 3, Properties.Resources.Tack);
-                            Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
-                            Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
-                            Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 3, Properties.Resources.Tack);
-                            Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 3, Properties.Resources.Tack);
+                            Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 2, Properties.Resources.Tack);
+                            Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 2, Properties.Resources.Tack);
+                            Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 2, Properties.Resources.Tack);
+                            Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 2, Properties.Resources.Tack);
+                            Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
+                            Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
+                            Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
+                            Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
 
                             darts.Add(dart1);
                             darts.Add(dart2);
@@ -377,6 +368,11 @@ namespace Bloons_TD__Final_Project
                             darts.Add(dart7);
                             darts.Add(dart8);
                         }
+                        if (d.type == 3)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 3, Properties.Resources.Dart);
+                            darts.Add(dart);
+                        }
                         if (d.type == 4)
                         {
                             Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
@@ -384,7 +380,7 @@ namespace Bloons_TD__Final_Project
                         }
                         if (d.type == 5)
                         {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.5, (y1 - y2) * 0.5, 5, Properties.Resources.ICEBALL);
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 5, Properties.Resources.ICEBALL);
                             darts.Add(dart);
                         }
 
@@ -471,6 +467,8 @@ namespace Bloons_TD__Final_Project
                 {
                     b.move(b);
                 }
+
+
                 #region Balloons be movin
                 foreach (Balloon b in balloons)
                 {
@@ -626,26 +624,83 @@ namespace Bloons_TD__Final_Project
                 {
                     foreach (Rectangle rect in pathRects)
                     {
-                        if (dms.IntersectsWith(d.hitBox))
+                        if (dms.IntersectsWith(rect))
                         {
                             spawn = false;
+                            drawRed = false;
                             goto BREAK;
                         }
-                        else if (dms.IntersectsWith(rect))
+                        else if (dms.IntersectsWith(d.hitBox))
                         {
                             spawn = false;
+                            drawRed = false;
                             goto BREAK;
                         }
                         else
                         {
                             spawn = true;
+                            drawRed = true;
                         }
                     }
-
+                }
+                if (defenders.Count == 0)
+                {
+                    foreach (Rectangle rect in pathRects)
+                    {
+                        if (dms.IntersectsWith(rect))
+                        {
+                            spawn = false;
+                            drawRed = false;
+                            goto BREAK;
+                        }
+                        else
+                        {
+                            drawRed = true;
+                            spawn = true;
+                        }
+                    }
                 }
 
             }
         BREAK:
+
+
+
+
+            for (int i = 0; i < darts.Count; i++)
+            {
+                darts[i].timer++;
+
+                if (darts[i].type == 1 && darts[i].timer >= 7)
+                {
+                    darts.RemoveAt(i);
+                }
+                else if (darts[i].type == 2 && darts[i].timer >= 7)
+                {
+                    darts.RemoveAt(i);
+                }
+                else if (darts[i].type == 3 && darts[i].timer >= 9)
+                {
+                    darts.RemoveAt(i);
+                }
+                else if (darts[i].type == 4 && darts[i].timer >= 7)
+                {
+                    darts.RemoveAt(i);
+                }
+                else if (darts[i].type == 5 && darts[i].timer >= 6)
+                {
+                    darts.RemoveAt(i);
+                }
+
+
+
+            }
+
+
+
+
+
+
 
 
             Refresh();
@@ -673,7 +728,7 @@ namespace Bloons_TD__Final_Project
             {
                 Defender defenderNew = new Defender(mouse.X - 30, mouse.Y - 30, 60, 60, spawnType, spawnImage, false);
                 defenders.Add(defenderNew);
-                spawn = false;
+                //spawn = false;
                 spawnSelect = false;
             }
 
@@ -702,6 +757,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.Dart_Monkey;
                 spawnType = 1;
                 money -= 170;
+                rad = 150;
             }
 
         }
@@ -716,6 +772,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.TackShooter;
                 spawnType = 2;
                 money -= 220;
+                rad = 80;
             }
 
         }
@@ -728,6 +785,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.SuperMonkey;
                 spawnType = 3;
                 money -= 1000;
+                rad = 200;
             }
         }
 
@@ -739,6 +797,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.WizardMonkey;
                 spawnType = 4;
                 money -= 500;
+                rad = 130;
             }
         }
 
@@ -750,6 +809,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.IceMonkey;
                 spawnType = 5;
                 money -= 425;
+                rad = 160;
             }
         }
 
