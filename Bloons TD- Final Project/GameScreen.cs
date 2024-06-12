@@ -115,6 +115,8 @@ namespace Bloons_TD__Final_Project
 
         int price;
 
+        bool menuOpen;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -251,6 +253,21 @@ namespace Bloons_TD__Final_Project
                 e.Graphics.DrawImage(spawnImage, dms.X - 10, dms.Y - 10, 60, 60);
             }
 
+            if (menuOpen)
+            {
+                e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad +30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+                e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+
+                foreach(Defender d in defenders)
+                {
+                    if (d == menuMonkey)
+                    {
+                        e.Graphics.DrawImage(d.image, d.hitBox);
+                        break;
+                    }
+                }
+            }
+
 
 
         }
@@ -311,7 +328,7 @@ namespace Bloons_TD__Final_Project
                 }
                 foreach (Defender d in defenders)
                 {
-
+                    
                     d.shotTimer--;
 
                     foreach (Balloon b in balloons)
@@ -358,7 +375,7 @@ namespace Bloons_TD__Final_Project
                     }
                     if (shoot)
                     {
-                        if (d.type == 1)
+                        if (d.type == 1 &! d.upgrade)
                         {
                             Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
                             darts.Add(dart);
@@ -396,9 +413,19 @@ namespace Bloons_TD__Final_Project
                             Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
                             darts.Add(dart);
                         }
-                        if (d.type == 5)
+                        if (d.type == 5 &! d.upgrade)
                         {
                             Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 5, Properties.Resources.ICEBALL);
+                            darts.Add(dart);
+                        }
+                        if(d.type == 5 && d.upgrade)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 7, Properties.Resources.ICEBALL);
+                            darts.Add(dart);
+                        }
+                        if (d.type == 1 && d.upgrade)
+                        {
+                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 6, Properties.Resources.Dart);
                             darts.Add(dart);
                         }
 
@@ -406,6 +433,8 @@ namespace Bloons_TD__Final_Project
                         d.shotTimer = d.defualtTimer;
                     }
                 }
+
+                
 
                 foreach (Dart d in darts)
                 {
@@ -444,6 +473,24 @@ namespace Bloons_TD__Final_Project
                                 else if (darts[j].type == 5)
                                 {
                                     balloons[i].slow = true;
+                                }
+                                else if (darts[j].type == 7)
+                                {
+                                    balloons[i].slow = true;
+                                    balloons[i].popped(balloons[i]);
+                                }
+                                else
+                                {
+                                    balloons[i].slow = false;
+                                    balloons[i].popped(balloons[i]);
+                                }
+
+                                if (darts[j].type != 6)
+                                {
+                                    darts.RemoveAt(j);
+                                }
+                                if (balloons[i].slow)
+                                {
                                     if (balloons[i].colour == 1)
                                     {
                                         balloons[i].image = Properties.Resources.Red_Ice_Balloon;
@@ -465,17 +512,13 @@ namespace Bloons_TD__Final_Project
                                         balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
                                     }
                                 }
-                                else
-                                {
-                                    balloons[i].slow = false;
-                                    balloons[i].popped(balloons[i]);
-                                }
-                                darts.RemoveAt(j);
                                 if (Balloon.bePopped)
                                 {
                                     balloons.RemoveAt(i);
                                     Balloon.bePopped = false;
                                 }
+
+                                
                             }
                         }
                     }
@@ -494,111 +537,87 @@ namespace Bloons_TD__Final_Project
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect2))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect3))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                       
                     }
                     if (b.hitBox.IntersectsWith(cornerRect4))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                      
                     }
                     if (b.hitBox.IntersectsWith(cornerRect5))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect6))
                     {
                         b.xSpeed = balloonSpeed + b.colour; ;
                         b.ySpeed = 0;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect7))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                       
                     }
                     if (b.hitBox.IntersectsWith(cornerRect8))
                     {
                         b.xSpeed = balloonSpeed + b.colour;
                         b.ySpeed = 0;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect9))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                       
                     }
                     if (b.hitBox.IntersectsWith(cornerRect10))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                        if (b.slow)
-                        {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
-                        }
+                        
                     }
                     if (b.hitBox.IntersectsWith(cornerRect11))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                        if (b.slow)
+                       
+                    }
+                    if (b.slow)
+                    {
+                        if (b.xSpeed > 0)
                         {
-                            b.xSpeed *= 0.5;
-                            b.ySpeed *= 0.5;
+                            b.xSpeed = (balloonSpeed + b.colour) * 0.5;
                         }
+                        else if (b.xSpeed < 0)
+                        {
+                            b.xSpeed = -(balloonSpeed + b.colour) * 0.5;
+                        }
+                        if(b.ySpeed > 0)
+                        {
+                            b.ySpeed = (balloonSpeed + b.colour) * 0.5;
+                        }
+                        else if (b.ySpeed < 0)
+                        {
+                            b.ySpeed = -(balloonSpeed + b.colour) * 0.5;
+                        }
+
                     }
                 }
                 for (int i = 0; i < balloons.Count; i++)
@@ -715,13 +734,6 @@ namespace Bloons_TD__Final_Project
 
             }
 
-
-
-
-
-
-
-
             Refresh();
         }
 
@@ -751,9 +763,9 @@ namespace Bloons_TD__Final_Project
                 {
                     if (d.hitBox.Contains(clicked) && spawnSelect == false)
                     {
-                        openMenu(d.type, d.hitBox);
-
                         menuMonkey = d;
+
+                        openMenu(d.type, d.hitBox);
 
                         break;
                     }
@@ -777,9 +789,6 @@ namespace Bloons_TD__Final_Project
                 spawnSelect = false;
             }
            
-
-          
-
         }
 
 
@@ -787,6 +796,12 @@ namespace Bloons_TD__Final_Project
         {
             if (rec.X < this.Width /2)
             {
+                if (menuMonkey.upgrade == false)
+                {
+                    upgradeButton.Enabled = true;
+                    upgradeButton.BackColor = Color.White;
+                }
+                menuOpen = true;
                 upgradeMenuBackgroundLabel.Location = new Point(595, 45);
                 upgradeButton.Location = new Point(631,284);
                 upgradeMenuNameLabel.Location = new Point(639, 171);
@@ -839,6 +854,14 @@ namespace Bloons_TD__Final_Project
             }
             else
             {
+                if(menuMonkey.upgrade == false)
+                {
+                    upgradeButton.Enabled = true;
+                    upgradeButton.BackColor = Color.White;
+                }
+                
+
+                menuOpen = true;
                 upgradeMenuBackgroundLabel.Location = new Point(0, 45);
                 upgradeButton.Location = new Point(36, 284);
                 upgradeMenuNameLabel.Location = new Point(44, 171);
@@ -894,7 +917,8 @@ namespace Bloons_TD__Final_Project
 
         public void closeMenu()
         {
-        
+
+            menuOpen = false;
             upgradeMenuBackgroundLabel.Visible = false;
 
             upgradeMenuPictureBox.Visible = false;
@@ -1013,6 +1037,25 @@ namespace Bloons_TD__Final_Project
             }
             
 
+        }
+
+        private void upgradeButton_Click(object sender, EventArgs e)
+        {
+            foreach (Defender d in defenders)
+            {
+                if (d == menuMonkey)
+                {
+                    d.upgrade = true;
+                    upgradeButton.Enabled = false;
+                    upgradeButton.BackColor = Color.Gray;
+                }
+                if (d.type == 3 && d.defualtTimer != 3)
+                {
+                    d.rad = 250;
+                    d.shotTimer = 3;
+                    d.defualtTimer = 3;
+                }
+            }
         }
     }
 }

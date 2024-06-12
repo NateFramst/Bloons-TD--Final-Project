@@ -276,6 +276,7 @@
             this.upgradeButton.Text = "Upgrade";
             this.upgradeButton.UseVisualStyleBackColor = true;
             this.upgradeButton.Visible = false;
+            this.upgradeButton.Click += new System.EventHandler(this.upgradeButton_Click);
             // 
             // sellButton
             // 

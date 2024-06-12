@@ -20,7 +20,7 @@ namespace Bloons_TD__Final_Project
 
         public int shotTimer, defualtTimer, rad;
 
-        public bool upgrade;
+        public bool upgrade = false;
 
 
         public Defender(int _x, int _y, int _width, int _height, int _type, Image _image, bool _upgrade)
