@@ -96,7 +96,7 @@ namespace Bloons_TD__Final_Project
 
         int angle = 0;
 
-        bool spawn = true;
+        bool spawn = false;
 
         int money = 1000;
 
@@ -116,6 +116,14 @@ namespace Bloons_TD__Final_Project
         int price;
 
         bool menuOpen;
+
+        int speedFlip;
+
+        int lightningShot;
+
+        List<Balloon> LightningBalloons = new List<Balloon>();
+
+        int lightningCount;
 
         public GameScreen()
         {
@@ -175,8 +183,6 @@ namespace Bloons_TD__Final_Project
             pathRects.Add(pathRect11);
             pathRects.Add(pathRect12);
             #endregion
-
-
 
 
             rad = 150;
@@ -255,10 +261,10 @@ namespace Bloons_TD__Final_Project
 
             if (menuOpen)
             {
-                e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad +30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+                e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
                 e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
 
-                foreach(Defender d in defenders)
+                foreach (Defender d in defenders)
                 {
                     if (d == menuMonkey)
                     {
@@ -328,7 +334,7 @@ namespace Bloons_TD__Final_Project
                 }
                 foreach (Defender d in defenders)
                 {
-                    
+
                     d.shotTimer--;
 
                     foreach (Balloon b in balloons)
@@ -375,33 +381,68 @@ namespace Bloons_TD__Final_Project
                     }
                     if (shoot)
                     {
-                        if (d.type == 1 &! d.upgrade)
+                        if (d.type == 1)
                         {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
-                            darts.Add(dart);
+                            if (!d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 1, Properties.Resources.Dart);
+                                darts.Add(dart);
+                            }
+                            if (d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 6, Properties.Resources.Dart);
+                                darts.Add(dart);
+                            }
                         }
                         if (d.type == 2)
                         {
-                            double xStep = Math.Cos(45 * Math.PI / 180.0);
-                            double yStep = Math.Sin(45 * Math.PI / 180.0);
+                            if (!d.upgrade)
+                            {
+                                double xStep = Math.Cos(45 * Math.PI / 180.0);
+                                double yStep = Math.Sin(45 * Math.PI / 180.0);
 
-                            Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 2, Properties.Resources.Tack);
-                            Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 2, Properties.Resources.Tack);
-                            Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 2, Properties.Resources.Tack);
-                            Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 2, Properties.Resources.Tack);
-                            Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
-                            Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
-                            Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
-                            Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
+                                Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 2, Properties.Resources.Tack);
+                                Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 2, Properties.Resources.Tack);
+                                Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 2, Properties.Resources.Tack);
+                                Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 2, Properties.Resources.Tack);
+                                Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
+                                Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
+                                Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 2, Properties.Resources.Tack);
+                                Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 2, Properties.Resources.Tack);
 
-                            darts.Add(dart1);
-                            darts.Add(dart2);
-                            darts.Add(dart3);
-                            darts.Add(dart4);
-                            darts.Add(dart5);
-                            darts.Add(dart6);
-                            darts.Add(dart7);
-                            darts.Add(dart8);
+                                darts.Add(dart1);
+                                darts.Add(dart2);
+                                darts.Add(dart3);
+                                darts.Add(dart4);
+                                darts.Add(dart5);
+                                darts.Add(dart6);
+                                darts.Add(dart7);
+                                darts.Add(dart8);
+                            }
+                            if (d.upgrade)
+                            {
+                                double xStep = Math.Cos(45 * Math.PI / 180.0);
+                                double yStep = Math.Sin(45 * Math.PI / 180.0);
+
+                                Dart dart1 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10, 0, 8, Properties.Resources.Tack);
+                                Dart dart2 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, 10, 8, Properties.Resources.Tack);
+                                Dart dart3 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10, 0, 8, Properties.Resources.Tack);
+                                Dart dart4 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 0, -10, 8, Properties.Resources.Tack);
+                                Dart dart5 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, 10 * yStep, 8, Properties.Resources.Tack);
+                                Dart dart6 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, 10 * xStep, -10 * yStep, 8, Properties.Resources.Tack);
+                                Dart dart7 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, 10 * yStep, 8, Properties.Resources.Tack);
+                                Dart dart8 = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, -10 * xStep, -10 * yStep, 8, Properties.Resources.Tack);
+
+                                darts.Add(dart1);
+                                darts.Add(dart2);
+                                darts.Add(dart3);
+                                darts.Add(dart4);
+                                darts.Add(dart5);
+                                darts.Add(dart6);
+                                darts.Add(dart7);
+                                darts.Add(dart8);
+                            }
+
                         }
                         if (d.type == 3)
                         {
@@ -410,31 +451,41 @@ namespace Bloons_TD__Final_Project
                         }
                         if (d.type == 4)
                         {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
-                            darts.Add(dart);
+                            if (!d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 4, Properties.Resources.Magic);
+                                darts.Add(dart);
+                            }
+                            if (d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 9, Properties.Resources.Magic);
+                                darts.Add(dart);
+                            }
+
                         }
-                        if (d.type == 5 &! d.upgrade)
+                        if (d.type == 5)
                         {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 5, Properties.Resources.ICEBALL);
-                            darts.Add(dart);
+                            if (!d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 5, Properties.Resources.ICEBALL);
+                                darts.Add(dart);
+                            }
+
+                            if (d.upgrade)
+                            {
+                                Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 7, Properties.Resources.ICEBALL);
+                                darts.Add(dart);
+                            }
                         }
-                        if(d.type == 5 && d.upgrade)
-                        {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 7, Properties.Resources.ICEBALL);
-                            darts.Add(dart);
-                        }
-                        if (d.type == 1 && d.upgrade)
-                        {
-                            Dart dart = new Dart(def.hitBox.X + (def.hitBox.Width / 2), def.hitBox.Y + (def.hitBox.Height / 2), 20, 20, (x1 - x2) * 0.25, (y1 - y2) * 0.25, 6, Properties.Resources.Dart);
-                            darts.Add(dart);
-                        }
+
+
 
                         shoot = false;
                         d.shotTimer = d.defualtTimer;
                     }
                 }
 
-                
+
 
                 foreach (Dart d in darts)
                 {
@@ -466,8 +517,13 @@ namespace Bloons_TD__Final_Project
                             {
 
                                 money++;
-                                if (darts[j].type == 4)
+                                if (darts[j].type == 4 || (darts[j].type == 9 && lightningShot < 3))
                                 {
+                                    if (darts[j].type == 9)
+                                    {
+                                        lightningShot++;
+                                    }
+
                                     Balloon.bePopped = true;
                                 }
                                 else if (darts[j].type == 5)
@@ -479,46 +535,103 @@ namespace Bloons_TD__Final_Project
                                     balloons[i].slow = true;
                                     balloons[i].popped(balloons[i]);
                                 }
+                                else if (darts[j].type == 9 && lightningShot >= 3)
+                                {
+                                    lightningShot = 0;
+
+                                    Balloon.bePopped = true;
+                                    balloons.RemoveAt(i);
+                                    Balloon.bePopped = false;
+
+                                    int x = i;
+                                    for (int k = 0; k < 4; k++)
+                                    {
+                                        if (balloons.Count > x)
+                                        {
+                                            if (balloons[x].colour == 1)
+                                            {
+                                                balloons[x].image = Properties.Resources.RedLightningBalloon;
+                                            }
+                                            if (balloons[x].colour == 2)
+                                            {
+                                                balloons[x].image = Properties.Resources.BlueLightningBalloon;
+                                            }
+                                            if (balloons[x].colour == 3)
+                                            {
+                                                balloons[x].image = Properties.Resources.GreenLightningBalloon;
+                                            }
+                                            if (balloons[x].colour == 4)
+                                            {
+                                                balloons[x].image = Properties.Resources.YellowLightningBalloon;
+                                            }
+                                            if (balloons[x].colour == 5)
+                                            {
+                                                balloons[x].image = Properties.Resources.PinkLightningBalloon;
+                                            }
+
+                                            LightningBalloons.Add(balloons[x]);
+
+                                            x++;
+
+                                        }
+                                    }
+
+                                }
                                 else
                                 {
                                     balloons[i].slow = false;
                                     balloons[i].popped(balloons[i]);
                                 }
 
-                                if (darts[j].type != 6)
+
+
+
+                                if (balloons.Count > i)
                                 {
-                                    darts.RemoveAt(j);
+                                    if (balloons[i].slow)
+                                    {
+                                        if (balloons[i].colour == 1)
+                                        {
+                                            balloons[i].image = Properties.Resources.Red_Ice_Balloon;
+                                        }
+                                        if (balloons[i].colour == 2)
+                                        {
+                                            balloons[i].image = Properties.Resources.Blue_Ice_Balloon;
+                                        }
+                                        if (balloons[i].colour == 3)
+                                        {
+                                            balloons[i].image = Properties.Resources.Green_Ice_Balloon;
+                                        }
+                                        if (balloons[i].colour == 4)
+                                        {
+                                            balloons[i].image = Properties.Resources.Yellow_Ice_Balloon;
+                                        }
+                                        if (balloons[i].colour == 5)
+                                        {
+                                            balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
+                                        }
+                                    }
                                 }
-                                if (balloons[i].slow)
-                                {
-                                    if (balloons[i].colour == 1)
-                                    {
-                                        balloons[i].image = Properties.Resources.Red_Ice_Balloon;
-                                    }
-                                    if (balloons[i].colour == 2)
-                                    {
-                                        balloons[i].image = Properties.Resources.Blue_Ice_Balloon;
-                                    }
-                                    if (balloons[i].colour == 3)
-                                    {
-                                        balloons[i].image = Properties.Resources.Green_Ice_Balloon;
-                                    }
-                                    if (balloons[i].colour == 4)
-                                    {
-                                        balloons[i].image = Properties.Resources.Yellow_Ice_Balloon;
-                                    }
-                                    if (balloons[i].colour == 5)
-                                    {
-                                        balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
-                                    }
-                                }
+
                                 if (Balloon.bePopped)
                                 {
+                                    if (darts[j].type == 6)
+                                    {
+                                        darts.RemoveAt(j);
+                                    }
                                     balloons.RemoveAt(i);
                                     Balloon.bePopped = false;
                                 }
+                                if (darts.Count > j)
+                                {
+                                    if (darts[j].type != 6)
+                                    {
+                                        darts.RemoveAt(j);
+                                    }
+                                }
 
-                                
+
+
                             }
                         }
                     }
@@ -537,67 +650,67 @@ namespace Bloons_TD__Final_Project
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect2))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect3))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                       
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect4))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                      
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect5))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect6))
                     {
                         b.xSpeed = balloonSpeed + b.colour; ;
                         b.ySpeed = 0;
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect7))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
-                       
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect8))
                     {
                         b.xSpeed = balloonSpeed + b.colour;
                         b.ySpeed = 0;
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect9))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                       
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect10))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
-                        
+
                     }
                     if (b.hitBox.IntersectsWith(cornerRect11))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
-                       
+
                     }
                     if (b.slow)
                     {
@@ -609,7 +722,7 @@ namespace Bloons_TD__Final_Project
                         {
                             b.xSpeed = -(balloonSpeed + b.colour) * 0.5;
                         }
-                        if(b.ySpeed > 0)
+                        if (b.ySpeed > 0)
                         {
                             b.ySpeed = (balloonSpeed + b.colour) * 0.5;
                         }
@@ -639,7 +752,7 @@ namespace Bloons_TD__Final_Project
                 {
                     Application.Exit();
                 }
-                if (balloons.Count == 0  && bloonSpawner >= bpl)
+                if (balloons.Count == 0 && bloonSpawner >= bpl)
                 {
                     inBetweenRounds = true;
                     bloonSpawnTimer = 10;
@@ -656,6 +769,7 @@ namespace Bloons_TD__Final_Project
 
             if (spawnSelect)
             {
+
                 dms = new Rectangle(mouse.X - 20, mouse.Y - 20, 40, 40);
 
                 foreach (Defender d in defenders)
@@ -699,6 +813,8 @@ namespace Bloons_TD__Final_Project
                     }
                 }
 
+
+
             }
         BREAK:
 
@@ -729,10 +845,47 @@ namespace Bloons_TD__Final_Project
                 {
                     darts.RemoveAt(i);
                 }
+                else if (darts[i].type == 8 && darts[i].timer >= 10)
+                {
+                    darts.RemoveAt(i);
+                }
 
 
 
             }
+
+            if (LightningBalloons.Count > 0)
+            {
+                lightningCount++;
+                if (lightningCount >= 5)
+                {
+                    for (int i = 0; i < balloons.Count; i++)
+                    {
+                        for (int j = 0; j < LightningBalloons.Count; j++)
+                        {
+                            if (LightningBalloons[j] == balloons[i])
+                            {
+                                balloons[i].popped(balloons[i]);
+
+                                if (Balloon.bePopped)
+                                {
+                                    balloons.RemoveAt(i);
+                                    Balloon.bePopped = false;
+                                }
+
+                            }
+                        }
+                    }
+                    LightningBalloons.Clear();
+                    lightningCount = 0;
+                }
+
+            }
+
+
+
+
+
 
             Refresh();
         }
@@ -755,7 +908,7 @@ namespace Bloons_TD__Final_Project
 
         private void GameScreen_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 Point clicked = new Point(mouse.X, mouse.Y);
 
@@ -784,31 +937,36 @@ namespace Bloons_TD__Final_Project
                     spawnSelect = false;
                 }
             }
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 spawnSelect = false;
             }
-           
+
         }
 
 
         public void openMenu(int type, Rectangle rec)
         {
-            if (rec.X < this.Width /2)
+            if (rec.X < this.Width / 2)
             {
                 if (menuMonkey.upgrade == false)
                 {
                     upgradeButton.Enabled = true;
                     upgradeButton.BackColor = Color.White;
                 }
+                else if (menuMonkey.upgrade)
+                {
+                    upgradeButton.Enabled = false;
+                    upgradeButton.BackColor = Color.Gray;
+                }
                 menuOpen = true;
                 upgradeMenuBackgroundLabel.Location = new Point(595, 45);
-                upgradeButton.Location = new Point(631,284);
+                upgradeButton.Location = new Point(631, 284);
                 upgradeMenuNameLabel.Location = new Point(639, 171);
                 upgradeMenuPictureBox.Location = new Point(615, 67);
                 sellButton.Location = new Point(631, 397);
                 sellButtonLabel.Location = new Point(648, 381);
-                upgradeButtonLabel.Location = new Point(648,255);
+                upgradeButtonLabel.Location = new Point(648, 255);
 
 
                 upgradeMenuBackgroundLabel.Visible = true;
@@ -854,12 +1012,17 @@ namespace Bloons_TD__Final_Project
             }
             else
             {
-                if(menuMonkey.upgrade == false)
+                if (menuMonkey.upgrade == false)
                 {
                     upgradeButton.Enabled = true;
                     upgradeButton.BackColor = Color.White;
                 }
-                
+                else if (menuMonkey.upgrade)
+                {
+                    upgradeButton.Enabled = false;
+                    upgradeButton.BackColor = Color.Gray;
+                }
+
 
                 menuOpen = true;
                 upgradeMenuBackgroundLabel.Location = new Point(0, 45);
@@ -949,6 +1112,7 @@ namespace Bloons_TD__Final_Project
                 spawnType = 1;
                 price = 170;
                 rad = 150;
+                closeMenu();
             }
 
         }
@@ -963,7 +1127,8 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.TackShooter;
                 spawnType = 2;
                 price = 220;
-                rad = 80;
+                rad = 80; 
+                closeMenu();
             }
 
         }
@@ -977,6 +1142,7 @@ namespace Bloons_TD__Final_Project
                 spawnType = 3;
                 price = 1000;
                 rad = 200;
+                closeMenu();
             }
         }
 
@@ -989,6 +1155,7 @@ namespace Bloons_TD__Final_Project
                 spawnType = 4;
                 price = 500;
                 rad = 130;
+                closeMenu();
             }
         }
 
@@ -1001,6 +1168,7 @@ namespace Bloons_TD__Final_Project
                 spawnType = 5;
                 price = 425;
                 rad = 160;
+                closeMenu();
             }
         }
 
@@ -1009,7 +1177,7 @@ namespace Bloons_TD__Final_Project
             inBetweenRounds = false;
         }
 
-        
+
 
         private void sellButton_Click(object sender, EventArgs e)
         {
@@ -1017,7 +1185,15 @@ namespace Bloons_TD__Final_Project
             closeMenu();
             if (menuMonkey.type == 1)
             {
-                money += 136;
+                if (menuMonkey.upgrade)
+                {
+                    money += 170;
+                }
+                else
+                {
+                    money += 136;
+                }
+
             }
             if (menuMonkey.type == 2)
             {
@@ -1025,17 +1201,32 @@ namespace Bloons_TD__Final_Project
             }
             if (menuMonkey.type == 3)
             {
-                money += 800;
+                if (menuMonkey.upgrade)
+                {
+                    money += 1000;
+                }
+                else
+                {
+                    money += 800;
+                }
+
             }
             if (menuMonkey.type == 4)
             {
-                money += 400;
+                if (menuMonkey.upgrade)
+                {
+                    money += 500;
+                }
+                else
+                {
+                    money += 400;
+                }
             }
             if (menuMonkey.type == 5)
             {
                 money += 340;
             }
-            
+
 
         }
 
@@ -1045,16 +1236,69 @@ namespace Bloons_TD__Final_Project
             {
                 if (d == menuMonkey)
                 {
-                    d.upgrade = true;
-                    upgradeButton.Enabled = false;
-                    upgradeButton.BackColor = Color.Gray;
+                    if (d.type == 1 && money >= 150)
+                    {
+                        d.upgrade = true;
+                        upgradeButton.Enabled = false;
+                        upgradeButton.BackColor = Color.Gray;
+                        money -= 150;
+                    }
+                    if (d.type == 3 && money >= 600)
+                    {
+                        d.upgrade = true;
+                        upgradeButton.Enabled = false;
+                        upgradeButton.BackColor = Color.Gray;
+                        money -= 600;
+                    }
+                    if (d.type == 5 && money >= 250)
+                    {
+                        d.upgrade = true;
+                        upgradeButton.Enabled = false;
+                        upgradeButton.BackColor = Color.Gray;
+                        money -= 250;
+                    }
+                    if (d.type == 2 && money >= 200)
+                    {
+                        d.upgrade = true;
+                        upgradeButton.Enabled = false;
+                        upgradeButton.BackColor = Color.Gray;
+                        money -= 200;
+                    }
+                    if (d.type == 4 && money >= 300)
+                    {
+                        d.upgrade = true;
+                        upgradeButton.Enabled = false;
+                        upgradeButton.BackColor = Color.Gray;
+                        money -= 300;
+                    }
+
                 }
-                if (d.type == 3 && d.defualtTimer != 3)
+                if (d.upgrade && d.type == 3 && d.defualtTimer != 3)
                 {
                     d.rad = 250;
                     d.shotTimer = 3;
                     d.defualtTimer = 3;
                 }
+                if (d.upgrade && d.type == 2 && d.defualtTimer != 37)
+                {
+                    d.rad = 100;
+                    d.shotTimer = 37;
+                    d.defualtTimer = 37;
+                }
+            }
+        }
+
+        private void SpeedUpButton_Click(object sender, EventArgs e)
+        {
+            if (speedFlip == 0)
+            {
+                gameTimer.Interval = 10;
+                speedFlip = 1;
+            }
+            else if (speedFlip == 1)
+            {
+                gameTimer.Interval = 20;
+                speedFlip = 0;
             }
         }
     }

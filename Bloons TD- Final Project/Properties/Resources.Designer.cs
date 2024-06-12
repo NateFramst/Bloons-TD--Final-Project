@@ -93,6 +93,16 @@ namespace Bloons_TD__Final_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BlueLightningBalloon {
+            get {
+                object obj = ResourceManager.GetObject("BlueLightningBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dart {
             get {
                 object obj = ResourceManager.GetObject("Dart", resourceCulture);
@@ -126,6 +136,16 @@ namespace Bloons_TD__Final_Project.Properties {
         internal static System.Drawing.Bitmap GreenBalloon {
             get {
                 object obj = ResourceManager.GetObject("GreenBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GreenLightningBalloon {
+            get {
+                object obj = ResourceManager.GetObject("GreenLightningBalloon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,6 +213,16 @@ namespace Bloons_TD__Final_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PinkLightningBalloon {
+            get {
+                object obj = ResourceManager.GetObject("PinkLightningBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Red_Ice_Balloon {
             get {
                 object obj = ResourceManager.GetObject("Red_Ice_Balloon", resourceCulture);
@@ -206,6 +236,16 @@ namespace Bloons_TD__Final_Project.Properties {
         internal static System.Drawing.Bitmap RedBalloon {
             get {
                 object obj = ResourceManager.GetObject("RedBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedLightningBalloon {
+            get {
+                object obj = ResourceManager.GetObject("RedLightningBalloon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +306,16 @@ namespace Bloons_TD__Final_Project.Properties {
         internal static System.Drawing.Bitmap YellowBalloon {
             get {
                 object obj = ResourceManager.GetObject("YellowBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YellowLightningBalloon {
+            get {
+                object obj = ResourceManager.GetObject("YellowLightningBalloon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

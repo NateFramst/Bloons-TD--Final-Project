@@ -176,5 +176,20 @@
   <ItemGroup>
     <None Include="Resources\pink snow balloon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Lightning_Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Lightning_Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green_Lightning_Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yellow_Lightning_Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pink_Lightning_Balloon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

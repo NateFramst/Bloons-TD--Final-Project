@@ -54,6 +54,7 @@
             this.sellButton = new System.Windows.Forms.Button();
             this.upgradeButtonLabel = new System.Windows.Forms.Label();
             this.sellButtonLabel = new System.Windows.Forms.Label();
+            this.SpeedUpButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -309,12 +310,23 @@
             this.sellButtonLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.sellButtonLabel.Visible = false;
             // 
+            // SpeedUpButton
+            // 
+            this.SpeedUpButton.Location = new System.Drawing.Point(481, 474);
+            this.SpeedUpButton.Name = "SpeedUpButton";
+            this.SpeedUpButton.Size = new System.Drawing.Size(73, 47);
+            this.SpeedUpButton.TabIndex = 24;
+            this.SpeedUpButton.Text = "Speed";
+            this.SpeedUpButton.UseVisualStyleBackColor = true;
+            this.SpeedUpButton.Click += new System.EventHandler(this.SpeedUpButton_Click);
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImage = global::Bloons_TD__Final_Project.Properties.Resources.MonkeyMeadow;
+            this.Controls.Add(this.SpeedUpButton);
             this.Controls.Add(this.sellButtonLabel);
             this.Controls.Add(this.upgradeButtonLabel);
             this.Controls.Add(this.sellButton);
@@ -384,5 +396,6 @@
         private System.Windows.Forms.Button sellButton;
         private System.Windows.Forms.Label upgradeButtonLabel;
         private System.Windows.Forms.Label sellButtonLabel;
+        private System.Windows.Forms.Button SpeedUpButton;
     }
 }
