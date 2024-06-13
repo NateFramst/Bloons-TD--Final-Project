@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Bloons_TD__Final_Project
 {
     public partial class SignUpScreen : UserControl
     {
         int prevHighscore;
 
-      
+        int x;
 
         Highscore trackingHighscore;
 
@@ -35,33 +36,44 @@ namespace Bloons_TD__Final_Project
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            if(TitleScreen.signUp)
+            if (TitleScreen.signUp)
             {
-                Highscore highscore = new Highscore(usernameTextBox.Text, passwordTextbox.Text, 0);
-                Form1.highscores.Add(highscore);
+                if (usernameTextBox.Text.Length > 7 && usernameTextBox.Text.Length < 17 && passwordTextbox.Text.Length > 7 && passwordTextbox.Text.Length < 17)
+                {
+                    Highscore highscore = new Highscore(usernameTextBox.Text, passwordTextbox.Text, 0);
+                    Form1.highscores.Add(highscore);
 
-                Form1.ChangeScreen(this, new GameScreen());
+                    GameScreen.trackingHighscore = highscore;
+
+                    Form1.ChangeScreen(this, new GameScreen());
+                }
+                else
+                {
+                    usernameTextBox.Text = "Please enter a valid username and password combo";
+                }
+
             }
             else
             {
-                foreach(Highscore h in Form1.highscores)
+                foreach (Highscore h in Form1.highscores)
                 {
                     if (h.userName == usernameTextBox.Text && h.password == passwordTextbox.Text)
                     {
                         GameScreen.trackingHighscore = h;
                         Form1.ChangeScreen(this, new GameScreen());
+                        x = 1;
+                    }
+                    if (x == 0)
+                    {
+                        usernameTextBox.Text = "No accounts have this username and password combo";
                     }
                 }
             }
+        }
 
-
-
-
-
-
-
-
-            Highscore highscore1 = new Highscore(usernameTextBox.Text, passwordTextbox.Text, prevHighscore);
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new TitleScreen());
         }
     }
 }

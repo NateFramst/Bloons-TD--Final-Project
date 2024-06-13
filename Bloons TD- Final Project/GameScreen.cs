@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region code
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+//using System.⚡;
 
 namespace Bloons_TD__Final_Project
 {
@@ -56,7 +58,7 @@ namespace Bloons_TD__Final_Project
 
         bool drawRed = true;
 
-        int lives = 100;
+        int lives = 1;
 
         double x1;
         double y1;
@@ -157,6 +159,8 @@ namespace Bloons_TD__Final_Project
 
         public static Highscore trackingHighscore;
 
+        
+
 
 
 
@@ -247,7 +251,7 @@ namespace Bloons_TD__Final_Project
             MoneyLabel5.Text = iceMonkeyPrice.ToString();
 
 
-
+            gameTimer.Enabled = true;
 
 
         }
@@ -345,7 +349,7 @@ namespace Bloons_TD__Final_Project
                         int type;
                         if (bloonSpawner < 10)
                         {
-                            type = 1;
+                            type = 5;
                         }
                         else if (bloonSpawner < 20)
                         {
@@ -566,6 +570,7 @@ namespace Bloons_TD__Final_Project
                             {
 
                                 money++;
+                                trackingHighscore.score++;
                                 if (darts[j].type == 4 || (darts[j].type == 9 && lightningShot < 3))
                                 {
                                     if (darts[j].type == 9)
@@ -701,66 +706,77 @@ namespace Bloons_TD__Final_Project
                         b.ySpeed = -(balloonSpeed + b.colour);
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect2))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect3))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect4))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect5))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect6))
                     {
                         b.xSpeed = balloonSpeed + b.colour; ;
                         b.ySpeed = 0;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect7))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = -(balloonSpeed + b.colour);
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect8))
                     {
                         b.xSpeed = balloonSpeed + b.colour;
                         b.ySpeed = 0;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect9))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect10))
                     {
                         b.xSpeed = -(balloonSpeed + b.colour);
                         b.ySpeed = 0;
 
                     }
+
                     if (b.hitBox.IntersectsWith(cornerRect11))
                     {
                         b.xSpeed = 0;
                         b.ySpeed = balloonSpeed + b.colour;
 
                     }
+
                     if (b.slow)
                     {
                         if (b.xSpeed > 0)
@@ -771,6 +787,7 @@ namespace Bloons_TD__Final_Project
                         {
                             b.xSpeed = -(balloonSpeed + b.colour) * 0.5;
                         }
+
                         if (b.ySpeed > 0)
                         {
                             b.ySpeed = (balloonSpeed + b.colour) * 0.5;
@@ -799,8 +816,10 @@ namespace Bloons_TD__Final_Project
 
                 if (lives <= 0)
                 {
-                    Application.Exit();
+                    gameTimer.Enabled = false;
+                    Form1.ChangeScreen(this, new EndScreen());
                 }
+
                 if (balloons.Count == 0 && bloonSpawner >= bpl)
                 {
                     inBetweenRounds = true;
@@ -1479,3 +1498,4 @@ namespace Bloons_TD__Final_Project
     }
 }
 // monkey rotate
+#endregion

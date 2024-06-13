@@ -34,6 +34,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
             this.signUpButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // usernameTextBox
@@ -88,11 +89,22 @@
             this.signUpButton.UseVisualStyleBackColor = true;
             this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
             // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(297, 372);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(75, 23);
+            this.BackButton.TabIndex = 6;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // SignUpScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.signUpButton);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.passwordLabel);
@@ -114,5 +126,6 @@
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Button signUpButton;
+        private System.Windows.Forms.Button BackButton;
     }
 }

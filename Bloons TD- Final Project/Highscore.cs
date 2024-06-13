@@ -10,7 +10,7 @@ namespace Bloons_TD__Final_Project
     {
         public string userName, password;
 
-        public static int highscore, levelNumber, score;
+        public int highscore, levelNumber, score;
 
 
         public Highscore(string _username, string _password, int _highscore)
