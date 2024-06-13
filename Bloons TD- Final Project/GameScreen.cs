@@ -125,6 +125,42 @@ namespace Bloons_TD__Final_Project
 
         int lightningCount;
 
+        int wizardMonkeyPrice = 500;
+
+        int dartMonkeyPrice = 170;
+
+        int tackShooterPrice = 220;
+
+        int iceMonkeyPrice = 450;
+
+        int superMonkeyPrice = 1000;
+
+        int wizardMonkeySellPrice = 400;
+
+        int dartMonkeySellPrice = 136;
+
+        int tackShooterSellPrice = 176;
+
+        int iceMonkeySellPrice = 360;
+
+        int superMonkeySellPrice = 800;
+
+        int wizardMonkeyUpgradePrice = 600;
+
+        int dartMonkeyUpgradePrice = 150;
+
+        int tackShooterUpgradePrice = 250;
+
+        int iceMonkeyUpgradePrice = 400;
+
+        int superMonkeyUpgradePrice = 800;
+
+        public static Highscore trackingHighscore;
+
+
+
+
+
         public GameScreen()
         {
             InitializeComponent();
@@ -189,6 +225,8 @@ namespace Bloons_TD__Final_Project
 
             bpl = 10;
 
+            
+
 
             //Defender defender = new Defender(180, 140, 60, 60, 2, Properties.Resources.TackShooter);
 
@@ -201,6 +239,17 @@ namespace Bloons_TD__Final_Project
             //defenders.Add(defender3);
 
             onScreen = new Rectangle(0, 0, this.Width, this.Height);
+
+            MoneyLabel1.Text = dartMonkeyPrice.ToString();
+            MoneyLabel2.Text = tackShooterPrice.ToString();
+            MoneyLabel3.Text = superMonkeyPrice.ToString();
+            MoneyLabel4.Text = wizardMonkeyPrice.ToString();
+            MoneyLabel5.Text = iceMonkeyPrice.ToString();
+
+
+
+
+
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -940,6 +989,7 @@ namespace Bloons_TD__Final_Project
             if (e.Button == MouseButtons.Right)
             {
                 spawnSelect = false;
+                spawn = false;
             }
 
         }
@@ -976,22 +1026,73 @@ namespace Bloons_TD__Final_Project
                 if (type == 1)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.Dart_Monkey;
+                    upgradeMenuNameLabel.Text = "Dart Monkey";
+                    upgradeButtonLabel.Text = dartMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = dartMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = dartMonkeySellPrice.ToString();
+                    }
+
                 }
                 if (type == 2)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.TackShooter;
+                    upgradeMenuNameLabel.Text = "Tack Shooter";
+                    upgradeButtonLabel.Text = tackShooterUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = tackShooterPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = tackShooterSellPrice.ToString();
+                    }
                 }
                 if (type == 3)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.SuperMonkey;
+                    upgradeMenuNameLabel.Text = "Super Monkey";
+                    upgradeButtonLabel.Text = superMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = superMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = superMonkeySellPrice.ToString();
+                    }
                 }
                 if (type == 4)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.WizardMonkey;
+                    upgradeMenuNameLabel.Text = "Wizard Monkey";
+                    upgradeButtonLabel.Text = wizardMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = wizardMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = wizardMonkeySellPrice.ToString();
+                    }
                 }
                 if (type == 5)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.IceMonkey;
+                    upgradeMenuNameLabel.Text = "Ice Monkey";
+                    upgradeButtonLabel.Text = iceMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = iceMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = iceMonkeySellPrice.ToString();
+                    }
                 }
 
                 upgradeButton.Visible = true;
@@ -1009,6 +1110,7 @@ namespace Bloons_TD__Final_Project
                 sellButtonLabel.BringToFront();
                 upgradeButtonLabel.BringToFront();
                 upgradeMenuNameLabel.BringToFront();
+               
             }
             else
             {
@@ -1041,22 +1143,73 @@ namespace Bloons_TD__Final_Project
                 if (type == 1)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.Dart_Monkey;
+                    upgradeMenuNameLabel.Text = "Dart Monkey";
+                    upgradeButtonLabel.Text = dartMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = dartMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = dartMonkeySellPrice.ToString();
+                    }
+
                 }
                 if (type == 2)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.TackShooter;
+                    upgradeMenuNameLabel.Text = "Tack Shooter";
+                    upgradeButtonLabel.Text = tackShooterUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = tackShooterPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = tackShooterSellPrice.ToString();
+                    }
                 }
                 if (type == 3)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.SuperMonkey;
+                    upgradeMenuNameLabel.Text = "Super Monkey";
+                    upgradeButtonLabel.Text = superMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = superMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = superMonkeySellPrice.ToString();
+                    }
                 }
                 if (type == 4)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.WizardMonkey;
+                    upgradeMenuNameLabel.Text = "Wizard Monkey";
+                    upgradeButtonLabel.Text = wizardMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = wizardMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = wizardMonkeySellPrice.ToString();
+                    }
                 }
                 if (type == 5)
                 {
                     upgradeMenuPictureBox.Image = Properties.Resources.IceMonkey;
+                    upgradeMenuNameLabel.Text = "Ice Monkey";
+                    upgradeButtonLabel.Text = iceMonkeyUpgradePrice.ToString();
+                    if (menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = iceMonkeyPrice.ToString();
+                    }
+                    if (!menuMonkey.upgrade)
+                    {
+                        sellButtonLabel.Text = iceMonkeySellPrice.ToString();
+                    }
                 }
 
                 upgradeButton.Visible = true;
@@ -1074,6 +1227,7 @@ namespace Bloons_TD__Final_Project
                 sellButtonLabel.BringToFront();
                 upgradeButtonLabel.BringToFront();
                 upgradeMenuNameLabel.BringToFront();
+               
             }
 
         }
@@ -1105,12 +1259,12 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (money >= 170)
+            if (money >= dartMonkeyPrice)
             {
                 spawnSelect = true;
                 spawnImage = Properties.Resources.Dart_Monkey;
                 spawnType = 1;
-                price = 170;
+                price = dartMonkeyPrice;
                 rad = 150;
                 closeMenu();
             }
@@ -1121,12 +1275,12 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            if (money >= 220)
+            if (money >= tackShooterPrice)
             {
                 spawnSelect = true;
                 spawnImage = Properties.Resources.TackShooter;
                 spawnType = 2;
-                price = 220;
+                price = tackShooterPrice;
                 rad = 80; 
                 closeMenu();
             }
@@ -1135,12 +1289,12 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            if (money >= 1000)
+            if (money >= superMonkeyPrice)
             {
                 spawnSelect = true;
                 spawnImage = Properties.Resources.SuperMonkey;
                 spawnType = 3;
-                price = 1000;
+                price = superMonkeyPrice;
                 rad = 200;
                 closeMenu();
             }
@@ -1148,12 +1302,12 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox5_Click(object sender, EventArgs e)
         {
-            if (money >= 500)
+            if (money >= wizardMonkeyPrice)
             {
                 spawnSelect = true;
                 spawnImage = Properties.Resources.WizardMonkey;
                 spawnType = 4;
-                price = 500;
+                price = wizardMonkeyPrice;
                 rad = 130;
                 closeMenu();
             }
@@ -1161,12 +1315,12 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
-            if (money >= 425)
+            if (money >= iceMonkeyPrice)
             {
                 spawnSelect = true;
                 spawnImage = Properties.Resources.IceMonkey;
                 spawnType = 5;
-                price = 425;
+                price = iceMonkeyPrice;
                 rad = 160;
                 closeMenu();
             }
@@ -1187,27 +1341,34 @@ namespace Bloons_TD__Final_Project
             {
                 if (menuMonkey.upgrade)
                 {
-                    money += 170;
+                    money += dartMonkeyPrice;
                 }
                 else
                 {
-                    money += 136;
+                    money += dartMonkeySellPrice;
                 }
 
             }
             if (menuMonkey.type == 2)
             {
-                money += 176;
+                if (menuMonkey.upgrade)
+                {
+                    money += tackShooterPrice;
+                }
+                else
+                {
+                    money += tackShooterSellPrice;
+                }
             }
             if (menuMonkey.type == 3)
             {
                 if (menuMonkey.upgrade)
                 {
-                    money += 1000;
+                    money += superMonkeyPrice;
                 }
                 else
                 {
-                    money += 800;
+                    money += superMonkeySellPrice;
                 }
 
             }
@@ -1215,16 +1376,23 @@ namespace Bloons_TD__Final_Project
             {
                 if (menuMonkey.upgrade)
                 {
-                    money += 500;
+                    money += wizardMonkeyPrice;
                 }
                 else
                 {
-                    money += 400;
+                    money += wizardMonkeySellPrice;
                 }
             }
             if (menuMonkey.type == 5)
             {
-                money += 340;
+                if (menuMonkey.upgrade)
+                {
+                    money += iceMonkeyPrice;
+                }
+                else
+                {
+                    money += iceMonkeySellPrice;
+                }
             }
 
 
@@ -1241,35 +1409,40 @@ namespace Bloons_TD__Final_Project
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
                         upgradeButton.BackColor = Color.Gray;
-                        money -= 150;
+                        money -= dartMonkeyUpgradePrice;
+                        sellButtonLabel.Text = dartMonkeyPrice.ToString();
                     }
                     if (d.type == 3 && money >= 600)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
                         upgradeButton.BackColor = Color.Gray;
-                        money -= 600;
+                        money -= superMonkeyUpgradePrice;
+                        sellButtonLabel.Text = superMonkeyPrice.ToString();
                     }
                     if (d.type == 5 && money >= 250)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
                         upgradeButton.BackColor = Color.Gray;
-                        money -= 250;
+                        money -= iceMonkeyUpgradePrice;
+                        sellButtonLabel.Text = iceMonkeyPrice.ToString();
                     }
                     if (d.type == 2 && money >= 200)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
                         upgradeButton.BackColor = Color.Gray;
-                        money -= 200;
+                        money -= tackShooterUpgradePrice;
+                        sellButtonLabel.Text = tackShooterPrice.ToString();
                     }
                     if (d.type == 4 && money >= 300)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
                         upgradeButton.BackColor = Color.Gray;
-                        money -= 300;
+                        money -= wizardMonkeyUpgradePrice;
+                        sellButtonLabel.Text = wizardMonkeyPrice.ToString();
                     }
 
                 }
@@ -1290,16 +1463,18 @@ namespace Bloons_TD__Final_Project
 
         private void SpeedUpButton_Click(object sender, EventArgs e)
         {
-            if (speedFlip == 0)
-            {
-                gameTimer.Interval = 10;
-                speedFlip = 1;
-            }
-            else if (speedFlip == 1)
-            {
-                gameTimer.Interval = 20;
-                speedFlip = 0;
-            }
+            //if (speedFlip == 0)
+            //{
+            //    gameTimer.Interval = 10;
+            //    speedFlip = 1;
+            //}
+            //else if (speedFlip == 1)
+            //{
+            //    gameTimer.Interval = 20;
+            //    speedFlip = 0;
+            //}
+
+            Form1.ChangeScreen(this, new TitleScreen());
         }
     }
 }

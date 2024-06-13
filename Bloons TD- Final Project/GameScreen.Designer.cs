@@ -260,9 +260,10 @@
             // 
             // upgradeMenuNameLabel
             // 
+            this.upgradeMenuNameLabel.AutoSize = true;
             this.upgradeMenuNameLabel.Location = new System.Drawing.Point(639, 171);
             this.upgradeMenuNameLabel.Name = "upgradeMenuNameLabel";
-            this.upgradeMenuNameLabel.Size = new System.Drawing.Size(56, 13);
+            this.upgradeMenuNameLabel.Size = new System.Drawing.Size(27, 13);
             this.upgradeMenuNameLabel.TabIndex = 19;
             this.upgradeMenuNameLabel.Text = "ants";
             this.upgradeMenuNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

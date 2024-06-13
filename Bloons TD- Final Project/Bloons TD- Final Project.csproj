@@ -61,6 +61,7 @@
     <Compile Include="GameScreen.Designer.cs">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Highscore.cs" />
     <Compile Include="MenuScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,6 +70,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignUpScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SignUpScreen.Designer.cs">
+      <DependentUpon>SignUpScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TitleScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TitleScreen.Designer.cs">
+      <DependentUpon>TitleScreen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +101,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SignUpScreen.resx">
+      <DependentUpon>SignUpScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TitleScreen.resx">
+      <DependentUpon>TitleScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

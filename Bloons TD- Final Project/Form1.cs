@@ -16,7 +16,7 @@ namespace Bloons_TD__Final_Project
         {
             InitializeComponent();
 
-            ChangeScreen(this, new MenuScreen());
+            ChangeScreen(this, new TitleScreen());
 
         }
         public static void ChangeScreen(object sender, UserControl next)
