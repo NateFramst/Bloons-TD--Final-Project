@@ -14,7 +14,7 @@ namespace Bloons_TD__Final_Project
     {
         int prevHighscore;
 
-        List <Highscore> highscores = new List<Highscore>();
+      
 
         Highscore trackingHighscore;
 
@@ -38,13 +38,13 @@ namespace Bloons_TD__Final_Project
             if(TitleScreen.signUp)
             {
                 Highscore highscore = new Highscore(usernameTextBox.Text, passwordTextbox.Text, 0);
-                highscores.Add(highscore);
+                Form1.highscores.Add(highscore);
 
                 Form1.ChangeScreen(this, new GameScreen());
             }
             else
             {
-                foreach(Highscore h in highscores)
+                foreach(Highscore h in Form1.highscores)
                 {
                     if (h.userName == usernameTextBox.Text && h.password == passwordTextbox.Text)
                     {

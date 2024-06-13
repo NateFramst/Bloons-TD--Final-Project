@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bloons_TD__Final_Project
-{
+{ 
     public partial class Form1 : Form
     {
+       public static List<Highscore> highscores = new List<Highscore>();
         public Form1()
         {
             InitializeComponent();
