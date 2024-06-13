@@ -21,13 +21,13 @@ namespace Bloons_TD__Final_Project
         {
             InitializeComponent();
 
-            Highscore balls = new Highscore("jimmybob", "jimmybob", 1000);
-            Highscore balls1 = new Highscore("jimmyRob", "jimmyRob", 2000);
-            Highscore balls2 = new Highscore("jimmyJob", "jimmyJob", 3000);
+            //Highscore balls = new Highscore("jimmybob", "jimmybob", 1000);
+            //Highscore balls1 = new Highscore("jimmyRob", "jimmyRob", 2000);
+            //Highscore balls2 = new Highscore("jimmyJob", "jimmyJob", 3000);
 
-            Form1.highscores.Add(balls);
-            Form1.highscores.Add(balls1);
-            Form1.highscores.Add(balls2);
+            //Form1.highscores.Add(balls);
+            //Form1.highscores.Add(balls1);
+            //Form1.highscores.Add(balls2);
 
            
 
@@ -43,39 +43,22 @@ namespace Bloons_TD__Final_Project
 
             Form1.highscores.Reverse();
 
-            foreach (Highscore h in Form1.highscores)
-            {
-                if (h.highscore == highScoreArray[0])
-                {
-                    first = h;
-                }
-                if(h.highscore == highScoreArray[1])
-                {
-                    second = h;
-                }
-                if (h.highscore == highScoreArray[2])
-                {
-                    third = h;
-                }
-            }
-
-           
-
-            Form1.highscores.Add(third);
-            Form1.highscores.Add(second);
-            Form1.highscores.Add(first);
-
-            Form1.highscores.Reverse();
-
 
             firstUsernameLabel.Text = Form1.highscores[0].userName;
             firstHighscoreLabel.Text = Form1.highscores[0].highscore.ToString();
 
-            secondUsernameLabel.Text = Form1.highscores[1].userName;
-            secondHighscoreLabel.Text = Form1.highscores[1].highscore.ToString();
+            if (Form1.highscores.Count > 1)
+            {
+                secondUsernameLabel.Text = Form1.highscores[1].userName;
+                secondHighscoreLabel.Text = Form1.highscores[1].highscore.ToString();
+            }
 
-            thirdUsernameLabel.Text = Form1.highscores[2].userName;
-            thirdHighscoreLabel.Text = Form1.highscores[2].highscore.ToString();
+            if (Form1.highscores.Count > 2)
+            {
+                thirdUsernameLabel.Text = Form1.highscores[2].userName;
+                thirdHighscoreLabel.Text = Form1.highscores[2].highscore.ToString();
+            }
+           
 
 
 

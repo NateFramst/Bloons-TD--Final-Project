@@ -100,7 +100,7 @@ namespace Bloons_TD__Final_Project
 
         bool spawn = false;
 
-        int money = 1000;
+        int money = 440;
 
         int superRange;
 
@@ -135,7 +135,7 @@ namespace Bloons_TD__Final_Project
 
         int iceMonkeyPrice = 450;
 
-        int superMonkeyPrice = 1000;
+        int superMonkeyPrice = 2000;
 
         int wizardMonkeySellPrice = 400;
 
@@ -145,7 +145,7 @@ namespace Bloons_TD__Final_Project
 
         int iceMonkeySellPrice = 360;
 
-        int superMonkeySellPrice = 800;
+        int superMonkeySellPrice = 1600;
 
         int wizardMonkeyUpgradePrice = 600;
 
@@ -155,7 +155,7 @@ namespace Bloons_TD__Final_Project
 
         int iceMonkeyUpgradePrice = 400;
 
-        int superMonkeyUpgradePrice = 800;
+        int superMonkeyUpgradePrice = 1000;
 
         public static Highscore trackingHighscore;
 
@@ -349,7 +349,7 @@ namespace Bloons_TD__Final_Project
                         int type;
                         if (bloonSpawner < 10)
                         {
-                            type = 5;
+                            type = 1;
                         }
                         else if (bloonSpawner < 20)
                         {
@@ -1492,7 +1492,7 @@ namespace Bloons_TD__Final_Project
             //    gameTimer.Interval = 20;
             //    speedFlip = 0;
             //}
-
+            gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new TitleScreen());
         }
     }
