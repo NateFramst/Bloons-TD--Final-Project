@@ -12,11 +12,6 @@ namespace Bloons_TD__Final_Project
 {
     public partial class HighscoreScreen : UserControl
     {
-        Highscore first;
-
-        Highscore second;
-
-        Highscore third;
         public HighscoreScreen()
         {
             InitializeComponent();
@@ -43,9 +38,12 @@ namespace Bloons_TD__Final_Project
 
             Form1.highscores.Reverse();
 
-
-            firstUsernameLabel.Text = Form1.highscores[0].userName;
-            firstHighscoreLabel.Text = Form1.highscores[0].highscore.ToString();
+            if(Form1.highscores.Count > 0)
+            {
+                firstUsernameLabel.Text = Form1.highscores[0].userName;
+                firstHighscoreLabel.Text = Form1.highscores[0].highscore.ToString();
+            }
+            
 
             if (Form1.highscores.Count > 1)
             {
@@ -114,7 +112,16 @@ namespace Bloons_TD__Final_Project
             }
         }
 
-
-
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            if (Form1.whatScreen == 1)
+            {
+                Form1.ChangeScreen(this, new TitleScreen());
+            }
+            else if (Form1.whatScreen == 2)
+            {
+                Form1.ChangeScreen(this, new EndScreen());
+            }
+        }
     }
 }

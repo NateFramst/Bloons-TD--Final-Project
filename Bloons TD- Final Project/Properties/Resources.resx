@@ -154,6 +154,18 @@
   <data name="Magic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\purple_balls-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MOABDOWN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MOABDOWN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MOABLEFT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MOABLEFTFR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MOABRIGHT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BTD6MOAB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MOABUP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MOABLEFT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MonkeyMeadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MonkeyMeadow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

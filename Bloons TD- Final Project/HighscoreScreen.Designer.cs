@@ -34,6 +34,7 @@
             this.secondUsernameLabel = new System.Windows.Forms.Label();
             this.thirdHighscoreLabel = new System.Windows.Forms.Label();
             this.thirdUsernameLabel = new System.Windows.Forms.Label();
+            this.BackButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // firstUsernameLabel
@@ -78,10 +79,21 @@
             this.thirdUsernameLabel.Size = new System.Drawing.Size(226, 46);
             this.thirdUsernameLabel.TabIndex = 4;
             // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(513, 387);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(135, 28);
+            this.BackButton.TabIndex = 6;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // HighscoreScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.thirdHighscoreLabel);
             this.Controls.Add(this.thirdUsernameLabel);
             this.Controls.Add(this.secondHighscoreLabel);
@@ -102,5 +114,6 @@
         private System.Windows.Forms.Label secondUsernameLabel;
         private System.Windows.Forms.Label thirdHighscoreLabel;
         private System.Windows.Forms.Label thirdUsernameLabel;
+        private System.Windows.Forms.Button BackButton;
     }
 }

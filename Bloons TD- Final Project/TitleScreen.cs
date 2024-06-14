@@ -34,7 +34,8 @@ namespace Bloons_TD__Final_Project
 
         private void highScores_Click(object sender, EventArgs e)
         {
-
+            Form1.whatScreen = 1;
+            Form1.ChangeScreen(this, new HighscoreScreen());
         }
     }
 }

@@ -34,6 +34,8 @@
             this.scoreTitleLabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.usernameScore = new System.Windows.Forms.Label();
+            this.highscorePrintLabel = new System.Windows.Forms.Label();
+            this.highscoreTitleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // playAgainButton
@@ -70,7 +72,7 @@
             // 
             this.scoreTitleLabel.AutoSize = true;
             this.scoreTitleLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreTitleLabel.Location = new System.Drawing.Point(16, 122);
+            this.scoreTitleLabel.Location = new System.Drawing.Point(16, 107);
             this.scoreTitleLabel.Name = "scoreTitleLabel";
             this.scoreTitleLabel.Size = new System.Drawing.Size(366, 50);
             this.scoreTitleLabel.TabIndex = 3;
@@ -80,7 +82,7 @@
             // scoreLabel
             // 
             this.scoreLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreLabel.Location = new System.Drawing.Point(16, 232);
+            this.scoreLabel.Location = new System.Drawing.Point(16, 217);
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(366, 50);
             this.scoreLabel.TabIndex = 4;
@@ -96,10 +98,32 @@
             this.usernameScore.TabIndex = 5;
             this.usernameScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // highscorePrintLabel
+            // 
+            this.highscorePrintLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highscorePrintLabel.Location = new System.Drawing.Point(16, 421);
+            this.highscorePrintLabel.Name = "highscorePrintLabel";
+            this.highscorePrintLabel.Size = new System.Drawing.Size(448, 50);
+            this.highscorePrintLabel.TabIndex = 7;
+            this.highscorePrintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // highscoreTitleLabel
+            // 
+            this.highscoreTitleLabel.AutoSize = true;
+            this.highscoreTitleLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highscoreTitleLabel.Location = new System.Drawing.Point(16, 311);
+            this.highscoreTitleLabel.Name = "highscoreTitleLabel";
+            this.highscoreTitleLabel.Size = new System.Drawing.Size(476, 50);
+            this.highscoreTitleLabel.TabIndex = 6;
+            this.highscoreTitleLabel.Text = "Your Highscore is";
+            this.highscoreTitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // EndScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.highscorePrintLabel);
+            this.Controls.Add(this.highscoreTitleLabel);
             this.Controls.Add(this.usernameScore);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.scoreTitleLabel);
@@ -121,5 +145,7 @@
         private System.Windows.Forms.Label scoreTitleLabel;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label usernameScore;
+        private System.Windows.Forms.Label highscorePrintLabel;
+        private System.Windows.Forms.Label highscoreTitleLabel;
     }
 }

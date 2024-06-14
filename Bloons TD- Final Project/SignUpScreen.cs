@@ -17,7 +17,7 @@ namespace Bloons_TD__Final_Project
 
         int x;
 
-        Highscore trackingHighscore;
+        int counter;
 
         public SignUpScreen()
         {
@@ -38,14 +38,30 @@ namespace Bloons_TD__Final_Project
         {
             if (TitleScreen.signUp)
             {
+                counter = 0;
                 if (usernameTextBox.Text.Length > 7 && usernameTextBox.Text.Length < 17 && passwordTextbox.Text.Length > 7 && passwordTextbox.Text.Length < 17)
                 {
-                    Highscore highscore = new Highscore(usernameTextBox.Text, passwordTextbox.Text, 0);
-                    Form1.highscores.Add(highscore);
+                    foreach (Highscore h in Form1.highscores)
+                    {
+                        if(h.userName != usernameTextBox.Text)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == Form1.highscores.Count)
+                    {
+                        Highscore highscore = new Highscore(usernameTextBox.Text, passwordTextbox.Text, 0);
+                        Form1.highscores.Add(highscore);
 
-                    GameScreen.trackingHighscore = highscore;
+                        GameScreen.trackingHighscore = highscore;
 
-                    Form1.ChangeScreen(this, new GameScreen());
+                        Form1.ChangeScreen(this, new GameScreen());
+                    }
+                    else
+                    {
+                        usernameTextBox.Text = "This username is already in use";
+                    }
+                    
                 }
                 else
                 {

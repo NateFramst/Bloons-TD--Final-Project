@@ -228,5 +228,14 @@
   <ItemGroup>
     <None Include="Resources\Pink_Lightning_Balloon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Highscores.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\MOABLEFTFR.png" />
+    <None Include="Resources\MOABLEFT.png" />
+    <None Include="Resources\MOABDOWN.png" />
+    <None Include="Resources\BTD6MOAB.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

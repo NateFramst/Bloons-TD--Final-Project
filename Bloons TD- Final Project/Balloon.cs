@@ -11,7 +11,7 @@ namespace Bloons_TD__Final_Project
     {
 
 
-       public int x, y, width, height, colour;
+       public int x, y, width, height, colour, xDirection, yDirection, MOABhealth;
 
         public Image image;
 
@@ -35,28 +35,36 @@ namespace Bloons_TD__Final_Project
             ySpeed = _ySpeed;
             slow = _slow;
 
+            xDirection = 1;
+            yDirection = 0;
+
 
             hitBox = new Rectangle(x, y, width, height);
 
-            if (colour == 1)
+            if (colour == 2)
             {
                 image = Properties.Resources.RedBalloon;
             }
-            if (colour == 2)
+            if (colour == 3)
             {
                 image = Properties.Resources.BlueBalloon;
             }
-            if(colour == 3)
+            if(colour == 4)
             {
                 image = Properties.Resources.GreenBalloon;
             }
-            if(colour == 4)
+            if(colour == 5)
             {
                 image = Properties.Resources.YellowBalloon;
             }
-            if(colour == 5)
+            if(colour == 6)
             {
                 image= Properties.Resources.PinkBalloon;   
+            }
+            if(colour == 1)
+            {
+                image = Properties.Resources.MOABRIGHT;
+                MOABhealth = 100;
             }
         }
 
@@ -66,6 +74,23 @@ namespace Bloons_TD__Final_Project
             b.y += (int)ySpeed;
 
             b.hitBox = new Rectangle(b.x, b.y, b.width, b.height);
+
+            if(b.xSpeed > 0 && b.colour == 1)
+            {
+                b.image = Properties.Resources.MOABRIGHT;
+            }
+            else if (b.xSpeed < 0 && b.colour == 1)
+            {
+                b.image = Properties.Resources.MOABLEFT;
+            }
+            else if (b.ySpeed < 0 && b.colour == 1)
+            {
+                b.image = Properties.Resources.MOABUP;
+            }
+            if (b.ySpeed > 0 && b.colour == 1)
+            {
+                b.image = Properties.Resources.MOABDOWN;
+            }
         }
 
         public void popped(Balloon b)
@@ -75,26 +100,26 @@ namespace Bloons_TD__Final_Project
 
 
 
-            if (b.colour == 0)
+            if (b.colour == 1 || b.colour == 0)
             {
                 bePopped = true;
             }
 
-            if (b.colour == 1)
+            if (b.colour == 2)
             {
                 b.image = Properties.Resources.RedBalloon;
             }
 
-            if (b.colour == 2)
+            if (b.colour == 3)
             {
                 b.image = Properties.Resources.BlueBalloon;
             }
 
-            if (b.colour == 3)
+            if (b.colour == 4)
             {
                 b.image = Properties.Resources.GreenBalloon;
             }
-            if (b.colour == 4)
+            if (b.colour == 5)
             {
                 b.image = Properties.Resources.YellowBalloon;
             }

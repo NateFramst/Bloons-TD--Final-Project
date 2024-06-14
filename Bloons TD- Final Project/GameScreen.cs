@@ -57,6 +57,7 @@ namespace Bloons_TD__Final_Project
         int bloonSpawnTimer;
 
         bool drawRed = true;
+        bool moabDeathSpawn = true;
 
         int lives = 1;
 
@@ -159,10 +160,18 @@ namespace Bloons_TD__Final_Project
 
         public static Highscore trackingHighscore;
 
-        
+        int xDirection = 1;
+        int yDirection = 0;
 
+        bool MOABspawn = true;
 
+        Rectangle rec;
 
+        bool keepBalloon = false;
+
+        Balloon newB;
+
+        bool speedUp = false;
 
 
         public GameScreen()
@@ -172,15 +181,15 @@ namespace Bloons_TD__Final_Project
             #region balloon stuff
             cornerRect1 = new Rectangle(420, 215, 10, 10);
             cornerRect2 = new Rectangle(405, 75, 10, 10);
-            cornerRect3 = new Rectangle(240, 100, 10, 10);
+            cornerRect3 = new Rectangle(250, 90, 10, 10);
             cornerRect4 = new Rectangle(260, 440, 10, 10);
             cornerRect5 = new Rectangle(115, 425, 10, 10);
-            cornerRect6 = new Rectangle(140, 285, 10, 10);
+            cornerRect6 = new Rectangle(140, 290, 10, 10);
             cornerRect7 = new Rectangle(535, 295, 10, 10);
-            cornerRect8 = new Rectangle(535, 160, 10, 10);
+            cornerRect8 = new Rectangle(520, 165, 10, 10);
             cornerRect9 = new Rectangle(635, 185, 10, 10);
             cornerRect10 = new Rectangle(620, 400, 10, 10);
-            cornerRect11 = new Rectangle(340, 395, 10, 10);
+            cornerRect11 = new Rectangle(345, 380, 10, 10);
 
             CornerRects.Add(cornerRect1);
             CornerRects.Add(cornerRect2);
@@ -198,8 +207,8 @@ namespace Bloons_TD__Final_Project
 
             #region path stuff
             pathRect1 = new Rectangle(0, 210, 415, 30);
-            pathRect2 = new Rectangle(390, 90, 40, 120);
-            pathRect3 = new Rectangle(250, 85, 160, 30);
+            pathRect2 = new Rectangle(390, 80, 40, 130);
+            pathRect3 = new Rectangle(250, 80, 165, 30);
             pathRect4 = new Rectangle(250, 85, 40, 350);
             pathRect5 = new Rectangle(120, 410, 150, 30);
             pathRect6 = new Rectangle(115, 300, 40, 120);
@@ -207,8 +216,8 @@ namespace Bloons_TD__Final_Project
             pathRect8 = new Rectangle(505, 165, 40, 130);
             pathRect9 = new Rectangle(505, 165, 100, 30);
             pathRect10 = new Rectangle(605, 165, 35, 230);
-            pathRect11 = new Rectangle(355, 375, 250, 30);
-            pathRect12 = new Rectangle(350, 375, 40, 150);
+            pathRect11 = new Rectangle(355, 370, 255, 30);
+            pathRect12 = new Rectangle(350, 370, 40, 170);
 
             pathRects.Add(pathRect1);
             pathRects.Add(pathRect2);
@@ -229,7 +238,7 @@ namespace Bloons_TD__Final_Project
 
             bpl = 10;
 
-            
+
 
 
             //Defender defender = new Defender(180, 140, 60, 60, 2, Properties.Resources.TackShooter);
@@ -258,27 +267,45 @@ namespace Bloons_TD__Final_Project
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            foreach (Defender defender in defenders)
+            {
+                e.Graphics.DrawImage(defender.image, defender.hitBox);
+                //e.Graphics.DrawRectangle(Pens.Red, defender.hitBox);
+            }
             foreach (Balloon balloon in balloons)
             {
-                e.Graphics.DrawImage(balloon.image, balloon.hitBox);
+                if (balloon.colour != 1)
+                {
+                    e.Graphics.DrawImage(balloon.image, balloon.hitBox);
+                }
+                else if (balloon.colour == 1)
+                {
+
+                    if (balloon.xDirection != 0)
+                    {
+                        rec = new Rectangle(balloon.hitBox.X - 80 + 15, balloon.hitBox.Y - 40 + 15, 160, 80);
+                    }
+                    else
+                    {
+                        rec = new Rectangle(balloon.hitBox.X - 40 + 15, balloon.hitBox.Y - 80 + 15, 80, 160);
+                    }
+                    e.Graphics.DrawImage(balloon.image, rec);
+                }
+
                 //e.Graphics.DrawRectangle(Pens.White, balloon.hitBox);
             }
             foreach (Rectangle rect in CornerRects)
             {
                 //e.Graphics.DrawRectangle(Pens.White, rect);
             }
-            foreach (Defender defender in defenders)
-            {
-                e.Graphics.DrawImage(defender.image, defender.hitBox);
-                //e.Graphics.DrawRectangle(Pens.Red, defender.hitBox);
-            }
+
             foreach (Dart d in darts)
             {
                 e.Graphics.DrawImage(d.image, d.hitBox);
             }
             foreach (Rectangle rect in pathRects)
             {
-                //  e.Graphics.DrawRectangle(Pens.White, rect);
+                /// e.Graphics.DrawRectangle(Pens.White, rect);
             }
 
 
@@ -336,45 +363,69 @@ namespace Bloons_TD__Final_Project
             label1.Text = this.PointToClient(Cursor.Position).ToString();
             livesLabel.Text = lives.ToString();
             moneyLabel.Text = money.ToString();
-
+            keepBalloon = false;
             Size mouseSize = new Size(1, 1);
 
             mouse = new Rectangle(this.PointToClient(Cursor.Position), mouseSize);
             if (!inBetweenRounds)
             {
+
                 if (bloonSpawnTimer % 10 == 0)
                 {
                     if (bloonSpawner < bpl)
                     {
                         int type;
+
                         if (bloonSpawner < 10)
-                        {
-                            type = 1;
-                        }
-                        else if (bloonSpawner < 20)
                         {
                             type = 2;
                         }
-                        else if (bloonSpawner < 30)
+                        else if (bloonSpawner < 20)
                         {
                             type = 3;
                         }
-                        else if (bloonSpawner < 40)
+                        else if (bloonSpawner < 30)
                         {
                             type = 4;
                         }
-                        else if (bloonSpawner < 50)
+                        else if (bloonSpawner < 40)
                         {
                             type = 5;
+                        }
+                        else if (bloonSpawner < 50)
+                        {
+                            type = 6;
                         }
                         else
                         {
-                            type = 5;
+                            type = 6;
                         }
+
                         Balloon bloon = new Balloon(type, 0, 210, 30, 30, balloonSpeed + type, 0, false);
                         balloons.Add(bloon);
+
                     }
                     bloonSpawner++;
+
+                    if (roundNumber % 5 == 0)
+                    {
+                        balloonSpeed++;
+                        if (speedUp && bloonSpawner > bpl)
+                        {
+                            Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
+                            balloons.Add(bloon);
+                            MOABspawn = false;
+                        }
+                    }
+                    if (roundNumber % 10 == 0)
+                    {
+                        if (MOABspawn && bloonSpawner > bpl)
+                        {
+                            Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
+                            balloons.Add(bloon);
+                            MOABspawn = false;
+                        }
+                    }
 
                 }
                 if (bloonSpawnTimer < 100000000 && bloonSpawnTimer >= 0)
@@ -550,15 +601,46 @@ namespace Bloons_TD__Final_Project
                     {
                         //nada
                     }
-                    else if (darts[i].image == Properties.Resources.Tack)
-                    {
-                        //  darts.RemoveAt(i);
-                    }
                     else
                     {
                         darts.RemoveAt(i);
                     }
                 }
+
+
+                for (int i = 0; i < balloons.Count; i++)
+                {
+                    if (onScreen.Contains(balloons[i].hitBox.X, balloons[i].hitBox.Y))
+                    {
+                        //nada
+                    }
+                    else
+                    {
+                        balloons.RemoveAt(i);
+                    }
+                }
+
+
+                for (int i = 0; i < balloons.Count; i++)
+                {
+                    foreach (Rectangle rec in pathRects)
+                    {
+                        if (rec.Contains(balloons[i].hitBox.X, balloons[i].hitBox.Y))
+                        {
+                            keepBalloon = true;
+                        }
+                    }
+
+
+
+                    if (!keepBalloon)
+                    {
+                        balloons.RemoveAt(i);
+                    }
+
+                }
+
+
 
                 for (int i = 0; i < balloons.Count; i++)
                 {
@@ -566,7 +648,7 @@ namespace Bloons_TD__Final_Project
                     {
                         if (i < balloons.Count)
                         {
-                            if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox))
+                            if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox) && balloons[i].colour != 1)
                             {
 
                                 money++;
@@ -687,6 +769,68 @@ namespace Bloons_TD__Final_Project
 
 
                             }
+                            else
+                            {
+                                if (darts[j].hitBox.IntersectsWith(rec))
+                                {
+                                    if (darts[j].type == 1 || darts[j].type == 3 || darts[j].type == 5)
+                                    {
+                                        balloons[i].MOABhealth -= 3;
+                                    }
+                                    else if (darts[j].type == 2)
+                                    {
+                                        balloons[i].MOABhealth -= 1;
+                                    }
+                                    else if (darts[j].type == 4)
+                                    {
+                                        balloons[i].MOABhealth -= 5;
+                                    }
+                                    darts.RemoveAt(j);
+                                }
+
+
+                                if (balloons[i].MOABhealth < 0 && moabDeathSpawn)
+                                {
+                                    int bloonDisperser = 0;
+                                    for (int k = 0; k < 10; k++)
+                                    {
+                                        bloonDisperser += 20;
+                                        if (balloons[i].xDirection > 0)
+                                        {
+                                            newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                            newB.xDirection = 1;
+                                            newB.yDirection = 0;
+
+                                        }
+                                        else if (balloons[i].xDirection < 0)
+                                        {
+                                            newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                            newB.xDirection = -1;
+                                            newB.yDirection = 0;
+
+                                        }
+                                        else if (balloons[i].yDirection > 0)
+                                        {
+                                            newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                            newB.xDirection = 0;
+                                            newB.yDirection = 1;
+
+                                        }
+                                        else if (balloons[i].yDirection < 0)
+                                        {
+                                            newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                            newB.xDirection = 0;
+                                            newB.yDirection = -1;
+
+                                        }
+
+                                        balloons.Add(newB);
+                                    }
+                                    moabDeathSpawn = false;
+                                    balloons.RemoveAt(i);
+                                }
+
+                            }
                         }
                     }
                 }
@@ -702,80 +846,105 @@ namespace Bloons_TD__Final_Project
                 {
                     if (b.hitBox.IntersectsWith(cornerRect1))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = -(balloonSpeed + b.colour);
+
+                        b.xDirection = 0;
+                        b.yDirection = -1;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect2))
                     {
-                        b.xSpeed = -(balloonSpeed + b.colour);
-                        b.ySpeed = 0;
+
+
+                        b.xDirection = -1;
+                        b.yDirection = 0;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect3))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = balloonSpeed + b.colour;
+
+
+                        b.xDirection = 0;
+                        b.yDirection = 1;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect4))
                     {
-                        b.xSpeed = -(balloonSpeed + b.colour);
-                        b.ySpeed = 0;
+
+
+                        b.xDirection = -1;
+                        b.yDirection = 0;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect5))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = -(balloonSpeed + b.colour);
+
+
+                        b.xDirection = 0;
+                        b.yDirection = -1;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect6))
                     {
-                        b.xSpeed = balloonSpeed + b.colour; ;
-                        b.ySpeed = 0;
+
+
+                        b.xDirection = 1;
+                        b.yDirection = 0;
+
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect7))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = -(balloonSpeed + b.colour);
+
+
+                        b.xDirection = 0;
+                        b.yDirection = -1;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect8))
                     {
-                        b.xSpeed = balloonSpeed + b.colour;
-                        b.ySpeed = 0;
+
+
+                        b.xDirection = 1;
+                        b.yDirection = 0;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect9))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = balloonSpeed + b.colour;
+
+
+                        b.xDirection = 0;
+                        b.yDirection = 1;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect10))
                     {
-                        b.xSpeed = -(balloonSpeed + b.colour);
-                        b.ySpeed = 0;
+
+
+                        b.xDirection = -1;
+                        b.yDirection = 0;
 
                     }
 
                     if (b.hitBox.IntersectsWith(cornerRect11))
                     {
-                        b.xSpeed = 0;
-                        b.ySpeed = balloonSpeed + b.colour;
+
+
+                        b.xDirection = 0;
+                        b.yDirection = 1;
 
                     }
+
+                    b.xSpeed = (balloonSpeed + b.colour) * b.xDirection;
+                    b.ySpeed = (balloonSpeed + b.colour) * b.yDirection;
 
                     if (b.slow)
                     {
@@ -823,6 +992,8 @@ namespace Bloons_TD__Final_Project
                 if (balloons.Count == 0 && bloonSpawner >= bpl)
                 {
                     inBetweenRounds = true;
+                    MOABspawn = true;
+                    speedUp = true;
                     bloonSpawnTimer = 10;
                     bloonSpawner = 0;
                     roundNumber++;
@@ -1129,7 +1300,7 @@ namespace Bloons_TD__Final_Project
                 sellButtonLabel.BringToFront();
                 upgradeButtonLabel.BringToFront();
                 upgradeMenuNameLabel.BringToFront();
-               
+
             }
             else
             {
@@ -1246,7 +1417,7 @@ namespace Bloons_TD__Final_Project
                 sellButtonLabel.BringToFront();
                 upgradeButtonLabel.BringToFront();
                 upgradeMenuNameLabel.BringToFront();
-               
+
             }
 
         }
@@ -1300,7 +1471,7 @@ namespace Bloons_TD__Final_Project
                 spawnImage = Properties.Resources.TackShooter;
                 spawnType = 2;
                 price = tackShooterPrice;
-                rad = 80; 
+                rad = 80;
                 closeMenu();
             }
 

@@ -20,6 +20,8 @@ namespace Bloons_TD__Final_Project
 
             scoreLabel.Text = GameScreen.trackingHighscore.score + "";
 
+            
+
             foreach (Highscore h in Form1.highscores)
             {
                 if (GameScreen.trackingHighscore.userName == h.userName && GameScreen.trackingHighscore.password == h.password)
@@ -32,6 +34,9 @@ namespace Bloons_TD__Final_Project
                 }
             }
 
+
+            highscorePrintLabel.Text = GameScreen.trackingHighscore.highscore + "";
+
             //cheeseman : 2712
 
         }
@@ -43,12 +48,16 @@ namespace Bloons_TD__Final_Project
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            
             Application.Exit();
         }
 
         private void highScoreButton_Click(object sender, EventArgs e)
         {
+            Form1.whatScreen = 2;
             Form1.ChangeScreen(this, new HighscoreScreen());
         }
+
+       
     }
 }
