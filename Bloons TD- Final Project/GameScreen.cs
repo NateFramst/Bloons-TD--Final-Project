@@ -150,8 +150,6 @@ namespace Bloons_TD__Final_Project
 
         bool MOABspawn = true;
 
-        Rectangle rec;
-
         Balloon newB;
 
         bool speedUp = false;
