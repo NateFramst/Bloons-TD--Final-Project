@@ -1,30 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace Bloons_TD__Final_Project
-{ 
+{
     public partial class Form1 : Form
     {
-       public static List<Highscore> highscores = new List<Highscore>();
+        public static List<Highscore> highscores = new List<Highscore>();
 
         public static int whatScreen = 0;
+
+        public static bool setSize;
         public Form1()
         {
             InitializeComponent();
 
             loadDB();
-            ChangeScreen(this, new TitleScreen());
+            ChangeScreen(this, new TitleScreen(), false);
 
         }
-        public static void ChangeScreen(object sender, UserControl next)
+        public static void ChangeScreen(object sender, UserControl next, bool size)
         {
             Form form;
             if (sender is Form)
@@ -33,13 +37,21 @@ namespace Bloons_TD__Final_Project
             }
             else
             {
-                UserControl currenet = sender as UserControl;
-                form = currenet.FindForm();
-                form.Controls.Remove(currenet);
+                UserControl current = sender as UserControl;
+                form = current.FindForm();
+                form.Controls.Remove(current);
+
+                if (size)
+                {
+                    form.Size = new Size(900, 532);
+                }
+                else
+                {
+                    form.Size = new Size(500, 500);
+                }
             }
 
             next.Location = new Point(0, (form.Height - next.Height) / 2);
-
             form.Controls.Add(next);
         }
 
@@ -95,6 +107,17 @@ namespace Bloons_TD__Final_Project
             SaveHighScores();
         }
 
+        public void fixSize()
+        {
+            if (setSize)
+            {
+                this.Size = new Size(900, 532);
+            }
+            else
+            {
+                this.Size = new Size(500, 500);
+            }
+        }
     }
 }
 

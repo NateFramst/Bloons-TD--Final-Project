@@ -16,15 +16,17 @@ namespace Bloons_TD__Final_Project
         {
             InitializeComponent();
 
-            //Highscore balls = new Highscore("jimmybob", "jimmybob", 1000);
-            //Highscore balls1 = new Highscore("jimmyRob", "jimmyRob", 2000);
-            //Highscore balls2 = new Highscore("jimmyJob", "jimmyJob", 3000);
+            HighscoreTitleLabel.Location = new Point((this.Width / 2) - (HighscoreTitleLabel.Width / 2), 20);
 
-            //Form1.highscores.Add(balls);
-            //Form1.highscores.Add(balls1);
-            //Form1.highscores.Add(balls2);
+            firstUsernameLabel.Location = new Point((this.Width / 2) - (firstUsernameLabel.Width / 2), 120);
+            firstHighscoreLabel.Location = new Point((this.Width / 2) - (firstHighscoreLabel.Width / 2), 160);
 
-           
+            secondUsernameLabel.Location = new Point((this.Width / 2) - (secondUsernameLabel.Width / 2), 260);
+            secondHighscoreLabel.Location = new Point((this.Width / 2) - (secondHighscoreLabel.Width / 2), 300);
+
+            thirdUsernameLabel.Location = new Point((this.Width / 2) - (thirdUsernameLabel.Width / 2), 400);
+            thirdHighscoreLabel.Location = new Point((this.Width / 2) - (thirdHighscoreLabel.Width / 2), 460);
+
 
             List<int> scores = new List<int>();
             foreach(Highscore h in Form1.highscores)
@@ -116,12 +118,13 @@ namespace Bloons_TD__Final_Project
         {
             if (Form1.whatScreen == 1)
             {
-                Form1.ChangeScreen(this, new TitleScreen());
+                Form1.ChangeScreen(this, new TitleScreen(),false);
             }
             else if (Form1.whatScreen == 2)
             {
-                Form1.ChangeScreen(this, new EndScreen());
+                Form1.ChangeScreen(this, new EndScreen(),false);
             }
         }
+
     }
 }

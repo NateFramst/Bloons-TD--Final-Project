@@ -39,14 +39,14 @@
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(142, 178);
+            this.usernameTextBox.Location = new System.Drawing.Point(56, 162);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(389, 20);
             this.usernameTextBox.TabIndex = 0;
             // 
             // passwordTextbox
             // 
-            this.passwordTextbox.Location = new System.Drawing.Point(142, 254);
+            this.passwordTextbox.Location = new System.Drawing.Point(56, 256);
             this.passwordTextbox.Name = "passwordTextbox";
             this.passwordTextbox.Size = new System.Drawing.Size(389, 20);
             this.passwordTextbox.TabIndex = 1;
@@ -54,7 +54,7 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(208, 151);
+            this.usernameLabel.Location = new System.Drawing.Point(120, 129);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(253, 13);
             this.usernameLabel.TabIndex = 2;
@@ -63,7 +63,7 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(208, 228);
+            this.passwordLabel.Location = new System.Drawing.Point(108, 227);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(252, 13);
             this.passwordLabel.TabIndex = 3;
@@ -73,7 +73,7 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("MV Boli", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(267, 65);
+            this.titleLabel.Location = new System.Drawing.Point(152, 46);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(157, 49);
             this.titleLabel.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             // signUpButton
             // 
-            this.signUpButton.Location = new System.Drawing.Point(297, 330);
+            this.signUpButton.Location = new System.Drawing.Point(174, 322);
             this.signUpButton.Name = "signUpButton";
             this.signUpButton.Size = new System.Drawing.Size(75, 23);
             this.signUpButton.TabIndex = 5;
@@ -91,7 +91,7 @@
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(297, 372);
+            this.BackButton.Location = new System.Drawing.Point(174, 395);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 6;
@@ -112,7 +112,7 @@
             this.Controls.Add(this.passwordTextbox);
             this.Controls.Add(this.usernameTextBox);
             this.Name = "SignUpScreen";
-            this.Size = new System.Drawing.Size(669, 416);
+            this.Size = new System.Drawing.Size(500, 500);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -174,9 +174,9 @@ namespace Bloons_TD__Final_Project
             cornerRect3 = new Rectangle(250, 90, 10, 10);
             cornerRect4 = new Rectangle(260, 440, 10, 10);
             cornerRect5 = new Rectangle(115, 425, 10, 10);
-            cornerRect6 = new Rectangle(140, 290, 10, 10);
+            cornerRect6 = new Rectangle(140, 285, 10, 10);
             cornerRect7 = new Rectangle(535, 295, 10, 10);
-            cornerRect8 = new Rectangle(520, 165, 10, 10);
+            cornerRect8 = new Rectangle(520, 155, 10, 10);
             cornerRect9 = new Rectangle(635, 185, 10, 10);
             cornerRect10 = new Rectangle(620, 400, 10, 10);
             cornerRect11 = new Rectangle(345, 380, 10, 10);
@@ -272,7 +272,7 @@ namespace Bloons_TD__Final_Project
             }
             foreach (Rectangle rect in CornerRects)
             {
-                //e.Graphics.DrawRectangle(Pens.White, rect);
+               // e.Graphics.DrawRectangle(Pens.White, rect);
             }
 
             foreach (Dart d in darts)
@@ -1114,7 +1114,7 @@ namespace Bloons_TD__Final_Project
                 if (lives <= 0)
                 {
                     gameTimer.Enabled = false;
-                    Form1.ChangeScreen(this, new EndScreen());
+                    Form1.ChangeScreen(this, new EndScreen(), false);
                 }
 
                 if (balloons.Count == 0 && bloonSpawner >= bpl)
@@ -1797,7 +1797,7 @@ namespace Bloons_TD__Final_Project
             //    speedFlip = 0;
             //}
             gameTimer.Enabled = false;
-            Form1.ChangeScreen(this, new TitleScreen());
+            Form1.ChangeScreen(this, new TitleScreen(), false);
         }
 
         private void Angles(Defender d, Balloon b)

@@ -31,7 +31,21 @@ namespace Bloons_TD__Final_Project
             {
                 titleLabel.Text = "Login";
             }
-            
+
+            titleLabel.Location = new Point((this.Width / 2) - (titleLabel.Width / 2), 20);
+
+            usernameLabel.Location = new Point((this.Width / 2) - (usernameLabel.Width / 2), 120);
+
+            usernameTextBox.Location = new Point((this.Width / 2) - (usernameTextBox.Width / 2), 140);
+
+            passwordLabel.Location = new Point((this.Width / 2) - (passwordLabel.Width / 2), 240);
+
+            passwordTextbox.Location = new Point((this.Width / 2) - (passwordTextbox.Width / 2), 260);
+
+            signUpButton.Location = new Point((this.Width / 2) - (signUpButton.Width / 2), 360);
+
+            BackButton.Location = new Point((this.Width / 2) - (BackButton.Width / 2), 420);
+
         }
 
         private void signUpButton_Click(object sender, EventArgs e)
@@ -55,7 +69,7 @@ namespace Bloons_TD__Final_Project
 
                         GameScreen.trackingHighscore = highscore;
 
-                        Form1.ChangeScreen(this, new GameScreen());
+                        Form1.ChangeScreen(this, new GameScreen(),true);
                     }
                     else
                     {
@@ -76,7 +90,7 @@ namespace Bloons_TD__Final_Project
                     if (h.userName == usernameTextBox.Text && h.password == passwordTextbox.Text)
                     {
                         GameScreen.trackingHighscore = h;
-                        Form1.ChangeScreen(this, new GameScreen());
+                        Form1.ChangeScreen(this, new GameScreen(), true);
                         x = 1;
                     }
                     if (x == 0)
@@ -89,7 +103,7 @@ namespace Bloons_TD__Final_Project
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new TitleScreen());
+            Form1.ChangeScreen(this, new TitleScreen(),false);
         }
     }
 }

@@ -83,7 +83,7 @@
             this.Controls.Add(this.signUpButton);
             this.Controls.Add(this.gameTitleLabel);
             this.Name = "TitleScreen";
-            this.Size = new System.Drawing.Size(656, 419);
+            this.Size = new System.Drawing.Size(500, 500);
             this.ResumeLayout(false);
             this.PerformLayout();
 

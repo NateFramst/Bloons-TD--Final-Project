@@ -19,7 +19,7 @@ namespace Bloons_TD__Final_Project
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new GameScreen());
+            Form1.ChangeScreen(this, new GameScreen(), true);
         }
     }
 }

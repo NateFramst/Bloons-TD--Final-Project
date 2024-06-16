@@ -43,7 +43,7 @@ namespace Bloons_TD__Final_Project
 
         private void playAgainButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new GameScreen());
+            Form1.ChangeScreen(this, new GameScreen(), true);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace Bloons_TD__Final_Project
         private void highScoreButton_Click(object sender, EventArgs e)
         {
             Form1.whatScreen = 2;
-            Form1.ChangeScreen(this, new HighscoreScreen());
+            Form1.ChangeScreen(this, new HighscoreScreen(), false);
         }
 
        

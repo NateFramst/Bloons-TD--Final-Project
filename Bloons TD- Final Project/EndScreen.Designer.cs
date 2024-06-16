@@ -40,7 +40,7 @@
             // 
             // playAgainButton
             // 
-            this.playAgainButton.Location = new System.Drawing.Point(555, 228);
+            this.playAgainButton.Location = new System.Drawing.Point(385, 254);
             this.playAgainButton.Name = "playAgainButton";
             this.playAgainButton.Size = new System.Drawing.Size(112, 77);
             this.playAgainButton.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // highScoreButton
             // 
-            this.highScoreButton.Location = new System.Drawing.Point(555, 311);
+            this.highScoreButton.Location = new System.Drawing.Point(385, 337);
             this.highScoreButton.Name = "highScoreButton";
             this.highScoreButton.Size = new System.Drawing.Size(112, 77);
             this.highScoreButton.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(555, 394);
+            this.exitButton.Location = new System.Drawing.Point(385, 420);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(112, 77);
             this.exitButton.TabIndex = 2;
@@ -70,11 +70,10 @@
             // 
             // scoreTitleLabel
             // 
-            this.scoreTitleLabel.AutoSize = true;
             this.scoreTitleLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreTitleLabel.Location = new System.Drawing.Point(16, 107);
             this.scoreTitleLabel.Name = "scoreTitleLabel";
-            this.scoreTitleLabel.Size = new System.Drawing.Size(366, 50);
+            this.scoreTitleLabel.Size = new System.Drawing.Size(350, 131);
             this.scoreTitleLabel.TabIndex = 3;
             this.scoreTitleLabel.Text = "Your Score is";
             this.scoreTitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -82,9 +81,9 @@
             // scoreLabel
             // 
             this.scoreLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreLabel.Location = new System.Drawing.Point(16, 217);
+            this.scoreLabel.Location = new System.Drawing.Point(25, 219);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(366, 50);
+            this.scoreLabel.Size = new System.Drawing.Size(341, 83);
             this.scoreLabel.TabIndex = 4;
             this.scoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -101,19 +100,18 @@
             // highscorePrintLabel
             // 
             this.highscorePrintLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.highscorePrintLabel.Location = new System.Drawing.Point(16, 421);
+            this.highscorePrintLabel.Location = new System.Drawing.Point(25, 420);
             this.highscorePrintLabel.Name = "highscorePrintLabel";
-            this.highscorePrintLabel.Size = new System.Drawing.Size(448, 50);
+            this.highscorePrintLabel.Size = new System.Drawing.Size(341, 67);
             this.highscorePrintLabel.TabIndex = 7;
             this.highscorePrintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // highscoreTitleLabel
             // 
-            this.highscoreTitleLabel.AutoSize = true;
             this.highscoreTitleLabel.Font = new System.Drawing.Font("Ravie", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.highscoreTitleLabel.Location = new System.Drawing.Point(16, 311);
+            this.highscoreTitleLabel.Location = new System.Drawing.Point(3, 311);
             this.highscoreTitleLabel.Name = "highscoreTitleLabel";
-            this.highscoreTitleLabel.Size = new System.Drawing.Size(476, 50);
+            this.highscoreTitleLabel.Size = new System.Drawing.Size(363, 103);
             this.highscoreTitleLabel.TabIndex = 6;
             this.highscoreTitleLabel.Text = "Your Highscore is";
             this.highscoreTitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -131,7 +129,7 @@
             this.Controls.Add(this.highScoreButton);
             this.Controls.Add(this.playAgainButton);
             this.Name = "EndScreen";
-            this.Size = new System.Drawing.Size(690, 477);
+            this.Size = new System.Drawing.Size(500, 500);
             this.ResumeLayout(false);
             this.PerformLayout();
 
