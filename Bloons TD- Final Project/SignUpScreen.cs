@@ -13,7 +13,6 @@ namespace Bloons_TD__Final_Project
 {
     public partial class SignUpScreen : UserControl
     {
-
         int x;
 
         int counter;
