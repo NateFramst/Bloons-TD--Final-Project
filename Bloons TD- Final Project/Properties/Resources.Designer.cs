@@ -73,6 +73,16 @@ namespace Bloons_TD__Final_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BlackBalloon {
+            get {
+                object obj = ResourceManager.GetObject("BlackBalloon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Blue_Ice_Balloon {
             get {
                 object obj = ResourceManager.GetObject("Blue_Ice_Balloon", resourceCulture);

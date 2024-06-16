@@ -232,6 +232,10 @@
     <Content Include="Highscores.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Untitled__1_-removebg-preview.png" />
+    <None Include="Resources\BlackBalloon.png" />
+    <None Include="Resources\BTD6Yellow-removebg-preview - Copy.png" />
+    <None Include="Resources\BlackBalloon-removebg-preview.png" />
     <None Include="Resources\MOABLEFTFR.png" />
     <None Include="Resources\MOABLEFT.png" />
     <None Include="Resources\MOABDOWN.png" />

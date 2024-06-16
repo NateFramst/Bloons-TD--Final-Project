@@ -14,13 +14,19 @@ namespace Bloons_TD__Final_Project
 
         public Image image;
 
-        public Rectangle hitBox;
+        public Rectangle hitBox, turnRec;
 
         public int type;
 
         public int shotTimer, defualtTimer, rad;
 
         public bool upgrade = false;
+
+        public bool trackingBalloon, shootingBalloon;
+
+        public int rotationAngle;
+
+        public float RotationAngle { get; set; }
 
 
         public Defender(int _x, int _y, int _width, int _height, int _type, Image _image, bool _upgrade)
@@ -33,7 +39,14 @@ namespace Bloons_TD__Final_Project
             type = _type;
             upgrade = _upgrade;
 
+            trackingBalloon = false ;
+            shootingBalloon = false ;
+
+            rotationAngle = 0;
+
             hitBox = new Rectangle(x, y, width, height);
+
+            turnRec = new Rectangle(x, y, width, height);
 
             if (type == 1)
             {

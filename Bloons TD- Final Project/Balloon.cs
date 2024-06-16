@@ -11,13 +11,15 @@ namespace Bloons_TD__Final_Project
     {
 
 
-       public int x, y, width, height, colour, xDirection, yDirection, MOABhealth;
+       public int x, y, width, height, colour, xDirection, yDirection, blackBalloonHealth;
+
+        public double MOABhealth;
 
         public Image image;
 
         public double xSpeed, ySpeed;
 
-        public Rectangle hitBox;
+        public Rectangle hitBox, rec;
 
         public static bool bePopped;
 
@@ -60,6 +62,11 @@ namespace Bloons_TD__Final_Project
             if(colour == 6)
             {
                 image= Properties.Resources.PinkBalloon;   
+            }
+            if(colour == 7)
+            {
+                image = Properties.Resources.BlackBalloon;
+                blackBalloonHealth = 20;
             }
             if(colour == 1)
             {
@@ -122,6 +129,10 @@ namespace Bloons_TD__Final_Project
             if (b.colour == 5)
             {
                 b.image = Properties.Resources.YellowBalloon;
+            }
+            if(b.colour == 6)
+            {
+                b.image = Properties.Resources.PinkBalloon;
             }
 
 

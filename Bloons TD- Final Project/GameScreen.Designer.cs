@@ -111,7 +111,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Bloons_TD__Final_Project.Properties.Resources.Dart_Monkey;
-            this.pictureBox1.Location = new System.Drawing.Point(754, 29);
+            this.pictureBox1.Location = new System.Drawing.Point(787, 20);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(55, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -122,7 +122,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Bloons_TD__Final_Project.Properties.Resources.TackShooter;
-            this.pictureBox2.Location = new System.Drawing.Point(827, 29);
+            this.pictureBox2.Location = new System.Drawing.Point(787, 113);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(55, 55);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -155,7 +155,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Bloons_TD__Final_Project.Properties.Resources.SuperMonkey;
-            this.pictureBox4.Location = new System.Drawing.Point(754, 113);
+            this.pictureBox4.Location = new System.Drawing.Point(787, 434);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(55, 55);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -166,7 +166,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::Bloons_TD__Final_Project.Properties.Resources.WizardMonkey;
-            this.pictureBox5.Location = new System.Drawing.Point(827, 113);
+            this.pictureBox5.Location = new System.Drawing.Point(787, 324);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(55, 55);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -177,7 +177,7 @@
             // MoneyLabel1
             // 
             this.MoneyLabel1.AutoSize = true;
-            this.MoneyLabel1.Location = new System.Drawing.Point(768, 87);
+            this.MoneyLabel1.Location = new System.Drawing.Point(805, 78);
             this.MoneyLabel1.Name = "MoneyLabel1";
             this.MoneyLabel1.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel1.TabIndex = 10;
@@ -186,7 +186,7 @@
             // MoneyLabel2
             // 
             this.MoneyLabel2.AutoSize = true;
-            this.MoneyLabel2.Location = new System.Drawing.Point(842, 87);
+            this.MoneyLabel2.Location = new System.Drawing.Point(805, 171);
             this.MoneyLabel2.Name = "MoneyLabel2";
             this.MoneyLabel2.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel2.TabIndex = 11;
@@ -195,7 +195,7 @@
             // MoneyLabel3
             // 
             this.MoneyLabel3.AutoSize = true;
-            this.MoneyLabel3.Location = new System.Drawing.Point(768, 171);
+            this.MoneyLabel3.Location = new System.Drawing.Point(799, 492);
             this.MoneyLabel3.Name = "MoneyLabel3";
             this.MoneyLabel3.Size = new System.Drawing.Size(31, 13);
             this.MoneyLabel3.TabIndex = 12;
@@ -204,7 +204,7 @@
             // MoneyLabel4
             // 
             this.MoneyLabel4.AutoSize = true;
-            this.MoneyLabel4.Location = new System.Drawing.Point(842, 171);
+            this.MoneyLabel4.Location = new System.Drawing.Point(805, 381);
             this.MoneyLabel4.Name = "MoneyLabel4";
             this.MoneyLabel4.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel4.TabIndex = 13;
@@ -213,7 +213,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::Bloons_TD__Final_Project.Properties.Resources.IceMonkey;
-            this.pictureBox6.Location = new System.Drawing.Point(754, 197);
+            this.pictureBox6.Location = new System.Drawing.Point(787, 213);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(55, 55);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -224,7 +224,7 @@
             // MoneyLabel5
             // 
             this.MoneyLabel5.AutoSize = true;
-            this.MoneyLabel5.Location = new System.Drawing.Point(768, 255);
+            this.MoneyLabel5.Location = new System.Drawing.Point(805, 271);
             this.MoneyLabel5.Name = "MoneyLabel5";
             this.MoneyLabel5.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel5.TabIndex = 15;

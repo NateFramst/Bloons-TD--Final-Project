@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,15 +78,11 @@ namespace Bloons_TD__Final_Project
 
         Boolean shoot;
 
-        int shotTimer;
-
         Rectangle onScreen;
 
         int balloonSpeed = 2;
 
         bool spawnSelect = false;
-
-        bool slowShot;
 
         Image spawnImage;
         int spawnType;
@@ -94,16 +91,9 @@ namespace Bloons_TD__Final_Project
 
         Rectangle mouse;
 
-        double dxs;
-        double dys = 15;
-
-        int angle = 0;
-
         bool spawn = false;
 
         int money = 440;
-
-        int superRange;
 
         double roundNumber = 1;
 
@@ -119,8 +109,6 @@ namespace Bloons_TD__Final_Project
         int price;
 
         bool menuOpen;
-
-        int speedFlip;
 
         int lightningShot;
 
@@ -160,19 +148,23 @@ namespace Bloons_TD__Final_Project
 
         public static Highscore trackingHighscore;
 
-        int xDirection = 1;
-        int yDirection = 0;
-
         bool MOABspawn = true;
 
         Rectangle rec;
-
-        bool keepBalloon = false;
 
         Balloon newB;
 
         bool speedUp = false;
 
+        int moabSpawnCounter = 1;
+
+        int bloonDistance = 10;
+
+        bool moabSpawnTimer;
+
+        bool shorten = false;
+
+        int fixMOAB;
 
         public GameScreen()
         {
@@ -238,7 +230,7 @@ namespace Bloons_TD__Final_Project
 
             bpl = 10;
 
-
+           // money += 10000000;
 
 
             //Defender defender = new Defender(180, 140, 60, 60, 2, Properties.Resources.TackShooter);
@@ -267,32 +259,18 @@ namespace Bloons_TD__Final_Project
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
+
+
             foreach (Defender defender in defenders)
             {
-                e.Graphics.DrawImage(defender.image, defender.hitBox);
-                //e.Graphics.DrawRectangle(Pens.Red, defender.hitBox);
-            }
-            foreach (Balloon balloon in balloons)
-            {
-                if (balloon.colour != 1)
+                if (!defender.trackingBalloon)
                 {
-                    e.Graphics.DrawImage(balloon.image, balloon.hitBox);
-                }
-                else if (balloon.colour == 1)
-                {
-
-                    if (balloon.xDirection != 0)
-                    {
-                        rec = new Rectangle(balloon.hitBox.X - 80 + 15, balloon.hitBox.Y - 40 + 15, 160, 80);
-                    }
-                    else
-                    {
-                        rec = new Rectangle(balloon.hitBox.X - 40 + 15, balloon.hitBox.Y - 80 + 15, 80, 160);
-                    }
-                    e.Graphics.DrawImage(balloon.image, rec);
+                    //e.Graphics.DrawImage(defender.image, defender.hitBox);
                 }
 
-                //e.Graphics.DrawRectangle(Pens.White, balloon.hitBox);
+
+                //  e.Graphics.DrawRectangle(Pens.Red, defender.hitBox);
             }
             foreach (Rectangle rect in CornerRects)
             {
@@ -354,6 +332,68 @@ namespace Bloons_TD__Final_Project
                 }
             }
 
+            //rotate Monkeys
+
+            foreach (Defender d in defenders)
+            {
+                if (d.type != 2 && bloon != null && d.trackingBalloon)
+                {
+                    // Calculate the angle to the nearest balloon
+                    Angles(d, bloon);
+
+                    // Update the defender's rotation angle
+                    d.RotationAngle = d.rotationAngle;
+                }
+
+                // Save the current state of the Graphics object
+                GraphicsState state = g.Save();
+
+                // Translate to the center of the rectangle
+                g.TranslateTransform(d.turnRec.X + d.turnRec.Width / 2, d.turnRec.Y + d.turnRec.Height / 2);
+
+                // Rotate the Graphics object using the stored rotation angle
+                g.RotateTransform(d.RotationAngle);
+
+                // Translate back to the top-left corner of the rectangle
+                g.TranslateTransform(-d.turnRec.Width / 2, -d.turnRec.Height / 2);
+
+                // Draw the rotated rectangle
+                Rectangle turnRec = new Rectangle(0, 0, d.turnRec.Width, d.turnRec.Height);
+
+                // Draw the defender's image
+                g.DrawImage(d.image, turnRec);
+
+                //draw a rectangle around the defender
+                //e.Graphics.DrawRectangle(Pens.Black, turnRec);
+
+                // Restore the original state of the Graphics object
+                g.Restore(state);
+            }
+
+            foreach (Balloon balloon in balloons)
+            {
+                if (balloon.colour != 1)
+                {
+                    e.Graphics.DrawImage(balloon.image, balloon.hitBox);
+                }
+                else if (balloon.colour == 1)
+                {
+
+                    if (balloon.xDirection != 0)
+                    {
+                        balloon.rec = new Rectangle(balloon.hitBox.X - 80 + 15, balloon.hitBox.Y - 40 + 15, 160, 80);
+                    }
+                    else
+                    {
+                        balloon.rec = new Rectangle(balloon.hitBox.X - 40 + 15, balloon.hitBox.Y - 80 + 15, 80, 160);
+                    }
+                    e.Graphics.DrawImage(balloon.image, balloon.rec);
+                }
+
+                //e.Graphics.DrawRectangle(Pens.White, balloon.hitBox);
+            }
+
+
 
 
         }
@@ -363,14 +403,13 @@ namespace Bloons_TD__Final_Project
             label1.Text = this.PointToClient(Cursor.Position).ToString();
             livesLabel.Text = lives.ToString();
             moneyLabel.Text = money.ToString();
-            keepBalloon = false;
+            //keepBalloon = false;
             Size mouseSize = new Size(1, 1);
 
             mouse = new Rectangle(this.PointToClient(Cursor.Position), mouseSize);
             if (!inBetweenRounds)
             {
-
-                if (bloonSpawnTimer % 10 == 0)
+                if (bloonSpawnTimer % bloonDistance == 0)
                 {
                     if (bloonSpawner < bpl)
                     {
@@ -406,27 +445,50 @@ namespace Bloons_TD__Final_Project
 
                     }
                     bloonSpawner++;
+                    
 
                     if (roundNumber % 5 == 0)
                     {
-                        balloonSpeed++;
-                        if (speedUp && bloonSpawner > bpl)
+                        if (speedUp && balloonSpeed < 10)
                         {
-                            Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
-                            balloons.Add(bloon);
+                            balloonSpeed++;
                             speedUp = false;
                         }
+                        if (bloonDistance > 2 && shorten)
+                        {
+                            bloonDistance--;
+                            shorten = false;
+                        }
                     }
-                    if (roundNumber % 10 == 0)
+                   
+
+                }
+                if (bloonSpawnTimer % 50 == 0)
+                {
+                    moabSpawnTimer = true;
+                }
+                if (roundNumber % 10 == 0)
+                {
+                    if (MOABspawn && (bloonSpawner > bpl))
                     {
-                        if (MOABspawn && bloonSpawner > bpl)
+                        for (int i = fixMOAB; i < moabSpawnCounter && moabSpawnTimer;)
                         {
                             Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
                             balloons.Add(bloon);
-                            MOABspawn = false;
+                            moabSpawnTimer = false;
+
+                            if (i + 1 >= moabSpawnCounter)
+                            {
+                                MOABspawn = false;
+                            }
+                            fixMOAB++;
+                        }
+                      
+                        if (fixMOAB == moabSpawnCounter)
+                        {
+                            fixMOAB = 0;
                         }
                     }
-
                 }
                 if (bloonSpawnTimer < 100000000 && bloonSpawnTimer >= 0)
                 {
@@ -440,6 +502,50 @@ namespace Bloons_TD__Final_Project
                 {
 
                     d.shotTimer--;
+
+                    #region Wish this worked
+                    //Balloon b = FindNearestBalloon(d);
+
+                    // x1 = b.hitBox.X + (b.hitBox.Width / 2);
+                    // x2 = d.hitBox.X + (d.hitBox.Width / 2);
+
+                    // y1 = b.hitBox.Y + (b.hitBox.Height / 2);
+                    // y2 = d.hitBox.Y + (d.hitBox.Height / 2);
+
+                    // if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < d.rad)
+                    // {
+                    //     d.trackingBalloon = true;
+                    //     if (d.type == 5 && b.slow == false)
+                    //     {
+                    //         def = d;
+                    //         bloon = b;
+                    //         if (d.shotTimer < 0)
+                    //         {
+                    //             shoot = true;
+                    //         }
+                    //         break;
+                    //     }
+                    //     else if (d.type == 5 && b.slow == true)
+                    //     {
+                    //         //womp womp
+                    //     }
+                    //     else
+                    //     {
+                    //         def = d;
+                    //         bloon = b;
+                    //         if (d.shotTimer < 0)
+                    //         {
+                    //             shoot = true;
+                    //         }
+                    //         break;
+                    //     }
+
+                    // }
+                    // else
+                    // {
+                    //     d.trackingBalloon = false;
+                    // }
+                    #endregion
 
                     foreach (Balloon b in balloons)
                     {
@@ -455,6 +561,7 @@ namespace Bloons_TD__Final_Project
 
                         if (Math.Sqrt((Math.Pow(x2 - x1, 2)) + (Math.Pow(y2 - y1, 2))) < d.rad)
                         {
+                            d.trackingBalloon = true;
                             if (d.type == 5 && b.slow == false)
                             {
                                 def = d;
@@ -480,6 +587,10 @@ namespace Bloons_TD__Final_Project
                                 break;
                             }
 
+                        }
+                        else
+                        {
+                            d.trackingBalloon = false;
                         }
 
                     }
@@ -620,25 +731,25 @@ namespace Bloons_TD__Final_Project
                     }
                 }
 
+                //unneccisary
+                //for (int i = 0; i < balloons.Count; i++)
+                //{
+                //    foreach (Rectangle rec in pathRects)
+                //    {
+                //        if (rec.Contains(balloons[i].hitBox.X, balloons[i].hitBox.Y))
+                //        {
+                //            keepBalloon = true;
+                //        }
+                //    }
 
-                for (int i = 0; i < balloons.Count; i++)
-                {
-                    foreach (Rectangle rec in pathRects)
-                    {
-                        if (rec.Contains(balloons[i].hitBox.X, balloons[i].hitBox.Y))
-                        {
-                            keepBalloon = true;
-                        }
-                    }
 
 
+                //    if (!keepBalloon)
+                //    {
+                //        balloons.RemoveAt(i);
+                //    }
 
-                    if (!keepBalloon)
-                    {
-                        balloons.RemoveAt(i);
-                    }
-
-                }
+                //}
 
 
 
@@ -648,9 +759,8 @@ namespace Bloons_TD__Final_Project
                     {
                         if (i < balloons.Count)
                         {
-                            if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox) && balloons[i].colour != 1)
+                            if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox) && balloons[i].colour != 1 && balloons[i].colour != 7)
                             {
-
                                 money++;
                                 trackingHighscore.score++;
                                 if (darts[j].type == 4 || (darts[j].type == 9 && lightningShot < 3))
@@ -769,9 +879,9 @@ namespace Bloons_TD__Final_Project
 
 
                             }
-                            else
+                            else if (balloons[i].colour == 1)
                             {
-                                if (darts[j].hitBox.IntersectsWith(rec))
+                                if (darts[j].hitBox.IntersectsWith(balloons[i].rec))
                                 {
                                     if (darts[j].type == 1 || darts[j].type == 3 || darts[j].type == 5)
                                     {
@@ -779,11 +889,11 @@ namespace Bloons_TD__Final_Project
                                     }
                                     else if (darts[j].type == 2)
                                     {
-                                        balloons[i].MOABhealth -= 1;
+                                        balloons[i].MOABhealth -= 0.3;
                                     }
                                     else if (darts[j].type == 4)
                                     {
-                                        balloons[i].MOABhealth -= 5;
+                                        balloons[i].MOABhealth -= 10;
                                     }
                                     darts.RemoveAt(j);
                                 }
@@ -791,45 +901,65 @@ namespace Bloons_TD__Final_Project
 
                                 if (balloons[i].MOABhealth < 0 && moabDeathSpawn)
                                 {
-                                    int bloonDisperser = 0;
-                                    for (int k = 0; k < 10; k++)
-                                    {
-                                        bloonDisperser += 20;
-                                        if (balloons[i].xDirection > 0)
-                                        {
-                                            newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                            newB.xDirection = 1;
-                                            newB.yDirection = 0;
+                                    //int bloonDisperser = 0;
+                                    //for (int k = 0; k < 10; k++)
+                                    //{
+                                    //bloonDisperser += 20;
+                                    //if (balloons[i].xDirection > 0)
+                                    //{
+                                    //    newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                    //    newB.xDirection = 1;
+                                    //    newB.yDirection = 0;
 
-                                        }
-                                        else if (balloons[i].xDirection < 0)
-                                        {
-                                            newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                            newB.xDirection = -1;
-                                            newB.yDirection = 0;
+                                    //}
+                                    //else if (balloons[i].xDirection < 0)
+                                    //{
+                                    //    newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                    //    newB.xDirection = -1;
+                                    //    newB.yDirection = 0;
 
-                                        }
-                                        else if (balloons[i].yDirection > 0)
-                                        {
-                                            newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                            newB.xDirection = 0;
-                                            newB.yDirection = 1;
+                                    //}
+                                    //else if (balloons[i].yDirection > 0)
+                                    //{
+                                    //    newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                    //    newB.xDirection = 0;
+                                    //    newB.yDirection = 1;
 
-                                        }
-                                        else if (balloons[i].yDirection < 0)
-                                        {
-                                            newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                            newB.xDirection = 0;
-                                            newB.yDirection = -1;
+                                    //}
+                                    //else if (balloons[i].yDirection < 0)
+                                    //{
+                                    //    newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
+                                    //    newB.xDirection = 0;
+                                    //    newB.yDirection = -1;
 
-                                        }
+                                    //}
 
-                                        balloons.Add(newB);
-                                    }
+                                    newB = new Balloon(7, balloons[i].hitBox.X, balloons[i].hitBox.Y, 30, 30, balloons[i].xDirection, balloons[i].yDirection, false);
+                                    newB.xDirection = balloons[i].xDirection;
+                                    newB.yDirection = balloons[i].yDirection;
+                                    balloons.Add(newB);
+
                                     moabDeathSpawn = false;
                                     balloons.RemoveAt(i);
                                 }
+                            }
+                            else if (balloons[i].colour == 7)
+                            {
+                                if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox))
+                                {
+                                    balloons[i].blackBalloonHealth--;
+                                    darts.RemoveAt(j);
+                                }
 
+                                if (balloons[i].blackBalloonHealth < 1)
+                                {
+                                    balloons[i].popped(balloons[i]);
+                                    if (Balloon.bePopped)
+                                    {
+                                        balloons.RemoveAt(i);
+                                        Balloon.bePopped = false;
+                                    }
+                                }
                             }
                         }
                     }
@@ -994,8 +1124,13 @@ namespace Bloons_TD__Final_Project
                     inBetweenRounds = true;
                     MOABspawn = true;
                     speedUp = true;
+                    shorten = true;
                     bloonSpawnTimer = 10;
                     bloonSpawner = 0;
+                    if (roundNumber % 10 == 0)
+                    {
+                     moabSpawnCounter++;
+                    }
                     roundNumber++;
                     darts.Clear();
                     // money += (100 * (int)roundNumber);
@@ -1594,7 +1729,7 @@ namespace Bloons_TD__Final_Project
             {
                 if (d == menuMonkey)
                 {
-                    if (d.type == 1 && money >= 150)
+                    if (d.type == 1 && money >= dartMonkeyUpgradePrice)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
@@ -1602,7 +1737,7 @@ namespace Bloons_TD__Final_Project
                         money -= dartMonkeyUpgradePrice;
                         sellButtonLabel.Text = dartMonkeyPrice.ToString();
                     }
-                    if (d.type == 3 && money >= 600)
+                    if (d.type == 3 && money >= superMonkeyUpgradePrice)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
@@ -1610,7 +1745,7 @@ namespace Bloons_TD__Final_Project
                         money -= superMonkeyUpgradePrice;
                         sellButtonLabel.Text = superMonkeyPrice.ToString();
                     }
-                    if (d.type == 5 && money >= 250)
+                    if (d.type == 5 && money >= iceMonkeyUpgradePrice)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
@@ -1618,7 +1753,7 @@ namespace Bloons_TD__Final_Project
                         money -= iceMonkeyUpgradePrice;
                         sellButtonLabel.Text = iceMonkeyPrice.ToString();
                     }
-                    if (d.type == 2 && money >= 200)
+                    if (d.type == 2 && money >= tackShooterUpgradePrice)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
@@ -1626,7 +1761,7 @@ namespace Bloons_TD__Final_Project
                         money -= tackShooterUpgradePrice;
                         sellButtonLabel.Text = tackShooterPrice.ToString();
                     }
-                    if (d.type == 4 && money >= 300)
+                    if (d.type == 4 && money >= wizardMonkeyUpgradePrice)
                     {
                         d.upgrade = true;
                         upgradeButton.Enabled = false;
@@ -1666,7 +1801,23 @@ namespace Bloons_TD__Final_Project
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new TitleScreen());
         }
+
+        private void Angles(Defender d, Balloon b)
+        {
+            float x1 = b.hitBox.X + b.hitBox.Width / 2;
+            float y1 = b.hitBox.Y + b.hitBox.Height / 2;
+
+            float x2 = d.hitBox.X + d.hitBox.Width / 2;
+            float y2 = d.hitBox.Y + d.hitBox.Height / 2;
+
+            float dx = x1 - x2;
+            float dy = y1 - y2;
+
+            float angleInRadians = (float)Math.Atan2(dy, dx);
+            d.rotationAngle = (int)(angleInRadians * (180 / (float)Math.PI));
+        }
     }
 }
+
 // monkey rotate
 #endregion
