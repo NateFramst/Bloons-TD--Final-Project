@@ -29,15 +29,51 @@ namespace Bloons_TD__Final_Project
 
 
             List<int> scores = new List<int>();
-            foreach(Highscore h in Form1.highscores)
+            foreach (Highscore h in Form1.highscores)
             {
                 scores.Add(h.highscore);
             }
 
             int[] highScoreArray = scores.ToArray();
 
-            quickSort(highScoreArray, 0 , highScoreArray.Length - 1);
+            quickSort(highScoreArray, 0, highScoreArray.Length - 1);
 
+            for (int i = 0; i < Form1.highscores.Count; i++)
+            {
+                if (highScoreArray[0] == Form1.highscores[i].highscore)
+                {
+                    Highscore temp = Form1.highscores[0];
+
+                    Form1.highscores[0] = Form1.highscores[i];
+
+                    Form1.highscores[i] = temp;
+                }
+                if (highScoreArray[1] == Form1.highscores[i].highscore)
+                {
+                    Highscore temp = Form1.highscores[1];
+
+                    Form1.highscores[1] = Form1.highscores[i];
+
+                    Form1.highscores[i] = temp;
+                }
+                try
+                {
+                    if (highScoreArray[2] == Form1.highscores[i].highscore)
+                    {
+                        Highscore temp = Form1.highscores[2];
+
+                        Form1.highscores[2] = Form1.highscores[i];
+
+                        Form1.highscores[i] = temp;
+                    }
+                }
+                catch
+                {
+
+                }
+
+            }
+            
             Form1.highscores.Reverse();
 
             if(Form1.highscores.Count > 0)

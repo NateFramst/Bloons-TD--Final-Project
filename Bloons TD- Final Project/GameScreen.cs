@@ -60,7 +60,7 @@ namespace Bloons_TD__Final_Project
         bool drawRed = true;
         bool moabDeathSpawn = true;
 
-        int lives = 1;
+        int lives = 10;
 
         double x1;
         double y1;
@@ -319,15 +319,6 @@ namespace Bloons_TD__Final_Project
             {
                 e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
                 e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
-
-                foreach (Defender d in defenders)
-                {
-                    if (d == menuMonkey)
-                    {
-                        e.Graphics.DrawImage(d.image, d.hitBox);
-                        break;
-                    }
-                }
             }
 
             //rotate Monkeys
@@ -1100,7 +1091,14 @@ namespace Bloons_TD__Final_Project
                 {
                     if (balloons[i].hitBox.Y > this.Height)
                     {
-                        lives -= balloons[i].colour;
+                        if (balloons[i].colour > 1)
+                        {
+                            lives -= balloons[i].colour - 1;
+                        }
+                        else
+                        {
+                            lives -= 1000;
+                        }
                         balloons.RemoveAt(i);
 
                     }

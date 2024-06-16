@@ -72,6 +72,7 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            this.label1.Visible = false;
             // 
             // gameTimer
             // 
@@ -83,11 +84,11 @@
             // 
             this.livesLabel.AutoSize = true;
             this.livesLabel.BackColor = System.Drawing.Color.Transparent;
-            this.livesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.livesLabel.Font = new System.Drawing.Font("Ravie", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.livesLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.livesLabel.Location = new System.Drawing.Point(657, 11);
             this.livesLabel.Name = "livesLabel";
-            this.livesLabel.Size = new System.Drawing.Size(60, 24);
+            this.livesLabel.Size = new System.Drawing.Size(88, 26);
             this.livesLabel.TabIndex = 1;
             this.livesLabel.Text = "label2";
             this.livesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,6 +101,7 @@
             this.tempLabel.Size = new System.Drawing.Size(35, 13);
             this.tempLabel.TabIndex = 2;
             this.tempLabel.Text = "label2";
+            this.tempLabel.Visible = false;
             // 
             // label2
             // 
@@ -133,7 +135,7 @@
             // moneyLabel
             // 
             this.moneyLabel.BackColor = System.Drawing.Color.Transparent;
-            this.moneyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moneyLabel.Font = new System.Drawing.Font("Ravie", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moneyLabel.Location = new System.Drawing.Point(3, 11);
             this.moneyLabel.Name = "moneyLabel";
             this.moneyLabel.Size = new System.Drawing.Size(75, 27);
@@ -313,12 +315,14 @@
             // 
             // SpeedUpButton
             // 
+            this.SpeedUpButton.Enabled = false;
             this.SpeedUpButton.Location = new System.Drawing.Point(481, 474);
             this.SpeedUpButton.Name = "SpeedUpButton";
             this.SpeedUpButton.Size = new System.Drawing.Size(73, 47);
             this.SpeedUpButton.TabIndex = 24;
             this.SpeedUpButton.Text = "Speed";
             this.SpeedUpButton.UseVisualStyleBackColor = true;
+            this.SpeedUpButton.Visible = false;
             this.SpeedUpButton.Click += new System.EventHandler(this.SpeedUpButton_Click);
             // 
             // GameScreen

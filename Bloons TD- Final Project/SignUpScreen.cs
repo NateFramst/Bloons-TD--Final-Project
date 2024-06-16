@@ -13,7 +13,7 @@ namespace Bloons_TD__Final_Project
 {
     public partial class SignUpScreen : UserControl
     {
-        int x;
+   
 
         int counter;
 
@@ -83,15 +83,15 @@ namespace Bloons_TD__Final_Project
             }
             else
             {
-                foreach (Highscore h in Form1.highscores)
+                for(int i = 0; i < Form1.highscores.Count; i++)
                 {
-                    if (h.userName == usernameTextBox.Text && h.password == passwordTextbox.Text)
+                    if (Form1.highscores[i].userName == usernameTextBox.Text && Form1.highscores[i].password == passwordTextbox.Text)
                     {
-                        GameScreen.trackingHighscore = h;
+                        GameScreen.trackingHighscore = Form1.highscores[i];
                         Form1.ChangeScreen(this, new GameScreen(), true);
-                        x = 1;
+                        
                     }
-                    if (x == 0)
+                    if (i + 1 == Form1.highscores.Count)
                     {
                         usernameTextBox.Text = "No accounts have this username and password combo";
                     }
