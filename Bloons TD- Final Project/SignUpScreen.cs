@@ -13,7 +13,6 @@ namespace Bloons_TD__Final_Project
 {
     public partial class SignUpScreen : UserControl
     {
-        int prevHighscore;
 
         int x;
 
@@ -57,7 +56,7 @@ namespace Bloons_TD__Final_Project
                 {
                     foreach (Highscore h in Form1.highscores)
                     {
-                        if(h.userName != usernameTextBox.Text)
+                        if (h.userName != usernameTextBox.Text)
                         {
                             counter++;
                         }
@@ -69,13 +68,13 @@ namespace Bloons_TD__Final_Project
 
                         GameScreen.trackingHighscore = highscore;
 
-                        Form1.ChangeScreen(this, new GameScreen(),true);
+                        Form1.ChangeScreen(this, new GameScreen(), true);
                     }
                     else
                     {
                         usernameTextBox.Text = "This username is already in use";
                     }
-                    
+
                 }
                 else
                 {
@@ -103,7 +102,7 @@ namespace Bloons_TD__Final_Project
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new TitleScreen(),false);
+            Form1.ChangeScreen(this, new TitleScreen(), false);
         }
     }
 }
