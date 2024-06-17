@@ -27,53 +27,54 @@ namespace Bloons_TD__Final_Project
             thirdUsernameLabel.Location = new Point((this.Width / 2) - (thirdUsernameLabel.Width / 2), 400);
             thirdHighscoreLabel.Location = new Point((this.Width / 2) - (thirdHighscoreLabel.Width / 2), 460);
 
+            Form1.highscores = Form1.highscores.OrderBy(x => x.highscore).ThenBy(x => x.userName).ToList();
 
-            List<int> scores = new List<int>();
-            foreach (Highscore h in Form1.highscores)
-            {
-                scores.Add(h.highscore);
-            }
+            //List<int> scores = new List<int>();
+            //foreach (Highscore h in Form1.highscores)
+            //{
+            //    scores.Add(h.highscore);
+            //}
 
-            int[] highScoreArray = scores.ToArray();
+            //int[] highScoreArray = scores.ToArray();
 
-            quickSort(highScoreArray, 0, highScoreArray.Length - 1);
+            //quickSort(highScoreArray, 0, highScoreArray.Length - 1);
 
-            for (int i = 0; i < Form1.highscores.Count; i++)
-            {
-                if (highScoreArray[0] == Form1.highscores[i].highscore)
-                {
-                    Highscore temp = Form1.highscores[0];
+            //for (int i = 0; i < Form1.highscores.Count; i++)
+            //{
+            //    if (highScoreArray[0] == Form1.highscores[i].highscore)
+            //    {
+            //        Highscore temp = Form1.highscores[0];
 
-                    Form1.highscores[0] = Form1.highscores[i];
+            //        Form1.highscores[0] = Form1.highscores[i];
 
-                    Form1.highscores[i] = temp;
-                }
-                if (highScoreArray[1] == Form1.highscores[i].highscore)
-                {
-                    Highscore temp = Form1.highscores[1];
+            //        Form1.highscores[i] = temp;
+            //    }
+            //    if (highScoreArray[1] == Form1.highscores[i].highscore)
+            //    {
+            //        Highscore temp = Form1.highscores[1];
 
-                    Form1.highscores[1] = Form1.highscores[i];
+            //        Form1.highscores[1] = Form1.highscores[i];
 
-                    Form1.highscores[i] = temp;
-                }
-                try
-                {
-                    if (highScoreArray[2] == Form1.highscores[i].highscore)
-                    {
-                        Highscore temp = Form1.highscores[2];
+            //        Form1.highscores[i] = temp;
+            //    }
+            //    try
+            //    {
+            //        if (highScoreArray[2] == Form1.highscores[i].highscore)
+            //        {
+            //            Highscore temp = Form1.highscores[2];
 
-                        Form1.highscores[2] = Form1.highscores[i];
+            //            Form1.highscores[2] = Form1.highscores[i];
 
-                        Form1.highscores[i] = temp;
-                    }
-                }
-                catch
-                {
+            //            Form1.highscores[i] = temp;
+            //        }
+            //    }
+            //    catch
+            //    {
 
-                }
+            //    }
 
-            }
-            
+            //}
+
             Form1.highscores.Reverse();
 
             if(Form1.highscores.Count > 0)
@@ -99,66 +100,66 @@ namespace Bloons_TD__Final_Project
 
 
         }
-        static void swap(int[] arr, int i, int j)
-        {
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-        static int partition(int[] arr, int low, int high)
-        {
-            // Choosing the pivot
-            int pivot = arr[high];
+        //    static void swap(int[] arr, int i, int j)
+        //    {
+        //        int temp = arr[i];
+        //        arr[i] = arr[j];
+        //        arr[j] = temp;
+        //    }
+        //    static int partition(int[] arr, int low, int high)
+        //    {
+        //        // Choosing the pivot
+        //        int pivot = arr[high];
 
-            // Index of smaller element and indicates
-            // the right position of pivot found so far
-            int i = (low - 1);
+        //        // Index of smaller element and indicates
+        //        // the right position of pivot found so far
+        //        int i = (low - 1);
 
-            for (int j = low; j <= high - 1; j++)
-            {
+        //        for (int j = low; j <= high - 1; j++)
+        //        {
 
-                // If current element is smaller than the pivot
-                if (arr[j] < pivot)
-                {
+        //            // If current element is smaller than the pivot
+        //            if (arr[j] < pivot)
+        //            {
 
-                    // Increment index of smaller element
-                    i++;
-                    swap(arr, i, j);
-                }
-            }
-            swap(arr, i + 1, high);
-            return (i + 1);
-        }
+        //                // Increment index of smaller element
+        //                i++;
+        //                swap(arr, i, j);
+        //            }
+        //        }
+        //        swap(arr, i + 1, high);
+        //        return (i + 1);
+        //    }
 
-        // The main function that implements QuickSort
-        // arr[] --> Array to be sorted,
-        // low --> Starting index,
-        // high --> Ending index
-        public void quickSort(int[] arr, int low, int high)
-        {
-            if (low < high)
-            {
+        //    // The main function that implements QuickSort
+        //    // arr[] --> Array to be sorted,
+        //    // low --> Starting index,
+        //    // high --> Ending index
+        //    public void quickSort(int[] arr, int low, int high)
+        //    {
+        //        if (low < high)
+        //        {
 
-                // pi is partitioning index, arr[p]
-                // is now at right place
-                int pi = partition(arr, low, high);
+        //            // pi is partitioning index, arr[p]
+        //            // is now at right place
+        //            int pi = partition(arr, low, high);
 
-                // Separately sort elements before
-                // and after partition index
-                quickSort(arr, low, pi - 1);
-                quickSort(arr, pi + 1, high);
-            }
-        }
+        //            // Separately sort elements before
+        //            // and after partition index
+        //            quickSort(arr, low, pi - 1);
+        //            quickSort(arr, pi + 1, high);
+        //        }
+        //    }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (Form1.whatScreen == 1)
             {
-                Form1.ChangeScreen(this, new TitleScreen(),false);
+                Form1.ChangeScreen(this, new TitleScreen(), false);
             }
             else if (Form1.whatScreen == 2)
             {
-                Form1.ChangeScreen(this, new EndScreen(),false);
+                Form1.ChangeScreen(this, new EndScreen(), false);
             }
         }
 

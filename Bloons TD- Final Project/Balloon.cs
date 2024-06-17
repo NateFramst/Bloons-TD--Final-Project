@@ -11,7 +11,7 @@ namespace Bloons_TD__Final_Project
     {
 
 
-       public int x, y, width, height, colour, xDirection, yDirection, blackBalloonHealth;
+        public int x, y, width, height, colour, xDirection, yDirection, blackBalloonHealth;
 
         public double MOABhealth;
 
@@ -25,6 +25,7 @@ namespace Bloons_TD__Final_Project
 
         public bool slow = false;
 
+        public bool moabDeathSpawn = true;
 
         public Balloon(int _colour, int _x, int _y, int _width, int _height, double _xSpeed, double _ySpeed, bool _slow)
         {
@@ -51,27 +52,28 @@ namespace Bloons_TD__Final_Project
             {
                 image = Properties.Resources.BlueBalloon;
             }
-            if(colour == 4)
+            if (colour == 4)
             {
                 image = Properties.Resources.GreenBalloon;
             }
-            if(colour == 5)
+            if (colour == 5)
             {
                 image = Properties.Resources.YellowBalloon;
             }
-            if(colour == 6)
+            if (colour == 6)
             {
-                image= Properties.Resources.PinkBalloon;   
+                image = Properties.Resources.PinkBalloon;
             }
-            if(colour == 7)
+            if (colour == 7)
             {
                 image = Properties.Resources.BlackBalloon;
                 blackBalloonHealth = 20;
             }
-            if(colour == 1)
+            if (colour == 1)
             {
                 image = Properties.Resources.MOABRIGHT;
                 MOABhealth = 100;
+                rec = new Rectangle(x - 80 + 15, y - 40 + 15, 160, 80);
             }
         }
 
@@ -81,8 +83,13 @@ namespace Bloons_TD__Final_Project
             b.y += (int)ySpeed;
 
             b.hitBox = new Rectangle(b.x, b.y, b.width, b.height);
+            
+            if (b.colour == 1)
+            {
+                b.rec = new Rectangle(b.x, b.y, b.rec.Width, b.rec.Height);
+            }
 
-            if(b.xSpeed > 0 && b.colour == 1)
+            if (b.xSpeed > 0 && b.colour == 1)
             {
                 b.image = Properties.Resources.MOABRIGHT;
             }
@@ -130,7 +137,7 @@ namespace Bloons_TD__Final_Project
             {
                 b.image = Properties.Resources.YellowBalloon;
             }
-            if(b.colour == 6)
+            if (b.colour == 6)
             {
                 b.image = Properties.Resources.PinkBalloon;
             }

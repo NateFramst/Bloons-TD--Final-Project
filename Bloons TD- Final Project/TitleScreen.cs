@@ -32,6 +32,8 @@ namespace Bloons_TD__Final_Project
         {
             signUp = true;
             Form1.ChangeScreen(this, new SignUpScreen(), false);
+            //Form1.highscores.Add(new Highscore("Hellofffff", "aaaadfadfa", 5));
+            //Form1.SaveHighScores();
 
         }
 

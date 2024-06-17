@@ -154,7 +154,7 @@ namespace Bloons_TD__Final_Project
 
         bool speedUp = false;
 
-        int moabSpawnCounter = 1;
+        int moabSpawnCounter = 0;
 
         int bloonDistance = 10;
 
@@ -163,6 +163,12 @@ namespace Bloons_TD__Final_Project
         bool shorten = false;
 
         int fixMOAB;
+
+        bool MOABSspawned;
+
+        bool MOABincrease;
+
+        bool stopSpawn;
 
         public GameScreen()
         {
@@ -398,6 +404,37 @@ namespace Bloons_TD__Final_Project
             mouse = new Rectangle(this.PointToClient(Cursor.Position), mouseSize);
             if (!inBetweenRounds)
             {
+
+                if (roundNumber % 10 == 0)
+                {
+                    if(MOABincrease)
+                    {
+                        moabSpawnCounter++;
+                        MOABincrease = false;
+                    }
+                }
+                if (roundNumber >= 10)
+                {
+                    if(fixMOAB < moabSpawnCounter && moabSpawnTimer)
+                    {
+                        Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
+                        balloons.Add(bloon);
+                        moabSpawnTimer = false;
+                        fixMOAB++;
+                    }
+
+                    MOABSspawned = true;
+
+                    if (fixMOAB == moabSpawnCounter)
+                    {
+                        fixMOAB = 0;
+                        stopSpawn = true;
+                    }
+                }
+                else
+                {
+                    MOABSspawned = true;
+                }
                 if (bloonSpawnTimer % bloonDistance == 0)
                 {
                     if (bloonSpawner < bpl)
@@ -449,34 +486,12 @@ namespace Bloons_TD__Final_Project
                             shorten = false;
                         }
                     }
-                   
-
                 }
                 if (bloonSpawnTimer % 50 == 0)
                 {
-                    moabSpawnTimer = true;
-                }
-                if (roundNumber % 10 == 0)
-                {
-                    if (MOABspawn && (bloonSpawner > bpl))
+                    if (!stopSpawn)
                     {
-                        for (int i = fixMOAB; i < moabSpawnCounter && moabSpawnTimer;)
-                        {
-                            Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
-                            balloons.Add(bloon);
-                            moabSpawnTimer = false;
-
-                            if (i + 1 >= moabSpawnCounter)
-                            {
-                                MOABspawn = false;
-                            }
-                            fixMOAB++;
-                        }
-                      
-                        if (fixMOAB == moabSpawnCounter)
-                        {
-                            fixMOAB = 0;
-                        }
+                        moabSpawnTimer = true;
                     }
                 }
                 if (bloonSpawnTimer < 100000000 && bloonSpawnTimer >= 0)
@@ -750,7 +765,7 @@ namespace Bloons_TD__Final_Project
                         {
                             if (darts[j].hitBox.IntersectsWith(balloons[i].hitBox) && balloons[i].colour != 1 && balloons[i].colour != 7)
                             {
-                                money++;
+                                money ++;
                                 trackingHighscore.score++;
                                 if (darts[j].type == 4 || (darts[j].type == 9 && lightningShot < 3))
                                 {
@@ -776,6 +791,7 @@ namespace Bloons_TD__Final_Project
 
                                     Balloon.bePopped = true;
                                     balloons.RemoveAt(i);
+                                    money += 5;
                                     Balloon.bePopped = false;
 
                                     int x = i;
@@ -855,6 +871,7 @@ namespace Bloons_TD__Final_Project
                                         darts.RemoveAt(j);
                                     }
                                     balloons.RemoveAt(i);
+                                    money += 5;
                                     Balloon.bePopped = false;
                                 }
                                 if (darts.Count > j)
@@ -888,47 +905,14 @@ namespace Bloons_TD__Final_Project
                                 }
 
 
-                                if (balloons[i].MOABhealth < 0 && moabDeathSpawn)
+                                if (balloons[i].MOABhealth < 0 && balloons[i].moabDeathSpawn)
                                 {
-                                    //int bloonDisperser = 0;
-                                    //for (int k = 0; k < 10; k++)
-                                    //{
-                                    //bloonDisperser += 20;
-                                    //if (balloons[i].xDirection > 0)
-                                    //{
-                                    //    newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                    //    newB.xDirection = 1;
-                                    //    newB.yDirection = 0;
-
-                                    //}
-                                    //else if (balloons[i].xDirection < 0)
-                                    //{
-                                    //    newB = new Balloon(6, balloons[i].hitBox.X - bloonDisperser, balloons[i].hitBox.Y, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                    //    newB.xDirection = -1;
-                                    //    newB.yDirection = 0;
-
-                                    //}
-                                    //else if (balloons[i].yDirection > 0)
-                                    //{
-                                    //    newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                    //    newB.xDirection = 0;
-                                    //    newB.yDirection = 1;
-
-                                    //}
-                                    //else if (balloons[i].yDirection < 0)
-                                    //{
-                                    //    newB = new Balloon(6, balloons[i].hitBox.X, balloons[i].hitBox.Y - bloonDisperser, 30, 30, balloons[i].xSpeed, balloons[i].ySpeed, false);
-                                    //    newB.xDirection = 0;
-                                    //    newB.yDirection = -1;
-
-                                    //}
-
                                     newB = new Balloon(7, balloons[i].hitBox.X, balloons[i].hitBox.Y, 30, 30, balloons[i].xDirection, balloons[i].yDirection, false);
                                     newB.xDirection = balloons[i].xDirection;
                                     newB.yDirection = balloons[i].yDirection;
                                     balloons.Add(newB);
 
-                                    moabDeathSpawn = false;
+                                    balloons[i].moabDeathSpawn = false;
                                     balloons.RemoveAt(i);
                                 }
                             }
@@ -1095,9 +1079,9 @@ namespace Bloons_TD__Final_Project
                         {
                             lives -= balloons[i].colour - 1;
                         }
-                        else
+                        else if (balloons[i].colour == 1)
                         {
-                            lives -= 1000;
+                            lives = 0;
                         }
                         balloons.RemoveAt(i);
 
@@ -1121,16 +1105,18 @@ namespace Bloons_TD__Final_Project
                     MOABspawn = true;
                     speedUp = true;
                     shorten = true;
+                    stopSpawn = false;
+                    MOABincrease = true;
+                    MOABSspawned = false;
                     bloonSpawnTimer = 10;
                     bloonSpawner = 0;
+                    roundNumber++;
                     if (roundNumber % 10 == 0)
                     {
                      moabSpawnCounter++;
                     }
-                    roundNumber++;
                     darts.Clear();
-                    // money += (100 * (int)roundNumber);
-                    money += 200;
+                    money += (int)(100 * (roundNumber * 0.1));
 
                     bpl = (int)(Math.Pow(roundNumber, 2) + 10);
                 }
@@ -1794,8 +1780,16 @@ namespace Bloons_TD__Final_Project
             //    gameTimer.Interval = 20;
             //    speedFlip = 0;
             //}
-            gameTimer.Enabled = false;
-            Form1.ChangeScreen(this, new TitleScreen(), false);
+            //gameTimer.Enabled = false;
+            //Form1.ChangeScreen(this, new TitleScreen(), false);
+
+
+            if (1 ==1 )
+            {
+                int balls = 0;
+            }
+
+
         }
 
         private void Angles(Defender d, Balloon b)

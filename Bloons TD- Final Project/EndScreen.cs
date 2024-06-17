@@ -43,6 +43,7 @@ namespace Bloons_TD__Final_Project
 
         private void playAgainButton_Click(object sender, EventArgs e)
         {
+            GameScreen.trackingHighscore.score = 0;
             Form1.ChangeScreen(this, new GameScreen(), true);
         }
 

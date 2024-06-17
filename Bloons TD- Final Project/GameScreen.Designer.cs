@@ -55,6 +55,17 @@
             this.upgradeButtonLabel = new System.Windows.Forms.Label();
             this.sellButtonLabel = new System.Windows.Forms.Label();
             this.SpeedUpButton = new System.Windows.Forms.Button();
+            this.shopTitleLabel = new System.Windows.Forms.Label();
+            this.superMonkeyTitleLabel = new System.Windows.Forms.Label();
+            this.WizardMonkeyTilteLabel = new System.Windows.Forms.Label();
+            this.IceMonkeyTitleLabel = new System.Windows.Forms.Label();
+            this.TackShooterTitleLabel = new System.Windows.Forms.Label();
+            this.DartMonkeyTitleLabel = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -62,6 +73,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upgradeMenuPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -113,7 +129,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Bloons_TD__Final_Project.Properties.Resources.Dart_Monkey;
-            this.pictureBox1.Location = new System.Drawing.Point(787, 20);
+            this.pictureBox1.Location = new System.Drawing.Point(787, 67);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(55, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -124,7 +140,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Bloons_TD__Final_Project.Properties.Resources.TackShooter;
-            this.pictureBox2.Location = new System.Drawing.Point(787, 113);
+            this.pictureBox2.Location = new System.Drawing.Point(787, 162);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(55, 55);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -138,7 +154,7 @@
             this.moneyLabel.Font = new System.Drawing.Font("Ravie", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moneyLabel.Location = new System.Drawing.Point(3, 11);
             this.moneyLabel.Name = "moneyLabel";
-            this.moneyLabel.Size = new System.Drawing.Size(75, 27);
+            this.moneyLabel.Size = new System.Drawing.Size(155, 27);
             this.moneyLabel.TabIndex = 6;
             this.moneyLabel.Text = "label3";
             this.moneyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,7 +163,7 @@
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
-            this.pictureBox3.Location = new System.Drawing.Point(84, 3);
+            this.pictureBox3.Location = new System.Drawing.Point(54, 40);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(38, 35);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -157,7 +173,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Bloons_TD__Final_Project.Properties.Resources.SuperMonkey;
-            this.pictureBox4.Location = new System.Drawing.Point(787, 434);
+            this.pictureBox4.Location = new System.Drawing.Point(787, 450);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(55, 55);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -168,7 +184,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::Bloons_TD__Final_Project.Properties.Resources.WizardMonkey;
-            this.pictureBox5.Location = new System.Drawing.Point(787, 324);
+            this.pictureBox5.Location = new System.Drawing.Point(787, 356);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(55, 55);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -179,7 +195,7 @@
             // MoneyLabel1
             // 
             this.MoneyLabel1.AutoSize = true;
-            this.MoneyLabel1.Location = new System.Drawing.Point(805, 78);
+            this.MoneyLabel1.Location = new System.Drawing.Point(791, 125);
             this.MoneyLabel1.Name = "MoneyLabel1";
             this.MoneyLabel1.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel1.TabIndex = 10;
@@ -188,7 +204,7 @@
             // MoneyLabel2
             // 
             this.MoneyLabel2.AutoSize = true;
-            this.MoneyLabel2.Location = new System.Drawing.Point(805, 171);
+            this.MoneyLabel2.Location = new System.Drawing.Point(797, 220);
             this.MoneyLabel2.Name = "MoneyLabel2";
             this.MoneyLabel2.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel2.TabIndex = 11;
@@ -197,7 +213,7 @@
             // MoneyLabel3
             // 
             this.MoneyLabel3.AutoSize = true;
-            this.MoneyLabel3.Location = new System.Drawing.Point(799, 492);
+            this.MoneyLabel3.Location = new System.Drawing.Point(791, 508);
             this.MoneyLabel3.Name = "MoneyLabel3";
             this.MoneyLabel3.Size = new System.Drawing.Size(31, 13);
             this.MoneyLabel3.TabIndex = 12;
@@ -206,7 +222,7 @@
             // MoneyLabel4
             // 
             this.MoneyLabel4.AutoSize = true;
-            this.MoneyLabel4.Location = new System.Drawing.Point(805, 381);
+            this.MoneyLabel4.Location = new System.Drawing.Point(797, 414);
             this.MoneyLabel4.Name = "MoneyLabel4";
             this.MoneyLabel4.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel4.TabIndex = 13;
@@ -215,7 +231,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::Bloons_TD__Final_Project.Properties.Resources.IceMonkey;
-            this.pictureBox6.Location = new System.Drawing.Point(787, 213);
+            this.pictureBox6.Location = new System.Drawing.Point(787, 255);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(55, 55);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -226,7 +242,7 @@
             // MoneyLabel5
             // 
             this.MoneyLabel5.AutoSize = true;
-            this.MoneyLabel5.Location = new System.Drawing.Point(805, 271);
+            this.MoneyLabel5.Location = new System.Drawing.Point(797, 313);
             this.MoneyLabel5.Name = "MoneyLabel5";
             this.MoneyLabel5.Size = new System.Drawing.Size(25, 13);
             this.MoneyLabel5.TabIndex = 15;
@@ -315,15 +331,124 @@
             // 
             // SpeedUpButton
             // 
-            this.SpeedUpButton.Enabled = false;
             this.SpeedUpButton.Location = new System.Drawing.Point(481, 474);
             this.SpeedUpButton.Name = "SpeedUpButton";
             this.SpeedUpButton.Size = new System.Drawing.Size(73, 47);
             this.SpeedUpButton.TabIndex = 24;
             this.SpeedUpButton.Text = "Speed";
             this.SpeedUpButton.UseVisualStyleBackColor = true;
-            this.SpeedUpButton.Visible = false;
             this.SpeedUpButton.Click += new System.EventHandler(this.SpeedUpButton_Click);
+            // 
+            // shopTitleLabel
+            // 
+            this.shopTitleLabel.Font = new System.Drawing.Font("Ravie", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shopTitleLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.shopTitleLabel.Location = new System.Drawing.Point(763, 21);
+            this.shopTitleLabel.Name = "shopTitleLabel";
+            this.shopTitleLabel.Size = new System.Drawing.Size(112, 24);
+            this.shopTitleLabel.TabIndex = 25;
+            this.shopTitleLabel.Text = "Defenders";
+            this.shopTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // superMonkeyTitleLabel
+            // 
+            this.superMonkeyTitleLabel.AutoSize = true;
+            this.superMonkeyTitleLabel.Location = new System.Drawing.Point(775, 434);
+            this.superMonkeyTitleLabel.Name = "superMonkeyTitleLabel";
+            this.superMonkeyTitleLabel.Size = new System.Drawing.Size(76, 13);
+            this.superMonkeyTitleLabel.TabIndex = 26;
+            this.superMonkeyTitleLabel.Text = "Super Monkey";
+            this.superMonkeyTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // WizardMonkeyTilteLabel
+            // 
+            this.WizardMonkeyTilteLabel.AutoSize = true;
+            this.WizardMonkeyTilteLabel.Location = new System.Drawing.Point(775, 340);
+            this.WizardMonkeyTilteLabel.Name = "WizardMonkeyTilteLabel";
+            this.WizardMonkeyTilteLabel.Size = new System.Drawing.Size(81, 13);
+            this.WizardMonkeyTilteLabel.TabIndex = 27;
+            this.WizardMonkeyTilteLabel.Text = "Wizard Monkey";
+            this.WizardMonkeyTilteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // IceMonkeyTitleLabel
+            // 
+            this.IceMonkeyTitleLabel.AutoSize = true;
+            this.IceMonkeyTitleLabel.Location = new System.Drawing.Point(784, 239);
+            this.IceMonkeyTitleLabel.Name = "IceMonkeyTitleLabel";
+            this.IceMonkeyTitleLabel.Size = new System.Drawing.Size(63, 13);
+            this.IceMonkeyTitleLabel.TabIndex = 28;
+            this.IceMonkeyTitleLabel.Text = "Ice Monkey";
+            this.IceMonkeyTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TackShooterTitleLabel
+            // 
+            this.TackShooterTitleLabel.AutoSize = true;
+            this.TackShooterTitleLabel.Location = new System.Drawing.Point(779, 146);
+            this.TackShooterTitleLabel.Name = "TackShooterTitleLabel";
+            this.TackShooterTitleLabel.Size = new System.Drawing.Size(72, 13);
+            this.TackShooterTitleLabel.TabIndex = 29;
+            this.TackShooterTitleLabel.Text = "Tack Shooter";
+            this.TackShooterTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DartMonkeyTitleLabel
+            // 
+            this.DartMonkeyTitleLabel.AutoSize = true;
+            this.DartMonkeyTitleLabel.Location = new System.Drawing.Point(779, 51);
+            this.DartMonkeyTitleLabel.Name = "DartMonkeyTitleLabel";
+            this.DartMonkeyTitleLabel.Size = new System.Drawing.Size(68, 13);
+            this.DartMonkeyTitleLabel.TabIndex = 30;
+            this.DartMonkeyTitleLabel.Text = "Dart Monkey";
+            this.DartMonkeyTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
+            this.pictureBox7.Location = new System.Drawing.Point(822, 123);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 31;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
+            this.pictureBox8.Location = new System.Drawing.Point(822, 216);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 32;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
+            this.pictureBox9.Location = new System.Drawing.Point(822, 311);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 33;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
+            this.pictureBox10.Location = new System.Drawing.Point(822, 411);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 34;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::Bloons_TD__Final_Project.Properties.Resources.Banana;
+            this.pictureBox11.Location = new System.Drawing.Point(822, 501);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 35;
+            this.pictureBox11.TabStop = false;
             // 
             // GameScreen
             // 
@@ -331,6 +456,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImage = global::Bloons_TD__Final_Project.Properties.Resources.MonkeyMeadow;
+            this.Controls.Add(this.pictureBox11);
+            this.Controls.Add(this.pictureBox10);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.DartMonkeyTitleLabel);
+            this.Controls.Add(this.TackShooterTitleLabel);
+            this.Controls.Add(this.IceMonkeyTitleLabel);
+            this.Controls.Add(this.WizardMonkeyTilteLabel);
+            this.Controls.Add(this.superMonkeyTitleLabel);
+            this.Controls.Add(this.shopTitleLabel);
             this.Controls.Add(this.SpeedUpButton);
             this.Controls.Add(this.sellButtonLabel);
             this.Controls.Add(this.upgradeButtonLabel);
@@ -369,6 +505,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upgradeMenuPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,5 +543,16 @@
         private System.Windows.Forms.Label upgradeButtonLabel;
         private System.Windows.Forms.Label sellButtonLabel;
         private System.Windows.Forms.Button SpeedUpButton;
+        private System.Windows.Forms.Label shopTitleLabel;
+        private System.Windows.Forms.Label superMonkeyTitleLabel;
+        private System.Windows.Forms.Label WizardMonkeyTilteLabel;
+        private System.Windows.Forms.Label IceMonkeyTitleLabel;
+        private System.Windows.Forms.Label TackShooterTitleLabel;
+        private System.Windows.Forms.Label DartMonkeyTitleLabel;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox11;
     }
 }

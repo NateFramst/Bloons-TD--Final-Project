@@ -55,7 +55,7 @@ namespace Bloons_TD__Final_Project
             form.Controls.Add(next);
         }
 
-        public void SaveHighScores()
+        public static void SaveHighScores()
         {
             XmlWriter writer = XmlWriter.Create("Highscores.xml", null);
 

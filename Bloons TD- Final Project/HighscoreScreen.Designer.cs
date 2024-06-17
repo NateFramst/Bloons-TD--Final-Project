@@ -43,7 +43,7 @@
             this.firstUsernameLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstUsernameLabel.Location = new System.Drawing.Point(212, 33);
             this.firstUsernameLabel.Name = "firstUsernameLabel";
-            this.firstUsernameLabel.Size = new System.Drawing.Size(226, 46);
+            this.firstUsernameLabel.Size = new System.Drawing.Size(285, 46);
             this.firstUsernameLabel.TabIndex = 0;
             this.firstUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -52,7 +52,7 @@
             this.firstHighscoreLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstHighscoreLabel.Location = new System.Drawing.Point(212, 100);
             this.firstHighscoreLabel.Name = "firstHighscoreLabel";
-            this.firstHighscoreLabel.Size = new System.Drawing.Size(226, 46);
+            this.firstHighscoreLabel.Size = new System.Drawing.Size(285, 46);
             this.firstHighscoreLabel.TabIndex = 1;
             this.firstHighscoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -61,7 +61,7 @@
             this.secondHighscoreLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.secondHighscoreLabel.Location = new System.Drawing.Point(212, 239);
             this.secondHighscoreLabel.Name = "secondHighscoreLabel";
-            this.secondHighscoreLabel.Size = new System.Drawing.Size(226, 46);
+            this.secondHighscoreLabel.Size = new System.Drawing.Size(285, 46);
             this.secondHighscoreLabel.TabIndex = 3;
             this.secondHighscoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -70,7 +70,7 @@
             this.secondUsernameLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.secondUsernameLabel.Location = new System.Drawing.Point(212, 172);
             this.secondUsernameLabel.Name = "secondUsernameLabel";
-            this.secondUsernameLabel.Size = new System.Drawing.Size(226, 46);
+            this.secondUsernameLabel.Size = new System.Drawing.Size(285, 46);
             this.secondUsernameLabel.TabIndex = 2;
             this.secondUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -79,7 +79,7 @@
             this.thirdHighscoreLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thirdHighscoreLabel.Location = new System.Drawing.Point(212, 369);
             this.thirdHighscoreLabel.Name = "thirdHighscoreLabel";
-            this.thirdHighscoreLabel.Size = new System.Drawing.Size(226, 46);
+            this.thirdHighscoreLabel.Size = new System.Drawing.Size(285, 46);
             this.thirdHighscoreLabel.TabIndex = 5;
             this.thirdHighscoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -88,7 +88,7 @@
             this.thirdUsernameLabel.Font = new System.Drawing.Font("Ravie", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thirdUsernameLabel.Location = new System.Drawing.Point(212, 302);
             this.thirdUsernameLabel.Name = "thirdUsernameLabel";
-            this.thirdUsernameLabel.Size = new System.Drawing.Size(226, 46);
+            this.thirdUsernameLabel.Size = new System.Drawing.Size(285, 46);
             this.thirdUsernameLabel.TabIndex = 4;
             this.thirdUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
