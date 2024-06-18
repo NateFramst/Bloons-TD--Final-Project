@@ -66,6 +66,8 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.InstructionLabel = new System.Windows.Forms.Label();
+            this.arrowPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -78,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -331,12 +334,14 @@
             // 
             // SpeedUpButton
             // 
+            this.SpeedUpButton.Enabled = false;
             this.SpeedUpButton.Location = new System.Drawing.Point(481, 474);
             this.SpeedUpButton.Name = "SpeedUpButton";
             this.SpeedUpButton.Size = new System.Drawing.Size(73, 47);
             this.SpeedUpButton.TabIndex = 24;
             this.SpeedUpButton.Text = "Speed";
             this.SpeedUpButton.UseVisualStyleBackColor = true;
+            this.SpeedUpButton.Visible = false;
             this.SpeedUpButton.Click += new System.EventHandler(this.SpeedUpButton_Click);
             // 
             // shopTitleLabel
@@ -450,12 +455,37 @@
             this.pictureBox11.TabIndex = 35;
             this.pictureBox11.TabStop = false;
             // 
+            // InstructionLabel
+            // 
+            this.InstructionLabel.Font = new System.Drawing.Font("Ravie", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstructionLabel.Location = new System.Drawing.Point(572, 485);
+            this.InstructionLabel.Name = "InstructionLabel";
+            this.InstructionLabel.Size = new System.Drawing.Size(35, 13);
+            this.InstructionLabel.TabIndex = 36;
+            this.InstructionLabel.Text = "label3";
+            this.InstructionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.InstructionLabel.Visible = false;
+            // 
+            // arrowPictureBox
+            // 
+            this.arrowPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.arrowPictureBox.Image = global::Bloons_TD__Final_Project.Properties.Resources.redarrowUP;
+            this.arrowPictureBox.Location = new System.Drawing.Point(560, 411);
+            this.arrowPictureBox.Name = "arrowPictureBox";
+            this.arrowPictureBox.Size = new System.Drawing.Size(69, 71);
+            this.arrowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.arrowPictureBox.TabIndex = 37;
+            this.arrowPictureBox.TabStop = false;
+            this.arrowPictureBox.Visible = false;
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImage = global::Bloons_TD__Final_Project.Properties.Resources.MonkeyMeadow;
+            this.Controls.Add(this.arrowPictureBox);
+            this.Controls.Add(this.InstructionLabel);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
@@ -510,6 +540,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,5 +585,7 @@
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.Label InstructionLabel;
+        private System.Windows.Forms.PictureBox arrowPictureBox;
     }
 }

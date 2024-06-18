@@ -50,8 +50,8 @@ namespace Bloons_TD__Final_Project
 
             if (type == 1)
             {
-                shotTimer = 40;
-                defualtTimer = 40;
+                shotTimer = 24;
+                defualtTimer = 24;
                 rad = 150;
                 
             }

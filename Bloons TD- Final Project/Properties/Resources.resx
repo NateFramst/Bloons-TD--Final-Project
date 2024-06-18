@@ -181,6 +181,18 @@
   <data name="Pink_Ice_Balloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pink snow balloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="redarrowDOWN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redarrow - Copy (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redarrowLEFT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redarrow - Copy (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redarrowRIGHT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redarrow - Copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redarrowUP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redarrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RedBalloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BTD6Red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

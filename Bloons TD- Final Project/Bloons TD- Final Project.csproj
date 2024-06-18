@@ -232,6 +232,10 @@
     <Content Include="Highscores.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\redarrow - Copy %282%29.png" />
+    <None Include="Resources\redarrow - Copy.png" />
+    <None Include="Resources\redarrow - Copy %283%29.png" />
+    <None Include="Resources\redarrow.png" />
     <None Include="Resources\Untitled__1_-removebg-preview.png" />
     <None Include="Resources\BlackBalloon.png" />
     <None Include="Resources\BlackBalloon-removebg-preview.png" />

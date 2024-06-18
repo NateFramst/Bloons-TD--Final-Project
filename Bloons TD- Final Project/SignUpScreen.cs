@@ -66,7 +66,7 @@ namespace Bloons_TD__Final_Project
                         Form1.highscores.Add(highscore);
 
                         GameScreen.trackingHighscore = highscore;
-
+                        GameScreen.instructionTime = true;
                         Form1.ChangeScreen(this, new GameScreen(), true);
                     }
                     else
