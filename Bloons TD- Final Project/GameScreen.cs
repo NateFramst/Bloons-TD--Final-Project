@@ -1,4 +1,21 @@
-﻿#region code
+﻿/* Nate Framst
+ * 
+ * Mr. T
+ * 
+ * ICS4U
+ * 
+ * 20/06/24
+ * 
+ */
+
+
+
+
+
+
+
+
+#region code
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
