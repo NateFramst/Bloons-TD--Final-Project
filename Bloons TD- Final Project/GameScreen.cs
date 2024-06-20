@@ -58,7 +58,6 @@ namespace Bloons_TD__Final_Project
         int bloonSpawnTimer;
 
         bool drawRed = true;
-        bool moabDeathSpawn = true;
 
         int lives = 10;
 
@@ -101,8 +100,6 @@ namespace Bloons_TD__Final_Project
 
         SolidBrush transRed = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
         SolidBrush transGray = new SolidBrush(Color.FromArgb(100, 182, 172, 172));
-
-        //Label upgradeMenuBackgroundLabel = new Label();
 
         Defender menuMonkey;
 
@@ -148,8 +145,6 @@ namespace Bloons_TD__Final_Project
 
         public static Highscore trackingHighscore;
 
-        bool MOABspawn = true;
-
         Balloon newB;
 
         bool speedUp = false;
@@ -164,19 +159,20 @@ namespace Bloons_TD__Final_Project
 
         int fixMOAB;
 
-        bool MOABSspawned;
-
-        bool MOABincrease;
-
         bool stopSpawn;
 
         public static bool instructionTime;
 
-        bool instruction1, instruction2, instruction3;
-
         int instructionClickCounter;
 
-        bool upgradePress, sellPress;
+        bool upgradePress, sellPress, monkeyPress, oneMonkey;
+
+        bool extendRange1, extendRange2 = false;
+
+        int moabHealthIncreaser;
+
+        bool autoPlay = false;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -243,17 +239,6 @@ namespace Bloons_TD__Final_Project
 
             // money += 10000000;
 
-
-            //Defender defender = new Defender(180, 140, 60, 60, 2, Properties.Resources.TackShooter);
-
-            //Defender defender2 = new Defender(555, 225, 60, 60, 2, Properties.Resources.Dart_Monkey);
-
-            //Defender defender3 = new Defender(280, 450, 60, 60, 2, Properties.Resources.Dart_Monkey);
-
-            // defenders.Add(defender);
-            //defenders.Add(defender2);
-            //defenders.Add(defender3);
-
             onScreen = new Rectangle(0, 0, this.Width, this.Height);
 
             MoneyLabel1.Text = dartMonkeyPrice.ToString();
@@ -263,12 +248,24 @@ namespace Bloons_TD__Final_Project
             MoneyLabel5.Text = iceMonkeyPrice.ToString();
 
 
-            if(instructionTime)
+            if (instructionTime)
             {
                 upgradeButton.Enabled = false;
                 sellButton.Enabled = false;
+                skipButton.Enabled = true;
+                skipButton.Visible = true;
                 playButton.Enabled = false;
             }
+
+            heartPictureBox.SendToBack();
+
+
+
+            livesLabel.Parent = heartPictureBox;
+
+            // livesLabel.Location = new Point(heartPictureBox.Width / 2 - (livesLabel.Width / 2), heartPictureBox.Height / 2 - (livesLabel.Height / 2));
+            livesLabel.Location = new Point(35, 35);
+
 
             gameTimer.Enabled = true;
 
@@ -337,8 +334,22 @@ namespace Bloons_TD__Final_Project
 
             if (menuOpen)
             {
-                e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
-                e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+                if(extendRange1)
+                {
+                    e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - 100 + 30, menuMonkey.hitBox.Y - 100 + 30, 2 * 100, 2 * 100);
+                    e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - 100 + 30, menuMonkey.hitBox.Y - 100 + 30, 2 * 100, 2 * 100);
+                }
+                else if(extendRange2)
+                {
+                    e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - 250 + 30, menuMonkey.hitBox.Y - 250 + 30, 2 * 250, 2 * 250);
+                    e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - 250 + 30, menuMonkey.hitBox.Y - 250 + 30, 2 * 250, 2 * 250);
+                }
+                else
+                {
+                    e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+                    e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
+                }
+                
             }
 
             //rotate Monkeys
@@ -348,7 +359,7 @@ namespace Bloons_TD__Final_Project
                 if (d.type != 2 && bloon != null && d.trackingBalloon)
                 {
                     // Calculate the angle to the nearest balloon
-                    Angles(d, bloon);
+                    Angles(d, d.bloon);
 
                     // Update the defender's rotation angle
                     d.RotationAngle = d.rotationAngle;
@@ -412,32 +423,100 @@ namespace Bloons_TD__Final_Project
             label1.Text = this.PointToClient(Cursor.Position).ToString();
             livesLabel.Text = lives.ToString();
             moneyLabel.Text = money.ToString();
+            roundNumberLabel.Text = $"Round Number: {roundNumber}";
+            //roundNumberLabel.Text = "Round Number: " + roundNumber.ToString();
             //keepBalloon = false;
             Size mouseSize = new Size(1, 1);
 
             mouse = new Rectangle(this.PointToClient(Cursor.Position), mouseSize);
-            if (!inBetweenRounds)
-            {
 
-                if (roundNumber % 10 == 0)
+            if (instructionTime)
+            {
+                if (instructionClickCounter == 0)
                 {
-                    if (MOABincrease)
-                    {
-                        moabSpawnCounter++;
-                        MOABincrease = false;
-                    }
+                    arrowPictureBox.Visible = true;
+                    arrowPictureBox.Location = new Point(98, 40);
+                    arrowPictureBox.Image = Properties.Resources.redarrowLEFT;
+                    InstructionLabel.Visible = true;
+                    InstructionLabel.Location = new Point(173, 41);
+                    InstructionLabel.Size = new Size(500, 120);
+                    InstructionLabel.Text = "This is your money! Earn money by popping balloons, and completing levels. You can spend your money on new defenders, or upgrading ones you already have!            (Click to Continue) ";
                 }
+                if (instructionClickCounter == 1)
+                {
+                    arrowPictureBox.Location = new Point(679, 113);
+                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
+
+                    InstructionLabel.Location = new Point(282, 200);
+                    InstructionLabel.Size = new Size(500, 200);
+                    InstructionLabel.Text = "These are your defenders. They each have diffrent skills and abilities, and each comes with a diffrent cost. Click on their images to select them, and once agian to place on the field. A right click will cancel your purchase. Choose wisely";
+                    oneMonkey = true;
+                }
+
+                if (instructionClickCounter == 2)
+                {
+                    InstructionLabel.Visible = false;
+
+                    if (oneMonkey)
+                    {
+                        Defender instructionDef = new Defender(430, 220, 60, 60, 1, Properties.Resources.Dart_Monkey, false);
+                        defenders.Add(instructionDef);
+                        oneMonkey = false;
+                    }
+
+
+                    arrowPictureBox.Location = new Point(380, 255);
+                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
+                }
+                if (instructionClickCounter == 3)
+                {
+                    InstructionLabel.Visible = true;
+                    arrowPictureBox.Location = new Point(565, 307);
+                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
+
+                    InstructionLabel.Location = new Point(372, 381);
+                    InstructionLabel.Text = "Use this button to upgrade your defenders";
+                }
+                if (instructionClickCounter == 4)
+                {
+                    sellButton.Enabled = true;
+                    arrowPictureBox.Location = new Point(556, 340);
+                    arrowPictureBox.Image = Properties.Resources.redarrowRIGHT;
+
+                    InstructionLabel.Location = new Point(201, 356);
+                    InstructionLabel.Text = "Use this button to sell your defenders";
+
+                }
+                if (instructionClickCounter == 5)
+                {
+
+                    arrowPictureBox.Location = new Point(560, 434);
+                    arrowPictureBox.Image = Properties.Resources.redarrowDOWN;
+
+                    InstructionLabel.Location = new Point(72, 314);
+                    InstructionLabel.Text = "This is your play button. Pressing this will send the next wave of balloons through. But don't worry, you can still buy defenders during this time";
+                    playButton.Enabled = true;
+
+                }
+            }
+            else if (!inBetweenRounds)
+            {
                 if (roundNumber >= 10)
                 {
                     if (fixMOAB < moabSpawnCounter && moabSpawnTimer)
                     {
                         Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
+                        if (roundNumber % 10 == 0)
+                        {
+                            moabHealthIncreaser += 50;
+                        }
+
+                        bloon.MOABhealth = moabHealthIncreaser;
+
                         balloons.Add(bloon);
                         moabSpawnTimer = false;
                         fixMOAB++;
                     }
-
-                    MOABSspawned = true;
 
                     if (fixMOAB == moabSpawnCounter)
                     {
@@ -447,7 +526,7 @@ namespace Bloons_TD__Final_Project
                 }
                 else
                 {
-                    MOABSspawned = true;
+
                 }
                 if (bloonSpawnTimer % bloonDistance == 0)
                 {
@@ -489,9 +568,9 @@ namespace Bloons_TD__Final_Project
 
                     if (roundNumber % 5 == 0)
                     {
-                        if (speedUp && balloonSpeed < 10)
+                        if (speedUp && balloonSpeed < 20)
                         {
-                            balloonSpeed++;
+                            balloonSpeed += 2;
                             speedUp = false;
                         }
                         if (bloonDistance > 2 && shorten)
@@ -584,6 +663,7 @@ namespace Bloons_TD__Final_Project
                             {
                                 def = d;
                                 bloon = b;
+                                d.bloon = b;
                                 if (d.shotTimer < 0)
                                 {
                                     shoot = true;
@@ -598,6 +678,7 @@ namespace Bloons_TD__Final_Project
                             {
                                 def = d;
                                 bloon = b;
+                                d.bloon = b;
                                 if (d.shotTimer < 0)
                                 {
                                     shoot = true;
@@ -813,23 +894,23 @@ namespace Bloons_TD__Final_Project
                                     {
                                         if (balloons.Count > x)
                                         {
-                                            if (balloons[x].colour == 1)
+                                            if (balloons[x].colour == 2)
                                             {
                                                 balloons[x].image = Properties.Resources.RedLightningBalloon;
                                             }
-                                            if (balloons[x].colour == 2)
+                                            if (balloons[x].colour == 3)
                                             {
                                                 balloons[x].image = Properties.Resources.BlueLightningBalloon;
                                             }
-                                            if (balloons[x].colour == 3)
+                                            if (balloons[x].colour == 4)
                                             {
                                                 balloons[x].image = Properties.Resources.GreenLightningBalloon;
                                             }
-                                            if (balloons[x].colour == 4)
+                                            if (balloons[x].colour == 5)
                                             {
                                                 balloons[x].image = Properties.Resources.YellowLightningBalloon;
                                             }
-                                            if (balloons[x].colour == 5)
+                                            if (balloons[x].colour == 6)
                                             {
                                                 balloons[x].image = Properties.Resources.PinkLightningBalloon;
                                             }
@@ -855,23 +936,23 @@ namespace Bloons_TD__Final_Project
                                 {
                                     if (balloons[i].slow)
                                     {
-                                        if (balloons[i].colour == 1)
+                                        if (balloons[i].colour == 2)
                                         {
                                             balloons[i].image = Properties.Resources.Red_Ice_Balloon;
                                         }
-                                        if (balloons[i].colour == 2)
+                                        if (balloons[i].colour == 3)
                                         {
                                             balloons[i].image = Properties.Resources.Blue_Ice_Balloon;
                                         }
-                                        if (balloons[i].colour == 3)
+                                        if (balloons[i].colour == 4)
                                         {
                                             balloons[i].image = Properties.Resources.Green_Ice_Balloon;
                                         }
-                                        if (balloons[i].colour == 4)
+                                        if (balloons[i].colour == 5)
                                         {
                                             balloons[i].image = Properties.Resources.Yellow_Ice_Balloon;
                                         }
-                                        if (balloons[i].colour == 5)
+                                        if (balloons[i].colour == 6)
                                         {
                                             balloons[i].image = Properties.Resources.Pink_Ice_Balloon;
                                         }
@@ -903,7 +984,7 @@ namespace Bloons_TD__Final_Project
                             {
                                 if (darts[j].hitBox.IntersectsWith(balloons[i].rec))
                                 {
-                                    if (darts[j].type == 1 || darts[j].type == 3 || darts[j].type == 5)
+                                    if (darts[j].type == 1 || darts[j].type == 5)
                                     {
                                         balloons[i].MOABhealth -= 3;
                                     }
@@ -914,6 +995,10 @@ namespace Bloons_TD__Final_Project
                                     else if (darts[j].type == 4)
                                     {
                                         balloons[i].MOABhealth -= 10;
+                                    }
+                                    if( darts[j].type == 3 )
+                                    {
+                                        balloons[i].MOABhealth -= 1;
                                     }
                                     darts.RemoveAt(j);
                                 }
@@ -1116,12 +1201,10 @@ namespace Bloons_TD__Final_Project
                 if (balloons.Count == 0 && bloonSpawner >= bpl)
                 {
                     inBetweenRounds = true;
-                    MOABspawn = true;
                     speedUp = true;
                     shorten = true;
                     stopSpawn = false;
-                    MOABincrease = true;
-                    MOABSspawned = false;
+
                     bloonSpawnTimer = 10;
                     bloonSpawner = 0;
                     roundNumber++;
@@ -1131,8 +1214,14 @@ namespace Bloons_TD__Final_Project
                     }
                     darts.Clear();
                     money += (int)(100 * (roundNumber * 0.1));
-
                     bpl = (int)(Math.Pow(roundNumber, 2) + 10);
+
+                    if(autoPlay)
+                    {
+                        inBetweenRounds = false;
+                    }
+
+
                 }
             }
 
@@ -1280,16 +1369,19 @@ namespace Bloons_TD__Final_Project
         {
             if (instructionTime)
             {
-                
-                if (instructionClickCounter <= 3)
+
+                if (instructionClickCounter <= 1)
                 {
                     instructionClickCounter++;
                 }
-                else if (instructionClickCounter > 3 && instructionClickCounter <= 4)
+                else if (instructionClickCounter == 2)
                 {
-                    
+                    if (monkeyPress)
+                    {
+                        instructionClickCounter++;
+                    }
                 }
-                
+
 
 
                 Point clicked = new Point(mouse.X, mouse.Y);
@@ -1300,75 +1392,19 @@ namespace Bloons_TD__Final_Project
                     {
                         menuMonkey = d;
 
+                        if (!monkeyPress)
+                        {
+                            instructionClickCounter++;
+                        }
+
+                        monkeyPress = true;
+
                         openMenu(d.type, d.hitBox);
 
                         break;
                     }
                 }
-                if (instructionClickCounter == 1)
-                {
-                    arrowPictureBox.Visible = true;
-                    arrowPictureBox.Location = new Point(98, 40);
-                    arrowPictureBox.Image = Properties.Resources.redarrowLEFT;
-                    InstructionLabel.Visible = true;
-                    InstructionLabel.Location = new Point(173, 41);
-                    InstructionLabel.Size = new Size(500, 120);
-                    InstructionLabel.Text = "This is your money! Earn money by popping balloons, and completing levels. You can spend your money on new defenders,or upgrading ones you already have! ";
-                }
-                if (instructionClickCounter == 2)
-                {
-                    arrowPictureBox.Location = new Point(679, 113);
-                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
-             
-                    InstructionLabel.Location = new Point(282, 200);
-                    InstructionLabel.Size = new Size(500, 200);
-                    InstructionLabel.Text = "These are your defenders. They each have diffrent skills and abilities, and each comes with a diffrent cost. Click on their images to select them, and once agian to place on the field. A right click will cancel your purchase. Choose wisely";
-                }
-               
-                if (instructionClickCounter == 3)
-                {
-                    InstructionLabel.Visible = false;
 
-                    Defender instructionDef = new Defender(430, 220, 60, 60, 1, Properties.Resources.Dart_Monkey, false);
-                    defenders.Add(instructionDef);
-
-                    arrowPictureBox.Location = new Point(380, 255);
-                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
-                }
-                if (instructionClickCounter == 4)
-                {
-                    InstructionLabel.Visible = true;
-                    arrowPictureBox.Location = new Point(565, 307);
-                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
-
-                    InstructionLabel.Location = new Point(572, 381);
-                    InstructionLabel.Text = "Use this button to upgrade your defenders";
-                }
-                if (instructionClickCounter == 5 && upgradePress)
-                {
-                    sellButton.Enabled = true;
-                    arrowPictureBox.Location = new Point(560, 411); 
-                    arrowPictureBox.Image = Properties.Resources.redarrowUP;
-
-                    InstructionLabel.Location = new Point(572, 485);
-                    InstructionLabel.Text = "Use this button to sell your defenders";
-                }
-                if (instructionClickCounter == 6 && sellPress)
-                {
-
-                    arrowPictureBox.Location = new Point(560, 434);
-                    arrowPictureBox.Image = Properties.Resources.redarrowDOWN;
-
-                    InstructionLabel.Location = new Point(572, 414);
-                    InstructionLabel.Text = "This is your play button. Pressing this will send the next wave of balloons through. But don't worry, you can still buy defenders during this time";
-                    playButton.Enabled = true;
-                    arrowPictureBox.Visible = false;
-                    InstructionLabel.Visible = false;
-                    instructionTime = false;
-                    sellPress = false;
-                    upgradePress = false;
-                    money -= 170;
-                }
 
             }
             else
@@ -1630,40 +1666,29 @@ namespace Bloons_TD__Final_Project
 
                 upgradeButton.Visible = true;
                 sellButton.Visible = true;
-
                 sellButtonLabel.Visible = true;
                 upgradeButtonLabel.Visible = true;
-
                 upgradeMenuNameLabel.Visible = true;
-
-
                 upgradeMenuPictureBox.BringToFront();
                 upgradeButton.BringToFront();
                 sellButton.BringToFront();
                 sellButtonLabel.BringToFront();
                 upgradeButtonLabel.BringToFront();
                 upgradeMenuNameLabel.BringToFront();
-
             }
 
         }
 
         public void closeMenu()
         {
-
             menuOpen = false;
             upgradeMenuBackgroundLabel.Visible = false;
-
             upgradeMenuPictureBox.Visible = false;
-
             upgradeButton.Visible = false;
             sellButton.Visible = false;
-
             sellButtonLabel.Visible = false;
             upgradeButtonLabel.Visible = false;
-
             upgradeMenuNameLabel.Visible = false;
-
             upgradeMenuBackgroundLabel.Visible = false;
         }
 
@@ -1675,7 +1700,7 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if(!instructionTime)
+            if (!instructionTime)
             {
                 if (money >= dartMonkeyPrice)
                 {
@@ -1687,7 +1712,7 @@ namespace Bloons_TD__Final_Project
                     closeMenu();
                 }
             }
-            
+
 
         }
 
@@ -1695,7 +1720,7 @@ namespace Bloons_TD__Final_Project
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            if(!instructionTime)
+            if (!instructionTime)
             {
                 if (money >= tackShooterPrice)
                 {
@@ -1707,13 +1732,13 @@ namespace Bloons_TD__Final_Project
                     closeMenu();
                 }
             }
-           
+
 
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            if(!instructionTime)
+            if (!instructionTime)
             {
                 if (money >= superMonkeyPrice)
                 {
@@ -1725,7 +1750,7 @@ namespace Bloons_TD__Final_Project
                     closeMenu();
                 }
             }
-           
+
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
@@ -1742,12 +1767,12 @@ namespace Bloons_TD__Final_Project
                     closeMenu();
                 }
             }
-            
+
         }
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
-            if(!instructionTime)
+            if (!instructionTime)
             {
                 if (money >= iceMonkeyPrice)
                 {
@@ -1759,22 +1784,67 @@ namespace Bloons_TD__Final_Project
                     closeMenu();
                 }
             }
-            
+
+        }
+
+        private void skipButton_Click(object sender, EventArgs e)
+        {
+            arrowPictureBox.Visible = false;
+            InstructionLabel.Visible = false;
+            instructionTime = false;
+            sellPress = false;
+            upgradePress = false;
+            skipButton.Visible = false;
+            skipButton.Enabled = false;
+            playButton.Enabled = true;
+            defenders.Clear();
         }
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            inBetweenRounds = false;
-           
+            if (!instructionTime)
+            {
+                if(!autoPlay)
+                {
+                    inBetweenRounds = false;
+                    autoPlay = true;
+                    playButton.BackColor = Color.Gray;
+                }
+                else if(autoPlay)
+                {
+                    inBetweenRounds = false;
+                    autoPlay = false;
+                    playButton.BackColor = Color.White;
+                }
+                
+            }
+            if (instructionTime)
+            {
+                skipButton.Visible = false;
+                skipButton.Enabled = false;
+                arrowPictureBox.Visible = false;
+                InstructionLabel.Visible = false;
+                instructionTime = false;
+                sellPress = false;
+                upgradePress = false;
+            }
+
+
+
         }
 
 
 
         private void sellButton_Click(object sender, EventArgs e)
         {
-            if(instructionTime)
+            if (instructionTime)
             {
-                sellPress = true;
+                if (!sellPress)
+                {
+                    sellPress = true;
+                    instructionClickCounter++;
+                }
+
             }
             defenders.Remove(menuMonkey);
             closeMenu();
@@ -1839,11 +1909,53 @@ namespace Bloons_TD__Final_Project
 
         }
 
+        private void upgradeButton_MouseEnter(object sender, EventArgs e)
+        {
+            if (upgradeButton.Visible == true)
+            {
+                upgradeDiscriptionLabel.Visible = true;
+                if (menuMonkey.type == 1)
+                {
+                    upgradeDiscriptionLabel.Text = "Piercing dart travels through mulitipule balloons that are not red";
+                }
+                if (menuMonkey.type == 2)
+                {
+                    upgradeDiscriptionLabel.Text = "Increased fire speed, and increased range";
+                    extendRange1 = true;
+                }
+                if (menuMonkey.type == 3)
+                {
+                    upgradeDiscriptionLabel.Text = "Increased fire speed, and increased range";
+                    extendRange2 = true;
+                }
+                if (menuMonkey.type == 4)
+                {
+                    upgradeDiscriptionLabel.Text = "Lighting effect pops multiple balloons in one shot";
+                }
+                if (menuMonkey.type == 5)
+                {
+                    upgradeDiscriptionLabel.Text = "Ice effect now pops a layer of balloon before slowing down";
+                }
+            }
+        }
+
+        private void upgradeButton_MouseLeave(object sender, EventArgs e)
+        {
+            upgradeDiscriptionLabel.Visible = false;
+            extendRange1 = false;
+            extendRange2 = false;
+        }
+
         private void upgradeButton_Click(object sender, EventArgs e)
         {
             if (instructionTime)
             {
-                upgradePress = true;
+                if (!upgradePress)
+                {
+                    upgradePress = true;
+                    instructionClickCounter++;
+                }
+
             }
             foreach (Defender d in defenders)
             {
@@ -1906,7 +2018,7 @@ namespace Bloons_TD__Final_Project
             }
         }
 
-        
+
 
         private void SpeedUpButton_Click(object sender, EventArgs e)
         {
@@ -1948,6 +2060,5 @@ namespace Bloons_TD__Final_Project
         }
     }
 }
-
 // monkey rotate
 #endregion

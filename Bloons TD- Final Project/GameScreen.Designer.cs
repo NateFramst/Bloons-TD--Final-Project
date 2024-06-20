@@ -68,6 +68,10 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.InstructionLabel = new System.Windows.Forms.Label();
             this.arrowPictureBox = new System.Windows.Forms.PictureBox();
+            this.skipButton = new System.Windows.Forms.Button();
+            this.heartPictureBox = new System.Windows.Forms.PictureBox();
+            this.upgradeDiscriptionLabel = new System.Windows.Forms.Label();
+            this.roundNumberLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -81,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heartPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -105,11 +110,10 @@
             this.livesLabel.BackColor = System.Drawing.Color.Transparent;
             this.livesLabel.Font = new System.Drawing.Font("Ravie", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.livesLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.livesLabel.Location = new System.Drawing.Point(657, 11);
+            this.livesLabel.Location = new System.Drawing.Point(646, 18);
             this.livesLabel.Name = "livesLabel";
-            this.livesLabel.Size = new System.Drawing.Size(88, 26);
+            this.livesLabel.Size = new System.Drawing.Size(0, 26);
             this.livesLabel.TabIndex = 1;
-            this.livesLabel.Text = "label2";
             this.livesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tempLabel
@@ -300,6 +304,8 @@
             this.upgradeButton.UseVisualStyleBackColor = true;
             this.upgradeButton.Visible = false;
             this.upgradeButton.Click += new System.EventHandler(this.upgradeButton_Click);
+            this.upgradeButton.MouseEnter += new System.EventHandler(this.upgradeButton_MouseEnter);
+            this.upgradeButton.MouseLeave += new System.EventHandler(this.upgradeButton_MouseLeave);
             // 
             // sellButton
             // 
@@ -458,7 +464,7 @@
             // InstructionLabel
             // 
             this.InstructionLabel.Font = new System.Drawing.Font("Ravie", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InstructionLabel.Location = new System.Drawing.Point(572, 485);
+            this.InstructionLabel.Location = new System.Drawing.Point(501, 356);
             this.InstructionLabel.Name = "InstructionLabel";
             this.InstructionLabel.Size = new System.Drawing.Size(35, 13);
             this.InstructionLabel.TabIndex = 36;
@@ -469,8 +475,8 @@
             // arrowPictureBox
             // 
             this.arrowPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.arrowPictureBox.Image = global::Bloons_TD__Final_Project.Properties.Resources.redarrowUP;
-            this.arrowPictureBox.Location = new System.Drawing.Point(560, 411);
+            this.arrowPictureBox.Image = global::Bloons_TD__Final_Project.Properties.Resources.redarrowRIGHT;
+            this.arrowPictureBox.Location = new System.Drawing.Point(556, 340);
             this.arrowPictureBox.Name = "arrowPictureBox";
             this.arrowPictureBox.Size = new System.Drawing.Size(69, 71);
             this.arrowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -478,12 +484,60 @@
             this.arrowPictureBox.TabStop = false;
             this.arrowPictureBox.Visible = false;
             // 
+            // skipButton
+            // 
+            this.skipButton.Enabled = false;
+            this.skipButton.Location = new System.Drawing.Point(8, 474);
+            this.skipButton.Name = "skipButton";
+            this.skipButton.Size = new System.Drawing.Size(73, 47);
+            this.skipButton.TabIndex = 38;
+            this.skipButton.Text = "Skip";
+            this.skipButton.UseVisualStyleBackColor = true;
+            this.skipButton.Visible = false;
+            this.skipButton.Click += new System.EventHandler(this.skipButton_Click);
+            // 
+            // heartPictureBox
+            // 
+            this.heartPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.heartPictureBox.Image = global::Bloons_TD__Final_Project.Properties.Resources.BetterHeart;
+            this.heartPictureBox.Location = new System.Drawing.Point(615, -14);
+            this.heartPictureBox.Name = "heartPictureBox";
+            this.heartPictureBox.Size = new System.Drawing.Size(102, 89);
+            this.heartPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.heartPictureBox.TabIndex = 39;
+            this.heartPictureBox.TabStop = false;
+            // 
+            // upgradeDiscriptionLabel
+            // 
+            this.upgradeDiscriptionLabel.Location = new System.Drawing.Point(586, 334);
+            this.upgradeDiscriptionLabel.Name = "upgradeDiscriptionLabel";
+            this.upgradeDiscriptionLabel.Size = new System.Drawing.Size(180, 47);
+            this.upgradeDiscriptionLabel.TabIndex = 40;
+            this.upgradeDiscriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.upgradeDiscriptionLabel.Visible = false;
+            // 
+            // roundNumberLabel
+            // 
+            this.roundNumberLabel.AutoSize = true;
+            this.roundNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            this.roundNumberLabel.Font = new System.Drawing.Font("Ravie", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundNumberLabel.Location = new System.Drawing.Point(297, 11);
+            this.roundNumberLabel.Name = "roundNumberLabel";
+            this.roundNumberLabel.Size = new System.Drawing.Size(0, 26);
+            this.roundNumberLabel.TabIndex = 41;
+            this.roundNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImage = global::Bloons_TD__Final_Project.Properties.Resources.MonkeyMeadow;
+            this.Controls.Add(this.roundNumberLabel);
+            this.Controls.Add(this.upgradeDiscriptionLabel);
+            this.Controls.Add(this.livesLabel);
+            this.Controls.Add(this.heartPictureBox);
+            this.Controls.Add(this.skipButton);
             this.Controls.Add(this.arrowPictureBox);
             this.Controls.Add(this.InstructionLabel);
             this.Controls.Add(this.pictureBox11);
@@ -520,7 +574,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tempLabel);
-            this.Controls.Add(this.livesLabel);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Name = "GameScreen";
@@ -541,6 +594,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heartPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -587,5 +641,9 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Label InstructionLabel;
         private System.Windows.Forms.PictureBox arrowPictureBox;
+        private System.Windows.Forms.Button skipButton;
+        private System.Windows.Forms.PictureBox heartPictureBox;
+        private System.Windows.Forms.Label upgradeDiscriptionLabel;
+        private System.Windows.Forms.Label roundNumberLabel;
     }
 }

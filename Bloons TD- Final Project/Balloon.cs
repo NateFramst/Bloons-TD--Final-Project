@@ -9,8 +9,6 @@ namespace Bloons_TD__Final_Project
 {
     internal class Balloon
     {
-
-
         public int x, y, width, height, colour, xDirection, yDirection, blackBalloonHealth;
 
         public double MOABhealth;
@@ -72,7 +70,7 @@ namespace Bloons_TD__Final_Project
             if (colour == 1)
             {
                 image = Properties.Resources.MOABRIGHT;
-                MOABhealth = 100;
+                MOABhealth = 0;
                 rec = new Rectangle(x - 80 + 15, y - 40 + 15, 160, 80);
             }
         }

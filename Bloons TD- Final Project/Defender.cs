@@ -18,7 +18,7 @@ namespace Bloons_TD__Final_Project
 
         public int type;
 
-        public int shotTimer, defualtTimer, rad;
+        public int shotTimer, defualtTimer, rad, defaultRad;
 
         public bool upgrade = false;
 
@@ -28,6 +28,7 @@ namespace Bloons_TD__Final_Project
 
         public float RotationAngle { get; set; }
 
+        public  Balloon bloon;
 
         public Defender(int _x, int _y, int _width, int _height, int _type, Image _image, bool _upgrade)
         {
@@ -39,8 +40,8 @@ namespace Bloons_TD__Final_Project
             type = _type;
             upgrade = _upgrade;
 
-            trackingBalloon = false ;
-            shootingBalloon = false ;
+            trackingBalloon = false;
+            shootingBalloon = false;
 
             rotationAngle = 0;
 
@@ -53,7 +54,6 @@ namespace Bloons_TD__Final_Project
                 shotTimer = 24;
                 defualtTimer = 24;
                 rad = 150;
-                
             }
             if (type == 2)
             {
@@ -67,7 +67,7 @@ namespace Bloons_TD__Final_Project
                 defualtTimer = 5;
                 rad = 200;
             }
-            if(type == 4)
+            if (type == 4)
             {
                 shotTimer = 50;
                 defualtTimer = 50;
