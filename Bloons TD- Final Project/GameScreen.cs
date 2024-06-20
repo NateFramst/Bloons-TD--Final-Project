@@ -1001,15 +1001,15 @@ namespace Bloons_TD__Final_Project
                             {
                                 if (darts[j].hitBox.IntersectsWith(balloons[i].rec))
                                 {
-                                    if (darts[j].type == 1 || darts[j].type == 5)
+                                    if (darts[j].type == 1 || darts[j].type == 5 || darts[j].type == 6 || darts[j].type == 7)
                                     {
                                         balloons[i].MOABhealth -= 3;
                                     }
-                                    else if (darts[j].type == 2)
+                                    else if (darts[j].type == 2 || darts[j].type == 8)
                                     {
                                         balloons[i].MOABhealth -= 0.3;
                                     }
-                                    else if (darts[j].type == 4)
+                                    else if (darts[j].type == 4 || darts[j].type == 9)
                                     {
                                         balloons[i].MOABhealth -= 10;
                                     }
