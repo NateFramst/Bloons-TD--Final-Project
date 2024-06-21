@@ -111,7 +111,7 @@ namespace Bloons_TD__Final_Project
 
         int money = 440;
 
-        double roundNumber = 0;
+        double roundNumber = 1;
 
         bool inBetweenRounds = true;
 
@@ -351,12 +351,12 @@ namespace Bloons_TD__Final_Project
 
             if (menuOpen)
             {
-                if(extendRange1)
+                if (extendRange1)
                 {
                     e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - 100 + 30, menuMonkey.hitBox.Y - 100 + 30, 2 * 100, 2 * 100);
                     e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - 100 + 30, menuMonkey.hitBox.Y - 100 + 30, 2 * 100, 2 * 100);
                 }
-                else if(extendRange2)
+                else if (extendRange2)
                 {
                     e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - 250 + 30, menuMonkey.hitBox.Y - 250 + 30, 2 * 250, 2 * 250);
                     e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - 250 + 30, menuMonkey.hitBox.Y - 250 + 30, 2 * 250, 2 * 250);
@@ -366,7 +366,7 @@ namespace Bloons_TD__Final_Project
                     e.Graphics.DrawEllipse(Pens.Black, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
                     e.Graphics.FillEllipse(transGray, menuMonkey.hitBox.X - menuMonkey.rad + 30, menuMonkey.hitBox.Y - menuMonkey.rad + 30, 2 * menuMonkey.rad, 2 * menuMonkey.rad);
                 }
-                
+
             }
 
             //rotate Monkeys
@@ -523,6 +523,8 @@ namespace Bloons_TD__Final_Project
                     if (fixMOAB < moabSpawnCounter && moabSpawnTimer)
                     {
                         Balloon bloon = new Balloon(1, -100, 210, 30, 30, 1, 0, false);
+
+
                         if (roundNumber % 10 == 0)
                         {
                             moabHealthIncreaser += 50;
@@ -577,6 +579,7 @@ namespace Bloons_TD__Final_Project
                         }
 
                         Balloon bloon = new Balloon(type, -40, 210, 30, 30, balloonSpeed + type, 0, false);
+
                         balloons.Add(bloon);
 
                     }
@@ -1013,7 +1016,7 @@ namespace Bloons_TD__Final_Project
                                     {
                                         balloons[i].MOABhealth -= 10;
                                     }
-                                    if( darts[j].type == 3 )
+                                    if (darts[j].type == 3)
                                     {
                                         balloons[i].MOABhealth -= 1;
                                     }
@@ -1233,7 +1236,7 @@ namespace Bloons_TD__Final_Project
                     money += (int)(100 * (roundNumber * 0.1));
                     bpl = (int)(Math.Pow(roundNumber, 2) + 10);
 
-                    if(autoPlay)
+                    if (autoPlay)
                     {
                         inBetweenRounds = false;
                     }
@@ -1358,7 +1361,27 @@ namespace Bloons_TD__Final_Project
 
             }
 
+            for (int i = 0; i < balloons.Count;i++)
+            {
+                if(balloons[i].colour == 7)
+                {
+                    if (onScreen.Contains(balloons[i].hitBox.X, balloons[i].hitBox.Y))
+                    {
+                        
+                    }
+                    else
+                    {
+                        if (balloons[i].hitBox.Y > this.Height)
+                        {
 
+                        }
+                        else
+                        {
+                            balloons.RemoveAt(i);
+                        }
+                    }
+                }
+            }
 
 
 
@@ -1821,19 +1844,19 @@ namespace Bloons_TD__Final_Project
         {
             if (!instructionTime)
             {
-                if(!autoPlay)
+                if (!autoPlay)
                 {
                     inBetweenRounds = false;
                     autoPlay = true;
                     playButton.BackColor = Color.Gray;
                 }
-                else if(autoPlay)
+                else if (autoPlay)
                 {
                     inBetweenRounds = false;
                     autoPlay = false;
                     playButton.BackColor = Color.White;
                 }
-                
+
             }
             if (instructionTime)
             {
