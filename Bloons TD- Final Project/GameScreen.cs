@@ -111,7 +111,7 @@ namespace Bloons_TD__Final_Project
 
         int money = 440;
 
-        double roundNumber = 1;
+        double roundNumber = 0;
 
         bool inBetweenRounds = true;
 
@@ -522,7 +522,7 @@ namespace Bloons_TD__Final_Project
                 {
                     if (fixMOAB < moabSpawnCounter && moabSpawnTimer)
                     {
-                        Balloon bloon = new Balloon(1, 0, 210, 30, 30, 1, 0, false);
+                        Balloon bloon = new Balloon(1, -100, 210, 30, 30, 1, 0, false);
                         if (roundNumber % 10 == 0)
                         {
                             moabHealthIncreaser += 50;
@@ -576,7 +576,7 @@ namespace Bloons_TD__Final_Project
                             type = 6;
                         }
 
-                        Balloon bloon = new Balloon(type, 0, 210, 30, 30, balloonSpeed + type, 0, false);
+                        Balloon bloon = new Balloon(type, -40, 210, 30, 30, balloonSpeed + type, 0, false);
                         balloons.Add(bloon);
 
                     }
